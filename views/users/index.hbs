@@ -1,0 +1,18 @@
+  <h1>User page</h1>
+  <p>Welcome to the user page</p>
+
+  <h2>
+    <a href="/users/signup"> Sign up </a>
+  </h2>
+    <h2>
+    <a href="/users/login"> Log in </a>
+  </h2>
+  {{#if logged}}
+  <h2>
+    <a href="/users/">My Profile</a>
+  </h2>
+  {{/if}}
+
+    <form action="users/logout" method="get">
+      <button>Log me out</button>
+    </form>

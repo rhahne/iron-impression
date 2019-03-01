@@ -3,11 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session    = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// connect to mongoDB
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/iron-impression', {useNewUrlParser: true}, (err)=>{
+  if(err) console.log(err)
+  else console.log("db created");
+});
+
+// init sessions
+app.use(session({
+  secret: "slothisticated",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
