@@ -6,29 +6,17 @@
   Hallo {{loggedUser._doc.firstName}}
 </p>
 
-<ul>
-  <li>
-    FirstName: {{loggedUser._doc.firstName}}
-  </li>
-  <li>
-    LastName: {{loggedUser._doc.lastName}}
-  </li>
-  <li>
-    eMail: {{loggedUser._doc.eMail}}
-  </li>
-</ul>
-
-<form action="/movies/{{movieId}}/edit" method="POST">
-  Title:<br>
-  <input type="text" name="title" value="{{movieToEdit._doc.title}}">
+<form action="/users/{{loggedUser.id}}/edit" method="POST">
+  FirstName:<br>
+  <input type="text" name="firstName" value="{{loggedUser._doc.firstName}}">
   <br>
-  Genre:<br>
-  <input type="text" name="genre" value="{{movieToEdit._doc.genre}}">
+  LastName:<br>
+  <input type="text" name="lastName" value="{{loggedUser._doc.lastName}}">
   <br>
-  Plot:<br>
-  <input type="text" name="plot" value="{{movieToEdit._doc.plot}}">
+  eMail:<br>
+  <input type="text" name="eMail" value="{{loggedUser._doc.eMail}}">
   <br><br>
-  <button>Send</button>
+  <button>Change</button>
 </form>
 
 

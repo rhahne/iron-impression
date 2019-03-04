@@ -80,7 +80,6 @@ router.get('/profile', function (req, res, next) {
   }
 })
 
-
 router.get('/logout', function (req, res) {
   req.session.destroy();
   res.redirect('/users');
@@ -100,5 +99,22 @@ router.get('/edit', function (req, res) {
   }
 })
 
+// receive edit changes from edit page
+router.post('/:id/edit', (req, res) => {
+  User.findOneAndUpdate({
+      _id: req.params.id
+    }, req.body, {
+      new: true
+    })
+    .then((loggedUser) => {
+      debugger
+      res.render('users/profile', {
+        loggedUser
+      })
+    })
+    .catch((err) => {
+      res.send(err);
+    })
+})
 
 module.exports = router;
