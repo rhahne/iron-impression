@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
         if (result == true) {
           req.session.currentUser = foundUser.eMail;
           req.session.save();
-          res.render('community/home')
+          res.redirect('/community/home')
         } else {
           res.render('users/login', {
             passwordReset: true
@@ -165,7 +165,7 @@ router.post('/signup', (req, res) => {
                   console.log('user registered')
                   req.session.currentUser = newUser.eMail;
                   req.session.save();
-                  res.render('community/home')
+                  res.redirect('/community/home')
                 }
               });
             }
