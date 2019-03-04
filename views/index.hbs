@@ -1,22 +1,47 @@
-<h1>Iron Impression</h1>
-<p>Iron Impression is an IronHack alumni community where we help eachother get ahead with CV’s and LinkedIn</p>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">
+      Iron Impression
+    </h1>
+    <p class="content">
+      Iron Impression is an IronHack alumni community where we help eachother get ahead with CV’s and LinkedIn
+    </p>
 
-{{#if user}}
-<p>Hello {{user}}</p>
-<h2>
-  <a href="/users/profile">My Profile</a>
-</h2>
-{{else}}
-<form action="/users/register" method="post">
-  <input type="email" name="email" id="" placeholder="Your E-Mail">
-  <button type="submit">Register</button>
-</form>
-{{#if errorMessage }}
-  <div class="error-message">{{ errorMessage }}</div>
-{{/if}}
-<br>
-or
-<h2>
-  <a href="/users/login"> Log in </a>
-</h2>
-{{/if}}
+    {{#if user}}
+    <p>Hello {{user}}</p>
+    <h2>
+      <a href="/users/profile">My Profile</a>
+    </h2>
+    {{else}}
+
+    <form action="/users/register" method="post">
+      <div class="field has-addons">
+        <div class="control has-icons-left is-expanded">
+          <input class="input is-hovered" type="email" name="email" placeholder="Your E-Mail">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary">Register</button>
+        </div>
+      </div>
+    </form>
+    {{#if errorMessage }}
+    <div class="error-message">{{ errorMessage }}</div>
+    {{/if}}
+    <br>
+    or
+    <br>
+    <br>
+    <h2>
+      <a class="button is-light" href="/users/login">
+        Log in 
+      </a>
+    </h2>
+    <br>
+    <br>
+    {{/if}}
+
+  </div>
+</section>

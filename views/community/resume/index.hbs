@@ -1,0 +1,10 @@
+<h1>Create the best CVs together</h1>
+<p>Receive feedback on your resume and help others with your opinion</p>
+<a href="/community/resume/upload">
+    <button>Upload your CV</button>
+</a>
+
+{{#each resumes}}
+    <img src="{{this.path}}" alt="">
+    <p>{{this.feedbackDescription}}</p>
+{{/each}}

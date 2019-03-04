@@ -52,6 +52,7 @@ router.post('/login', (req, res) => {
 
 // Register Button on /
 router.post('/register', (req, res, next) => {
+  debugger
   newRegister = {
     eMail: req.body.email,
     eMailSigned: jwt.sign({
@@ -193,7 +194,7 @@ router.get('/profile', function (req, res, next) {
 // Click on Logout Button
 router.get('/logout', function (req, res) {
   req.session.destroy();
-  res.redirect('/users');
+  res.redirect('/');
 })
 
 // Edit User information

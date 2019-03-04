@@ -1,6 +1,25 @@
-<h2>Forgot your password slohn?</h2>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">
+      Forgot your password slohn?
+    </h1>
+    <p class="content">
+      No worries slohn!, Reset it here:
+    </p>
 
-<form action="/users/reset" method="post">
-  <input type="email" name="email" id="" placeholder="Your E-Mail">
-  <button type="submit">Reset my password</button>
-</form>
+    <form action="/users/reset" method="post">
+      <div class="field has-addons">
+        <div class="control is-expanded has-icons-left">
+          <input class="input is-hovered" type="email" name="email" placeholder="bobderbaumeister@yowirschaffen.das">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary">Reset my password, please!</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</section>

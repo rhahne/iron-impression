@@ -1,0 +1,70 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            Feedback by Iron Friends
+        </h1>
+        <p class="content">
+            Receive feedback on your CV in 3 simple steps
+        </p>
+
+        <form action="/community/resume/upload" method="post" enctype="multipart/form-data">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-hovered" type="text" placeholder="name">
+                </div>
+            </div>
+
+            {{!-- <div class="field">
+                <div class="control">
+                    <input class="input is-hovered" type="file" placeholder="cv" id="file">
+                </div>
+            </div> --}}
+
+            <div class="field">
+                <div class="file has-name is-fullwidth">
+                    <label for="file" class="file-label">
+                        <input class="file-input" type="file" placeholder="cv" id="file">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Choose a file…
+                            </span>
+                        </span>
+                        <span class="file-name" id="filename">
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select name="feedbacktype">
+                            <option value="design">Design</option>
+                            <option value="grammar">Grammar</option>
+                            <option value="prof">Professionalism</option>
+                            <option value="allround">Allround</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <textarea class="textarea" placeholder="Describe the feedback you're looking for" name="feedbackdescription">
+            </textarea>
+            </div>
+
+            <button class="button is-primary" type="submit">
+                Submit
+            </button>
+        </form>
+        <p class="content">{{message}}</p>
+        <a href="/community/resume">
+            <button class="button is-primary">
+                Go to the community page
+            </button>
+        </a>
+    </div>
+</section>
