@@ -19,6 +19,19 @@
   <button>Change</button>
 </form>
 
+<form action="/users/{{loggedUser.id}}/editPassword" method="POST">
+  Old Password:<br>
+  <input type="text" name="oldPassword">
+  <br>
+  new Password:<br>
+  <input type="text" name="newPassword">
+  <br>
+  repeat new Password:<br>
+  <input type="text" name="newPassword2">
+  <br><br>
+  <button>Change Password</button>
+</form>
+
 
 <form action="logout" method="get">
   <button>Log me out</button>

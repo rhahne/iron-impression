@@ -53,10 +53,8 @@ router.post('/login', function (req, res) {
     } else {
       bcrypt.compare(req.body.password, foundUser.password, function (err, result) {
         if (result == true) {
-          debugger
           req.session.currentUser = foundUser.eMail;
           req.session.save();
-          debugger
           res.redirect('/users')
         } else {
           res.send('password incorrect!');
@@ -72,7 +70,6 @@ router.get('/profile', function (req, res, next) {
       eMail: req.session.currentUser
     })
     .then((loggedUser) => {
-      debugger
       res.render('users/profile', {loggedUser})
     })
   }else{
@@ -91,7 +88,6 @@ router.get('/edit', function (req, res) {
       eMail: req.session.currentUser
     })
     .then((loggedUser) => {
-      debugger
       res.render('users/edit', {loggedUser})
     })
   }else{
@@ -99,7 +95,6 @@ router.get('/edit', function (req, res) {
   }
 })
 
-// receive edit changes from edit page
 router.post('/:id/edit', (req, res) => {
   User.findOneAndUpdate({
       _id: req.params.id
@@ -107,7 +102,25 @@ router.post('/:id/edit', (req, res) => {
       new: true
     })
     .then((loggedUser) => {
-      debugger
+      res.render('users/profile', {
+        loggedUser
+      })
+    })
+    .catch((err) => {
+      res.send(err);
+    })
+})
+
+router.post('/:id/editPassword', (req, res) => {
+  var newPassword = req.body.newPassword;
+  var newPassword2 = req.body.newPassword2;
+  var oldPassword = req.body.oldPassword;
+  User.findOneAndUpdate({
+      _id: req.params.id
+    }, req.body, {
+      new: true
+    })
+    .then((loggedUser) => {
       res.render('users/profile', {
         loggedUser
       })
