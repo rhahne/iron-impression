@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user.js')
+const Register = require('../models/register.js')
 const nodemailer = require('nodemailer')
 const templates = require('../templates/template')
 
@@ -18,38 +19,76 @@ router.get('/login', function(req, res, next) {
   res.render('users/login');
 });
 
-router.post('/register', (req, res) => {
-  //var eMailToRegister = req.body.eMail;
-  debugger
-  var mail = require('../nodeMailerWithTemp');
-  debugger
-  mail.sendPasswordReset('hahne.robin@gmail.com', 'Bobbie','Bob','http://localhost:3000/users')
-})
-
-router.post('/send-email', (req, res, next) => {
-  debugger
-  let { email } = req.body;
-  let transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: 'ironimpressioner@gmail.com',
-      pass: 'alwayshalffull' 
+router.post('/register', (req, res, next) => {
+  bcrypt.hash(req.body.email, 10, function (err, hash) {
+    newRegister = {
+      eMail: req.body.email,
+      eMailHash: hash
     }
+    User.findOne({
+      eMail: req.body.email
+    })
+    .then( (user) => {
+      if (user){
+        res.render("users/index", {
+          errorMessage: "email already exists"
+        });
+      } else {
+        Register.findOne({
+          eMail: req.body.email
+        })
+        .then( (register) => {
+          if (register){
+          res.render("users/index", {
+            errorMessage: "register already exists"
+          });
+          } else{
+            Register.create(newRegister, (err) => {
+              if (err) console.log(err)
+              else {
+                let { email } = req.body;
+                var emailHash = newRegister.eMailHash;
+                let transporter = nodemailer.createTransport({
+                  service: 'Gmail',
+                  auth: {
+                    user: 'ironimpressioner@gmail.com',
+                    pass: 'alwayshalffull' 
+                  }
+                });
+                transporter.sendMail({
+                  from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
+                  to: email, 
+                  subject: 'Iron Impression Get Access!',
+                  html: templates.templateExample(emailHash)
+                })
+                .then(info => {
+                  console.log('email registered')
+                  res.render('users/message', { email })
+                  console.log(info)
+                })
+                .catch(error => console.log(error))
+              }
+            })
+          }
+        })
+      }
+    })
   });
-  transporter.sendMail({
-    from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
-    to: email, 
-    subject: 'Iron Impression Get Access!',
-    html: templates.templateExample()
-  })
-  .then(info => {
-    res.render('users/message', { email })
-    console.log(info)
-  })
-  .catch(error => console.log(error))
 });
 
-
+router.get('/createAccount/:emailHash', (req, res) => {
+  Register.findOne({
+    eMailHash: req.params.emailHash
+  })
+  .then( (foundRegister) => {
+    if(foundRegister){
+      debugger
+      res.render('users/register', {email: foundRegister._doc.eMail})
+    }else{
+      res.send('something went wrong!')
+    }
+  })
+})
 
 
 router.post('/signup', (req, res) => {
@@ -71,8 +110,14 @@ router.post('/signup', (req, res) => {
         User.create(newUser, (err) => {
           if (err) console.log(err)
           else {
-            console.log('user registered')
-            res.render('index')
+            Register.remove({ eMail: req.body.eMail }, (err) => {
+              if (err) {
+                res.send('something went wrong!')
+              } else {
+                console.log('user registered')
+                res.render('index')
+              }
+          });
           }
         })
       }
