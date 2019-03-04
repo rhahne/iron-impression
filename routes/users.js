@@ -5,8 +5,7 @@ const User = require('../models/user.js')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  debugger
-  res.render('users/index', {logged: req.session});
+  res.render('users/index', {user: req.session.currentUser});
 });
 
 router.get('/signup', function(req, res, next) {
@@ -37,7 +36,7 @@ router.post('/signup', (req, res) => {
           if (err) console.log(err)
           else {
             console.log('user registered')
-            res.render('index', {logged: req.session})
+            res.render('index')
           }
         })
       }
@@ -54,8 +53,11 @@ router.post('/login', function (req, res) {
     } else {
       bcrypt.compare(req.body.password, foundUser.password, function (err, result) {
         if (result == true) {
+          debugger
           req.session.currentUser = foundUser.eMail;
-          res.redirect('/users', {logged: req.session})
+          req.session.save();
+          debugger
+          res.redirect('/users')
         } else {
           res.send('password incorrect!');
         }
@@ -64,14 +66,39 @@ router.post('/login', function (req, res) {
   })
 });
 
-router.get('/logout', function (req, res) {
-  req.session.destroy();
-  res.render('/');
+router.get('/profile', function (req, res, next) {
+  if(req.session.currentUser){
+    User.findOne({
+      eMail: req.session.currentUser
+    })
+    .then((loggedUser) => {
+      debugger
+      res.render('users/profile', {loggedUser})
+    })
+  }else{
+    res.send('no session')
+  }
 })
 
-router.get('/:userId', function (req, res) {
+
+router.get('/logout', function (req, res) {
   req.session.destroy();
-  res.render('/');
+  res.redirect('/users');
 })
+
+router.get('/edit', function (req, res) {
+  if(req.session.currentUser){
+    User.findOne({
+      eMail: req.session.currentUser
+    })
+    .then((loggedUser) => {
+      debugger
+      res.render('users/edit', {loggedUser})
+    })
+  }else{
+    res.send('no session')
+  }
+})
+
 
 module.exports = router;

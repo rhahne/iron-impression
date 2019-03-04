@@ -1,0 +1,37 @@
+<h2>Edit Profile</h2>
+
+<p>all of the information</p>
+
+<p>
+  Hallo {{loggedUser._doc.firstName}}
+</p>
+
+<ul>
+  <li>
+    FirstName: {{loggedUser._doc.firstName}}
+  </li>
+  <li>
+    LastName: {{loggedUser._doc.lastName}}
+  </li>
+  <li>
+    eMail: {{loggedUser._doc.eMail}}
+  </li>
+</ul>
+
+<form action="/movies/{{movieId}}/edit" method="POST">
+  Title:<br>
+  <input type="text" name="title" value="{{movieToEdit._doc.title}}">
+  <br>
+  Genre:<br>
+  <input type="text" name="genre" value="{{movieToEdit._doc.genre}}">
+  <br>
+  Plot:<br>
+  <input type="text" name="plot" value="{{movieToEdit._doc.plot}}">
+  <br><br>
+  <button>Send</button>
+</form>
+
+
+<form action="logout" method="get">
+  <button>Log me out</button>
+</form>
