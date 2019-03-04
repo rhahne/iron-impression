@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
 });
 
 // ERRROR FOR ROBINNNNNNN ERROR ERRORRRR ERRRORR
