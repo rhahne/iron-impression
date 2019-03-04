@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/users">Users</a></li>
-        <li><a href="/endorsement">Endorsement</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-    </nav>
-
+    {{> nav}}
     {{{body}}}
   </body>
 </html>

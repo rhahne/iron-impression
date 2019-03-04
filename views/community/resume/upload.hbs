@@ -1,0 +1,24 @@
+<h1>Feedback by Iron Friends</h1>
+<p>Receive feedback on your CV in 3 simple steps</p>
+
+<img src="" alt="">
+<form action="/community/resume/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="name">
+    <input type="file" name="cv">
+    <select name="feedbacktype" id="">
+        <option value="design">
+            Design
+        </option>
+        <option value="design">
+            Grammar
+        </option>
+    </select>
+    <input type="text" name="feedbackdescription" placeholder="feedbackDescription">
+    <input type="submit" value="Submit">
+</form>
+<p>{{message}}</p>
+<a href="/community/resume">
+    <button>
+        Go to the community page
+    </button>
+</a>
