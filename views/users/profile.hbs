@@ -1,27 +1,35 @@
-<h2>Personal Profile Page</h2>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">
+      {{loggedUser._doc.firstName}} {{loggedUser._doc.lastName}}
+    </h1>
+    <p class="content">
+      Welcome to your personal profile Page!
+    </p>
 
-<p>all of the information</p>
+    <ul>
+      <li>
+        <strong>Bootcamp Class</strong><br>
+        Full Stack Web Dev, Amsterdam January 2019
+      </li><br>
+      <li>
+        <strong>Bio</strong> <br>
+        Ich habe heute Morgen zwei Bananenschalen gefunden. <br>
+        Ausserdem habe ich siebenundvierzig Stroopwaffeln nötig.
+      </li>
+      <li><br>
+        <strong>LinkedIn</strong><br>
+          www.linkedin.com/robinhahne
+      </li>
+      <li><br>
+        <strong>E-Mail</strong><br>
+          {{loggedUser._doc.eMail}}
+      </li>
+    </ul>
+    <br>
+    <form action="logout" method="get">
+      <button class="button is-primary">Log out</button>
+    </form>
 
-
-<p>
-  Hallo {{loggedUser._doc.firstName}}
-</p>
-
-<ul>
-  <li>
-    FirstName: {{loggedUser._doc.firstName}}
-  </li>
-  <li>
-    LastName: {{loggedUser._doc.lastName}}
-  </li>
-  <li>
-    eMail: {{loggedUser._doc.eMail}}
-  </li>
-</ul>
-
-<a href="/users/edit">edit Profile</a>
-
-
-<form action="logout" method="get">
-  <button>Log me out</button>
-</form>
+  </div>
+</section>

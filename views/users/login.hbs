@@ -1,11 +1,52 @@
-<h1>Log in page</h1>
-<p>Welcome to the Log in page</p>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">
+      Log in
+    </h1>
+    <p class="content">
+      Welcome to the Log in page
+    </p>
 
-<h2>Log in:</h2>
-<form action="/users/login" method="POST" id="login">
-  E-Mail: <br>
-  <input type="text" name="eMail" value="bob@mail.com"><br>
-  Password: <br>
-  <input type="password" name="password"><br><br>
-  <button>log in</button>
-</form>
+    <form action="/users/login" method="POST" id="login">
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input {{#if errorMessage}}is-danger{{/if}}" type="email" name="eMail" placeholder="Email" value="hahne.robin@gmail.com">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+
+          {{#if errorMessage}}
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+          {{else}}
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+          {{/if}}
+        </p>
+        {{#if errorMessage }}
+        <p class="help is-danger">{{ errorMessage }}</p>
+        {{/if}}
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="password" name="password" placeholder="Password">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+        {{#if passwordReset }}
+        <p class="help is-danger">Forgot your Password? <a href="/users/reset">Reset it here!</a></p>
+        {{/if}}
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button is-success">
+            Login
+          </button>
+        </p>
+      </div>
+    </form>
+  </div>
+</section>
