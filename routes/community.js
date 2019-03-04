@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const multer = require('multer');
 const Resume = require('../models/resume')
+const mongoose = require('mongoose')
 const Comments = require('../models/comments')
 const User = require('../models/user')
 
@@ -33,9 +34,10 @@ var upload = multer({ dest: './public/uploads/' });
 
 router
 .post('/resume/upload', upload.single('cv'), (req, res, next) => {
-
+    debugger
     const cv = new Resume({
         path: `/uploads/${req.file.filename}`,
+        title: req.body.title,
         originalName: req.file.originalname,
         user: req.session.currentUser,
         feedbackTypes: req.body.feedbacktype,
@@ -46,9 +48,20 @@ router
 
     cv.save((err) => {
         message = 'Your CV has been uploaded!'
-        res.redirect('/community/resume/upload', {message});
+        res.redirect('/community/resume');
     });
 });
+
+router.get('/resume/details/:id', (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    Resume.find({_id: id})
+    .then((resume) => {
+        res.render('community/resume/details', {resume})
+    })
+    .catch(error => {
+        console.log(error);
+    })
+})
 
 
 // ON HOLD ------- ON HOLD ------- ON HOLD ------- ON HOLD ------- //

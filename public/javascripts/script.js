@@ -18,14 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                 el.classList.toggle('is-active');
                 $target.classList.toggle('is-active');
-
             });
         });
     }
-
 });
 
-// ERRROR FOR ROBINNNNNNN ERROR ERRORRRR ERRRORR
+// ERRROR FOR ROBINNNNNNN ERROR ERRORRRR ERRRORR You want the file which you upload to be
 // var file = document.getElementById("file");
 // file.onchange = function () {
 //     debugger

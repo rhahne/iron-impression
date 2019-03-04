@@ -1,10 +1,30 @@
-<h1>Create the best CVs together</h1>
-<p>Receive feedback on your resume and help others with your opinion</p>
-<a href="/community/resume/upload">
-    <button>Upload your CV</button>
-</a>
+<section class="section">
+    <div class="container">
+        <h1 class="title is-spaced">
+            Create the best CVs together
+        </h1>
+        <h2 class="subtitle">
+            Receive feedback on your resume and help others with your opinion
+        </h2>
+        <a href="/community/resume/upload">
+            <button class="button is-primary">Upload your CV</button>
+        </a>
 
-{{#each resumes}}
-    <img src="{{this.path}}" alt="">
-    <p>{{this.feedbackDescription}}</p>
-{{/each}}
+        <div class="columns is-multiline">
+            {{#each resumes}}
+            <div class="column is-half">
+                <h3 class="title is-5">
+                    {{this.title}}
+                </h3>
+                <a href="/community/resume/details/{{this.id}}">
+                    <figure class="image is-3by4">
+                        <img src="{{this.path}}" alt="">
+                    </figure>
+                </a>
+                <p class="subtitle is-6">{{this.feedbackDescription}}</p>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+</section>
