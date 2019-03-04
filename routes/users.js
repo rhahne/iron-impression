@@ -16,6 +16,11 @@ router.get('/login', function(req, res, next) {
   res.render('users/login');
 });
 
+router.post('/register', (req, res) => {
+  var eMailToRegister = req.body.eMail;
+  
+})
+
 router.post('/signup', (req, res) => {
   bcrypt.hash(req.body.password, 10, function (err, hash) {
     newUser = {
@@ -111,23 +116,39 @@ router.post('/:id/edit', (req, res) => {
     })
 })
 
+
+
+/*
 router.post('/:id/editPassword', (req, res) => {
   var newPassword = req.body.newPassword;
   var newPassword2 = req.body.newPassword2;
   var oldPassword = req.body.oldPassword;
-  User.findOneAndUpdate({
-      _id: req.params.id
-    }, req.body, {
-      new: true
-    })
-    .then((loggedUser) => {
-      res.render('users/profile', {
-        loggedUser
-      })
-    })
-    .catch((err) => {
-      res.send(err);
-    })
-})
 
+  User.findById(req.params.id)
+  .then((userById) => {
+    bcrypt.compare(req.body.oldPassword, userById.password, function (err, result) {
+      if (result == true) {
+        User.findOneAndUpdate({
+          _id: req.params.id
+        }, req.body, {
+          new: true
+        })
+        .then((loggedUser) => {
+          res.render('users/profile', {
+            loggedUser
+          })
+        })
+        .catch((err) => {
+          res.send(err);
+        })
+      } else {
+        res.send('password doesnt match!');
+      }
+    });
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+*/
 module.exports = router;

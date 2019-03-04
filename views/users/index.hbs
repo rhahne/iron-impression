@@ -1,5 +1,7 @@
-<h1>User page</h1>
-<p>Welcome to the user page</p>
+<h1>Iron Impression</h1>
+<p>Iron Impression is an IronHack alumni community where we help eachother get ahead with CV’s and LinkedIn</p>
+
+
 
 
 {{#if user}}
@@ -8,6 +10,12 @@
   <a href="/users/profile">My Profile</a>
 </h2>
 {{else}}
+
+<form action="/users/register" method="POST" id="register">
+  <input type="text" name="eMail" placeholder="Your E-Mail">
+  <button>Register</button>
+</form>
+
 <h2>
   <a href="/users/signup"> Sign up </a>
 </h2>
