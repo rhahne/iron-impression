@@ -7,6 +7,7 @@ const User = mongoose.model('User', new Schema({
   lastName: String,
  // eMail: mongoose.SchemaTypes.Email,
   eMail: String,
+  eMailHash: String,
   password: String,
   points: Number
 }));

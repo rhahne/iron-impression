@@ -5,32 +5,45 @@ const User = require('../models/user.js')
 const Register = require('../models/register.js')
 const nodemailer = require('nodemailer')
 const templates = require('../templates/template')
+const salt = bcrypt.genSalt(10)
+
+let transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'ironimpressioner@gmail.com',
+    pass: 'alwayshalffull'
+  }
+});
 
 // Index Home
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
   res.render('/index', {
     user: req.session.currentUser
   });
 });
 
 // login
-router.get('/login', function (req, res, next) {
+router.get('/login', (req, res, next) => {
   res.render('users/login');
 });
-router.post('/login', function (req, res) {
+router.post('/login', (req, res) => {
   User.findOne({
     eMail: req.body.eMail
-  }).then(function (foundUser) {
+  }).then((foundUser) => {
     if (!foundUser) {
-      res.send("incorrect username");
+      res.render('users/login', {
+        errorMessage: 'E-Mail is not registered!'
+      });
     } else {
-      bcrypt.compare(req.body.password, foundUser.password, function (err, result) {
+      bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
         if (result == true) {
           req.session.currentUser = foundUser.eMail;
           req.session.save();
           res.render('community/home')
         } else {
-          res.send('password incorrect!');
+          res.render('users/login', {
+            passwordReset: true
+          });
         }
       });
     }
@@ -39,7 +52,7 @@ router.post('/login', function (req, res) {
 
 // Register Button on /
 router.post('/register', (req, res, next) => {
-  bcrypt.hash(req.body.email, 10, function (err, hash) {
+  bcrypt.hash(req.body.email, salt, function (err, hash) {
     newRegister = {
       eMail: req.body.email,
       eMailHash: hash
@@ -59,7 +72,7 @@ router.post('/register', (req, res, next) => {
             .then((register) => {
               if (register) {
                 res.render("index", {
-                  errorMessage: "register already exists"
+                  errorMessage: "E-Mail already registered, check your E-Mail!"
                 });
               } else {
                 Register.create(newRegister, (err) => {
@@ -69,6 +82,7 @@ router.post('/register', (req, res, next) => {
                       email
                     } = req.body;
                     var emailHash = newRegister.eMailHash;
+                    /* moved to the top
                     let transporter = nodemailer.createTransport({
                       service: 'Gmail',
                       auth: {
@@ -76,11 +90,12 @@ router.post('/register', (req, res, next) => {
                         pass: 'alwayshalffull'
                       }
                     });
+                    */
                     transporter.sendMail({
                         from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
                         to: email,
                         subject: 'Iron Impression Get Access!',
-                        html: templates.templateExample(emailHash)
+                        html: templates.register(emailHash)
                       })
                       .then(info => {
                         console.log('email registered')
@@ -100,13 +115,12 @@ router.post('/register', (req, res, next) => {
 });
 
 // Link on E-Mail
-router.get('/createAccount/:emailHash', (req, res) => {
+router.get('/createAccount', (req, res) => {
   Register.findOne({
-      eMailHash: req.params.emailHash
+      eMailHash: req.query.emailHash
     })
     .then((foundRegister) => {
       if (foundRegister) {
-        debugger
         res.render('users/register', {
           email: foundRegister._doc.eMail
         })
@@ -118,41 +132,47 @@ router.get('/createAccount/:emailHash', (req, res) => {
 
 // Sign Up new User
 router.post('/signup', (req, res) => {
-  bcrypt.hash(req.body.password, 10, function (err, hash) {
-    newUser = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      password: hash,
-      eMail: req.body.eMail,
-      points: 0
-    }
-    User.findOne({
-        eMail: req.body.eMail
-      })
-      .then((user) => {
-        if (user) {
-          res.send("username already exists")
-        } else {
-          User.create(newUser, (err) => {
-            if (err) console.log(err)
-            else {
-              Register.remove({
-                eMail: req.body.eMail
-              }, (err) => {
-                if (err) {
-                  res.send('something went wrong!')
-                } else {
-                  console.log('user registered')
-                  req.session.currentUser = foundUser.eMail;
-                  req.session.save();
-                  res.render('community/home')
-                }
-              });
-            }
-          })
-        }
-      })
-  });
+  debugger
+  bcrypt.hash(req.body.password, salt, function (err, hash) {
+    bcrypt.hash(req.body.eMail, salt, function (err, emailHash) {
+      newUser = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        password: hash,
+        eMail: req.body.eMail,
+        eMailHash: emailHash,
+        points: 0
+      }
+      User.findOne({
+          eMail: req.body.eMail
+        })
+        .then((user) => {
+          if (user) {
+            res.render("signup", {
+              errorMessage: "email already exists"
+            });
+          } else {
+            User.create(newUser, (err) => {
+              if (err) console.log(err)
+              else {
+                Register.remove({
+                  eMail: req.body.eMail
+                }, (err) => {
+                  if (err) {
+                    res.send('something went wrong!')
+                  } else {
+                    console.log('user registered')
+                    req.session.currentUser = newUser.eMail;
+                    req.session.save();
+                    res.render('community/home')
+                  }
+                });
+              }
+            })
+          }
+        })
+    });
+  })
 })
 
 // Individual Profile Page
@@ -206,6 +226,45 @@ router.post('/:id/edit', (req, res) => {
     .catch((err) => {
       res.send(err);
     })
+})
+
+// reset Password
+router.get('/reset', (req, res) => {
+  res.render('users/reset')
+})
+router.post('/reset', (req, res, next) => {
+  if (req.query.emailHash) {
+    next();
+  }
+  var email = req.body.email;
+  if (email) {
+    var emailHash;
+    bcrypt.hash(req.body.email, salt, function (err, hash) {
+      emailHash = hash;
+      transporter.sendMail({
+        from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
+        to: email,
+        subject: 'Reset password',
+        html: templates.resetPassword(emailHash)
+      })
+    })
+    res.send('email sent');
+  } else {
+    res.send('no email set')
+  }
+})
+router.get('/resetPassword', (req, res) => {
+  var emailHash = req.query.emailHash;
+  res.render('users/resetPassword', {emailHash})
+})
+router.post('/resetPassword', (req, res) => {
+  debugger
+  User.findOne({
+    eMailHash: req.query.emailHash
+  })
+  .then( (foundUser) => {
+    debugger
+  })
 })
 
 module.exports = router;

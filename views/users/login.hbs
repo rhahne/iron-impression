@@ -4,8 +4,19 @@
 <h2>Log in:</h2>
 <form action="/users/login" method="POST" id="login">
   E-Mail: <br>
-  <input type="text" name="eMail" value="bob@mail.com"><br>
+  <input type="email" name="eMail" value="bob@mail.com"><br>
   Password: <br>
-  <input type="password" name="password"><br><br>
+  <input type="password" name="password"><br>
   <button>log in</button>
 </form>
+{{#if errorMessage }}
+  <div class="error-message">{{ errorMessage }}</div>
+{{/if}}
+{{#if passwordReset }}
+  <div class="error-message">
+    Password is incorrect! <br>
+    <a href="/users/reset">
+    Did you forget your password slohn?
+    </a>
+  </div>
+{{/if}}
