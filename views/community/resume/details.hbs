@@ -11,20 +11,21 @@
                     <img src="https://bulma.io/images/placeholders/128x128.png">
                 </p>
             </figure>
-            <form action="/community/resume/details/{{resume.id}}/comment" method="POST">
-                <div class="media-content">
-                    <div class="field">
-                        <p class="control">
+            <div class="media-content">
+                <div class="field">
+                    <p class="control">
+                        <form action="/community/resume/details/{{resume.id}}/comment" method="POST">
                             <textarea name="text" class="textarea" placeholder="Add a comment..."></textarea>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="contol">
-                            <button type="submit" class="button">Post comment</button>
-                        </p>
-                    </div>
+                    </p>
                 </div>
-            </form>
+                <div class="field">
+                    <p class="contol">
+                        <button type="submit" class="button">Post comment</button>
+                        </form>
+                    </p>
+                </div>
+            </div>
+            <br>
         </article>
 
         {{!-- Comments --}}
@@ -38,11 +39,11 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>{{this.user}}</strong>
+                        <strong>{{this.user.firstName}} {{this.user.lastName}}</strong>
                         <br>
                         {{this.text}}
                         <br>
-                        <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                        {{!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> --}}
                     </p>
                 </div>
             </div>

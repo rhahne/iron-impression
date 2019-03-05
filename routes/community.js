@@ -58,7 +58,6 @@ router.get('/resume/details/:id', (req, res, next) => {
     .find({resume: id})
     .populate('user')
     .then((comments) => {
-        // POPULATING USER
         Resume
         .find({_id: id})
         .exec((err, resume) => {
