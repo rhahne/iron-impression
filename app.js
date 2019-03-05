@@ -20,11 +20,10 @@ mongoose
   .catch(err => {
     console.error('Error connecting to mongo', err)
 });
-
 // init sessions
 app.use(session({
   secret: "slothisticated",
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 60000000 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
