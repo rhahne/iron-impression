@@ -18,7 +18,7 @@
       </li>
       <li><br>
         <strong>LinkedIn</strong><br>
-          www.linkedin.com/robinhahne
+          {{loggedUser._doc.linkedin}}
       </li>
       <li><br>
         <strong>E-Mail</strong><br>
@@ -29,6 +29,13 @@
     <form action="logout" method="get">
       <button class="button is-primary">Log out</button>
     </form>
+   <br>
+    <a href="/users/edit">
+      <button class="button is-primary">Edit Shit</button>
+    </a>
+    </form>
+
+
 
   </div>
 </section>
