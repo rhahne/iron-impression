@@ -56,7 +56,7 @@ router.post('/register', (req, res, next) => {
   newRegister = {
     eMail: req.body.email,
     eMailSigned: jwt.sign({
-      eMail: 'hahne.robin@gmail.com'
+      eMail: req.body.email
     }, 'sloth')
   }
   User.findOne({
@@ -84,15 +84,6 @@ router.post('/register', (req, res, next) => {
                     email
                   } = req.body;
                   var emailHash = newRegister.eMailSigned;
-                  /* moved to the top
-                  let transporter = nodemailer.createTransport({
-                    service: 'Gmail',
-                    auth: {
-                      user: 'ironimpressioner@gmail.com',
-                      pass: 'alwayshalffull'
-                    }
-                  });
-                  */
                   transporter.sendMail({
                       from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
                       to: email,
@@ -134,14 +125,15 @@ router.get('/createAccount', (req, res) => {
 // Sign Up new User
 router.post('/signup', (req, res) => {
   bcrypt.hash(req.body.password, 10, function (err, hash) {
+    bootcampString = `${req.body.bootcamp} ${req.body.location} ${req.body.month}, ${req.body.year}`
     newUser = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      password: hash,
       eMail: req.body.eMail,
-      eMailSigned: jwt.sign({
-        eMail: 'hahne.robin@gmail.com'
-      }, 'sloth'),
+      bootcamp: bootcampString,
+      password: hash,
+      bio: req.body.bio,
+      linkedin: req.body.linkedin,
       points: 0
     }
     User.findOne({

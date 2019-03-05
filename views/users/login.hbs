@@ -6,7 +6,6 @@
     <p class="content">
       Welcome to the Log in page
     </p>
-
     <form action="/users/login" method="POST" id="login">
       <div class="field">
         <p class="control has-icons-left has-icons-right">
@@ -14,7 +13,6 @@
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
-
           {{#if errorMessage}}
           <span class="icon is-small is-right">
             <i class="fas fa-exclamation-triangle"></i>
@@ -47,47 +45,21 @@
           </button>
         </p>
       </div>
-   
   </div>
 </section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
-<script src="/vendors/formvalidation/dist/js/FormValidation.min.js"></script>
-<script src="/vendors/formvalidation/dist/js/plugins/Bulma.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function(e) {
-    FormValidation.formValidation(
-        document.getElementById('login'),
-        {
-            fields: {
-                eMail: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The E-Mail is required'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'The eMail must be more than 6 and less than 30 characters long',
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9_]+$/,
-                            message: 'The eMail can only consist of alphabetical, number and underscore',
-                        },
-                    }
-                },
-                password: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The password is required'
-                        },
-                        stringLength: {
-                            min: 8,
-                            message: 'The password must have at least 8 characters',
-                        },
-                    }
-                },
+$(document).ready(function () {
+    $('#login').validate({ // initialize the plugin
+        rules: {
+            eMail: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 5
             }
         }
-    );
-});    
+    });
+});
 </script>
