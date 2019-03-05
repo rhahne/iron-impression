@@ -45,21 +45,27 @@
           </button>
         </p>
       </div>
+      {{#if passwordUpdated}}
+      <div class="notification is-success">
+        <button class="delete"></button>
+        Password has been updated!
+      </div>
+      {{/if}}
   </div>
 </section>
 <script>
-$(document).ready(function () {
+  $(document).ready(function () {
     $('#login').validate({ // initialize the plugin
-        rules: {
-            eMail: {
-                required: true,
-                email: true
-            },
-            password: {
-                required: true,
-                minlength: 5
-            }
+      rules: {
+        eMail: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          minlength: 5
         }
+      }
     });
-});
+  });
 </script>

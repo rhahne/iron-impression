@@ -265,7 +265,8 @@ router.post('/resetPassword', (req, res) => {
           password: hash
         }, {new: true})
         .then((updatedUser) => {
-          res.send("password is now updated!")
+          res.render('users/login', {passwordUpdated: true});
+          //res.send("password is now updated!")
         })
     })
   } else {
