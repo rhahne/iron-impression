@@ -23,11 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+window.onload = function() {
+
+    var file = document.getElementById("file");
+    file.onchange = function () {
+        debugger
+        if (file.files.length > 0) {
+            document.getElementById('filename').innerHTML = file.files[0].name;
+        }
+    };
+}
 // ERRROR FOR ROBINNNNNNN ERROR ERRORRRR ERRRORR You want the file which you upload to be
-// var file = document.getElementById("file");
-// file.onchange = function () {
-//     debugger
-//     if (file.files.length > 0) {
-//         document.getElementById('filename').innerHTML = file.files[0].name;
-//     }
-// };

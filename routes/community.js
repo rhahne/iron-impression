@@ -56,7 +56,8 @@ router.get('/resume/details/:id', (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
     Resume.find({_id: id})
     .then((resume) => {
-        res.render('community/resume/details', {resume})
+        debugger
+        res.render('community/resume/details', {resume: resume[0]})
     })
     .catch(error => {
         console.log(error);
