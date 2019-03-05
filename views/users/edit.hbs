@@ -1,38 +1,42 @@
-<h2>Edit Profile</h2>
-
-<p>all of the information</p>
-
-<p>
-  Hallo {{loggedUser._doc.firstName}}
-</p>
-
-<form action="/users/{{loggedUser.id}}/edit" method="POST">
-  FirstName:<br>
-  <input type="text" name="firstName" value="{{loggedUser._doc.firstName}}">
-  <br>
-  LastName:<br>
-  <input type="text" name="lastName" value="{{loggedUser._doc.lastName}}">
-  <br>
-  eMail:<br>
-  <input type="text" name="eMail" value="{{loggedUser._doc.eMail}}">
-  <br><br>
-  <button>Change</button>
-</form>
-
-<form action="/users/{{loggedUser.id}}/editPassword" method="POST">
-  Old Password:<br>
-  <input type="text" name="oldPassword">
-  <br>
-  new Password:<br>
-  <input type="text" name="newPassword">
-  <br>
-  repeat new Password:<br>
-  <input type="text" name="newPassword2">
-  <br><br>
-  <button>Change Password</button>
-</form>
-
-
-<form action="logout" method="get">
-  <button>Log me out</button>
-</form>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">
+      Edit Profile
+    </h1>
+    <p class="content">
+      edit the desired fields:
+    </p>
+    <form action="/users/{{loggedUser._doc._id}}/edit" method="POST" id="edit">
+      <div class="field">
+        <label class="label">LinkedIn</label>
+        <div class="control">
+          <input class="input" type="text" name="linkedin" value="{{loggedUser._doc.linkedin}}">
+        </div>
+      </div>
+      <label class="label">Bio</label>
+      <div class="field-label is-normal">
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <textarea class="textarea" name="bio"
+              placeholder="Tell us about yourself!">{{loggedUser._doc.bio}}</textarea>
+            <br>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="field">
+        <p class="control">
+          <button class="button is-success">
+            Change!
+          </button>
+        </p>
+      </div>
+    </form>
+    <br>
+    <form action="logout" method="get">
+      <button class="button is-primary">Log me out</button>
+    </form>
+  </div>
+</section>

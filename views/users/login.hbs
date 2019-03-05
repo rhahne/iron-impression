@@ -6,15 +6,13 @@
     <p class="content">
       Welcome to the Log in page
     </p>
-
     <form action="/users/login" method="POST" id="login">
       <div class="field">
         <p class="control has-icons-left has-icons-right">
-          <input class="input {{#if errorMessage}}is-danger{{/if}}" type="email" name="eMail" placeholder="Email" value="hahne.robin@gmail.com">
+          <input class="input" type="email" name="eMail" placeholder="Email" value="hahne.robin@gmail.com">
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
-
           {{#if errorMessage}}
           <span class="icon is-small is-right">
             <i class="fas fa-exclamation-triangle"></i>
@@ -47,6 +45,27 @@
           </button>
         </p>
       </div>
-    </form>
+      {{#if passwordUpdated}}
+      <div class="notification is-success">
+        <button class="delete"></button>
+        Password has been updated!
+      </div>
+      {{/if}}
   </div>
 </section>
+<script>
+  $(document).ready(function () {
+    $('#login').validate({ // initialize the plugin
+      rules: {
+        eMail: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          minlength: 5
+        }
+      }
+    });
+  });
+</script>

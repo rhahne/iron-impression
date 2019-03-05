@@ -10,16 +10,15 @@
     <ul>
       <li>
         <strong>Bootcamp Class</strong><br>
-        Full Stack Web Dev, Amsterdam January 2019
+        {{loggedUser._doc.bootcamp}}
       </li><br>
       <li>
         <strong>Bio</strong> <br>
-        Ich habe heute Morgen zwei Bananenschalen gefunden. <br>
-        Ausserdem habe ich siebenundvierzig Stroopwaffeln nötig.
+        {{loggedUser._doc.bio}}
       </li>
       <li><br>
         <strong>LinkedIn</strong><br>
-          www.linkedin.com/robinhahne
+          {{loggedUser._doc.linkedin}}
       </li>
       <li><br>
         <strong>E-Mail</strong><br>
@@ -30,6 +29,13 @@
     <form action="logout" method="get">
       <button class="button is-primary">Log out</button>
     </form>
+   <br>
+    <a href="/users/edit">
+      <button class="button is-primary">Edit Shit</button>
+    </a>
+    </form>
+
+
 
   </div>
 </section>

@@ -14,7 +14,7 @@
     </h2>
     {{else}}
 
-    <form action="/users/register" method="post">
+    <form id="regist" action="/users/register" method="post">
       <div class="field has-addons">
         <div class="control has-icons-left is-expanded">
           <input class="input is-hovered" type="email" name="email" placeholder="Your E-Mail">
@@ -28,7 +28,7 @@
       </div>
     </form>
     {{#if errorMessage }}
-    <div class="error-message">{{ errorMessage }}</div>
+    <p class="help is-danger">{{ errorMessage }}</p>
     {{/if}}
     <br>
     or
@@ -36,12 +36,23 @@
     <br>
     <h2>
       <a class="button is-light" href="/users/login">
-        Log in 
+        Log in
       </a>
     </h2>
     <br>
     <br>
     {{/if}}
-
   </div>
 </section>
+<script>
+$(document).ready(function () {
+    $('#regist').validate({ // initialize the plugin
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        }
+    });
+});
+</script>
