@@ -38,6 +38,7 @@ router.post('/login', (req, res) => {
       bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
         if (result == true) {
           req.session.currentUser = foundUser.eMail;
+          req.session.currentUserId = foundUser.id;
           req.session.save();
           res.redirect('/community/home')
         } else {
@@ -52,7 +53,6 @@ router.post('/login', (req, res) => {
 
 // Register Button on /
 router.post('/register', (req, res, next) => {
-  debugger
   newRegister = {
     eMail: req.body.email,
     eMailSigned: jwt.sign({
@@ -164,6 +164,7 @@ router.post('/signup', (req, res) => {
                 } else {
                   console.log('user registered')
                   req.session.currentUser = newUser.eMail;
+                  req.session.currentUserId = newUser.id;
                   req.session.save();
                   res.redirect('/community/home')
                 }
@@ -253,7 +254,9 @@ router.post('/reset', (req, res, next) => {
   }
 })
 router.get('/resetPassword', (req, res) => {
-  var emailHash = req.query.emailHash;
+  if(!emailHash){
+    var emailHash = req.query.emailHash;
+  }
   var email = jwt.verify(emailHash, 'sloth');
   res.render('users/resetPassword', {
     email,
@@ -262,7 +265,7 @@ router.get('/resetPassword', (req, res) => {
 })
 router.post('/resetPassword', (req, res) => {
   var email = jwt.verify(req.query.emailHash, 'sloth');
-  if (req.body.pass === req.body.pass2) {
+  if (req.body.password === req.body.password2) {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
       User.findOneAndUpdate({
           eMail: email.eMail
@@ -274,7 +277,9 @@ router.post('/resetPassword', (req, res) => {
         })
     })
   } else {
-    res.send("passwords are not equal")
+    res.render('users/resetPassword', {
+      errorMessage: "passwords are not equal!", emailHash: req.query.emailHash
+    });
   }
 
 })

@@ -9,7 +9,7 @@ const User = require('../models/user')
 
 // -------------------- COMMUNITY HOME -------------------- //
 router.get('/home', function(req, res, next) {
-    res.render('community/index')
+    res.render('community/home')
 });
 
 

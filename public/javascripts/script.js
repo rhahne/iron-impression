@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
+    
 window.onload = function() {
 
     var file = document.getElementById("file");
