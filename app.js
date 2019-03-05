@@ -42,7 +42,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var communityRouter = require('./routes/community')

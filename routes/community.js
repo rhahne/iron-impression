@@ -34,15 +34,13 @@ var upload = multer({ dest: './public/uploads/' });
 
 router
 .post('/resume/upload', upload.single('cv'), (req, res, next) => {
-    debugger
     const cv = new Resume({
         path: `/uploads/${req.file.filename}`,
         title: req.body.title,
         originalName: req.file.originalname,
-        user: req.session.currentUser,
+        user: mongoose.Types.ObjectId(req.session.currentuserid),
         feedbackTypes: req.body.feedbacktype,
         feedbackDescription: req.body.feedbackdescription,
-        comments: [],
         points: 0
     });
 
@@ -52,15 +50,46 @@ router
     });
 });
 
+
 router.get('/resume/details/:id', (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
-    Resume.find({_id: id})
-    .then((resume) => {
-        debugger
-        res.render('community/resume/details', {resume: resume[0]})
+    
+    Comments
+    .find({resume: id})
+    .populate('user')
+    .then((comments) => {
+        // POPULATING USER
+        Resume
+        .find({_id: id})
+        .exec((err, resume) => {
+            
+            if (err) console.log(err)
+            res.render('community/resume/details', {resume: resume[0], comments: comments})
+        })
     })
-    .catch(error => {
-        console.log(error);
+})
+
+
+router.post('/resume/details/:id/comment', (req, res, next) => {
+    debugger
+    let user = mongoose.Types.ObjectId(req.session.currentUserId);
+    let resume = mongoose.Types.ObjectId(req.params.id); 
+    let text = req.body.text;
+    let votes = req.body.votes;
+
+    let comment = {
+        user: user,
+        resume: resume,
+        text: text,
+        votes: votes
+    }
+    Comments.create(comment, (err) => {
+
+        if (err) {
+            console.log(err)
+        } else {
+            res.redirect(`/community/resume/details/${req.params.id}`)
+        }
     })
 })
 

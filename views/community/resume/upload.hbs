@@ -47,7 +47,7 @@
 
             <div class="field">
                 <textarea class="textarea" placeholder="Describe the feedback you're looking for" name="feedbackdescription">
-            </textarea>
+                </textarea>
             </div>
 
             <button class="button is-primary" type="submit">
@@ -62,3 +62,16 @@
         </a>
     </div>
 </section>
+
+<script>
+    // Get the filename on upload
+    window.onload = function() {
+    var file = document.getElementById("file");
+    file.onchange = function () {
+        debugger
+        if (file.files.length > 0) {
+            document.getElementById('filename').innerHTML = file.files[0].name;
+        }
+    };
+}
+</script>
