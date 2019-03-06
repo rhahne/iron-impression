@@ -106,12 +106,23 @@
                             {{!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> --}}
                         </div>
                         {{#if this.myComment}}
-                        <button id="edit{{this.id}}" class="button is-dark">edit</button>
+                        <small>
+                            <a id="edit{{this.id}}" id="edit{{this.id}}">
+                                edit
+                            </a>
+                            <a href="/community/resume/deleteComment/{{this.id}}">
+                                delete
+                            </a>
+                        </small> 
+{{!-- 
+                        <button id="edit{{this.id}}" class="button is-dark">
+                            edit
+                        </button>
                         <a href="/community/resume/deleteComment/{{this.id}}">
                             <button class="button is-dark">
                                 Delete
                             </button>
-                        </a>
+                        </a> --}}
                         {{/if}}
                         <br>
                         <script>
