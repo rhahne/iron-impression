@@ -1,3 +1,131 @@
+{{> nav}}
+
+<section class="hero is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-fifth"></div>
+        <div class="column">
+          <h1 class="title is-1 is-spaced">
+            Profile
+          </h1>
+          <h2 class="subtitle">
+            Hi <strong>{{loggedUser._doc.firstName}}</strong>, welcome to your profile page.
+          </h2>
+          <p class="content">
+            Here you can manage your uploads, comments, and your account details
+          </p>
+          <section class="section">
+            <ul>
+              <li>
+                <strong>Bootcamp Class</strong><br>
+                {{loggedUser._doc.bootcamp}}
+              </li><br>
+              <li>
+                <strong>Bio</strong> <br>
+                {{loggedUser._doc.bio}}
+              </li>
+              <li><br>
+                <strong>LinkedIn</strong><br>
+                {{loggedUser._doc.linkedin}}
+              </li>
+              <li><br>
+                <strong>E-Mail</strong><br>
+                {{loggedUser._doc.eMail}}
+              </li>
+            </ul>
+            <div class="button-combo" style="display: flex">
+              <form action="logout" method="get">
+                <button class="button is-primary">Log out</button>
+              </form>
+              <a href="/users/edit">
+                <button class="button is-primary">Edit Shit</button>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="column">
+      </div>
+      <div class="column is-one-fifth"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="hero is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-fifth"></div>
+        <div class="column">
+          <h1 class="title is-1 is-spaced">
+            Comments
+          </h1>
+          <section class="section">
+            {{#each comments}}
+            <ul>
+              <li>
+                <strong>Bootcamp Class</strong><br>
+                {{loggedUser._doc.bootcamp}}
+              </li><br>
+              <li>
+                <strong>Bio</strong> <br>
+                {{loggedUser._doc.bio}}
+              </li>
+              <li><br>
+                <strong>LinkedIn</strong><br>
+                {{loggedUser._doc.linkedin}}
+              </li>
+              <li><br>
+                <strong>E-Mail</strong><br>
+                {{loggedUser._doc.eMail}}
+              </li>
+            </ul>
+            {{/each}}
+
+
+            <div class="button-combo" style="display: flex">
+              <form action="logout" method="get">
+                <button class="button is-primary">Log out</button>
+              </form>
+              <a href="/users/edit">
+                <button class="button is-primary">Edit Shit</button>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="column">
+      </div>
+      <div class="column is-one-fifth"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    {{#each comments}}
+    <div class="column">
+      <p class="content">{{this.text}}</p>
+    </div>
+    {{/each}}
+  </div>
+</section>
+
+{{#each resume}}
+<h2>{{this.feedbackDescription}}</h2>
+<h2>{{this.title}}</h2>
+<a href="/community/resume/details/{{this.id}}">
+  <button class="button is-dark">Go to your resume</button>
+</a>
+<hr class="hr">
+{{/each}}
+
+
+
 <section class="section">
   <div class="container">
     <h1 class="title is-2">
@@ -7,35 +135,8 @@
       Welcome to your personal profile Page!
     </p>
 
-    <ul>
-      <li>
-        <strong>Bootcamp Class</strong><br>
-        {{loggedUser._doc.bootcamp}}
-      </li><br>
-      <li>
-        <strong>Bio</strong> <br>
-        {{loggedUser._doc.bio}}
-      </li>
-      <li><br>
-        <strong>LinkedIn</strong><br>
-          {{loggedUser._doc.linkedin}}
-      </li>
-      <li><br>
-        <strong>E-Mail</strong><br>
-          {{loggedUser._doc.eMail}}
-      </li>
-    </ul>
-    <br>
-    <form action="logout" method="get">
-      <button class="button is-primary">Log out</button>
+
+
     </form>
-   <br>
-    <a href="/users/edit">
-      <button class="button is-primary">Edit Shit</button>
-    </a>
-    </form>
-
-
-
   </div>
 </section>

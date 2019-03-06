@@ -39,9 +39,16 @@
                             <p class="subtitle">
                                 Upload your CV and get ahead!
                             </p>
+                            {{#if currentUser}}
                             <a href="/community/resume">
-                                <button class="button is-dark">Learn more</button>
+                                <button class="button is-dark">Get it now</button>
                             </a>
+                            {{/if}}
+                            {{#unless currentUser}}
+                            <a href="/">
+                                <button class="button is-dark">Sign up</button>
+                            </a>
+                            {{/unless}}
                         </div>
                     </div>
                 </div>
@@ -68,9 +75,16 @@
                             <p class="subtitle">
                                 Add projects for review
                             </p>
+                            {{#if currentUser}}
                             <a href="/community/endorse">
-                                <button class="button is-light">Learn more</button>
+                                <button class="button is-light">Do it now</button>
                             </a>
+                            {{/if}}
+                            {{#unless currentUser}}
+                            <a href="/">
+                                <button class="button is-light">Sign up</button>
+                            </a>
+                            {{/unless}}
                         </div>
                         <div class="column">
                             <figure class="image is 96x96">

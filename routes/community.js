@@ -48,7 +48,7 @@ router.post('/resume/upload', upload.single('cv'), (req, res, next) => {
             path: `/uploads/${req.file.filename}`,
             title: req.body.title,
             originalName: req.file.originalname,
-            user: mongoose.Types.ObjectId(req.session.currentuserid),
+            user: mongoose.Types.ObjectId(req.session.currentUserId),
             feedbackTypes: req.body.feedbacktype,
             feedbackDescription: req.body.feedbackdescription,
             points: 0

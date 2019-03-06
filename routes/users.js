@@ -6,6 +6,9 @@ const Register = require('../models/register.js')
 const nodemailer = require('nodemailer')
 const templates = require('../templates/template')
 var jwt = require('jsonwebtoken');
+const Comments = require('../models/comments')
+const Resume = require('../models/resume')
+const mongoose = require('mongoose')
 
 
 let transporter = nodemailer.createTransport({
@@ -172,12 +175,22 @@ router.post('/signup', (req, res) => {
 // Individual Profile Page
 router.get('/profile', function (req, res, next) {
   if (req.session.currentUser) {
-    User.findOne({
-        eMail: req.session.currentUser
-      })
+    User
+      .findOne({ eMail: req.session.currentUser})
       .then((loggedUser) => {
-        res.render('users/profile', {
-          loggedUser
+        let profileid = mongoose.Types.ObjectId(loggedUser.id);
+
+        Comments
+          .find({user: profileid})
+          .then((comments) => {
+
+            Resume
+            .find({user: profileid})
+            .exec((err, resume) => {
+              debugger
+              if (err) console.log(err)
+              res.render('users/profile', {loggedUser, resume, comments})
+            })
         })
       })
   } else {
