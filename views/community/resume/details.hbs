@@ -1,12 +1,42 @@
 <section class="section">
     <div class="container">
         <h1 class="title">{{resume.title}}</h1>
-        <img src="{{resume.path}}" alt="{{resume.title}}">
-        <p class="content">{{resume.feedbackDescription}}</p>
 
+        <p class="content">
+            <strong>Description:</strong> <br>
+            {{resume.feedbackDescription}} <br><br>
+            <strong>Type of help:</strong> <br>
+            {{resume.feedbackTypes}}
+        </p>
+
+        <canvas id="pdf-canvas" class="canvas-pdf"></canvas>
+        <script>
+            pdfjsLib.getDocument('{{resume.path}}')
+                .then((doc) => {
+                    doc.getPage(1).then((page) => {
+                        var myCanvas = document.getElementById("pdf-canvas")
+                        var context = myCanvas.getContext("2d")
+
+                        var viewport = page.getViewport(1);
+                        myCanvas.width = viewport.width;
+                        myCanvas.height = viewport.height;
+
+                        page.render({
+                            canvasContext: context,
+                            viewport: viewport
+                        })
+                    })
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        </script>
+        <br><br><br>
+        <hr><br><br><br>
         {{!-- Write comment --}}
         <article class="media">
             <figure class="media-left">
+
                 <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
                 </p>
@@ -32,6 +62,7 @@
         {{#each comments}}
         <article class="media">
             <figure class="media-left">
+
                 <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
                 </p>

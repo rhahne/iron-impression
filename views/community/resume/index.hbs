@@ -9,22 +9,57 @@
         <a href="/community/resume/upload">
             <button class="button is-primary">Upload your CV</button>
         </a>
-
+        <br><br>
         <div class="columns is-multiline">
             {{#each resumes}}
             <div class="column is-half">
-                <h3 class="title is-5">
-                    {{this.title}}
-                </h3>
-                <a href="/community/resume/details/{{this.id}}">
-                    <figure class="image is-3by4">
-                        <img src="{{this.path}}" alt="">
-                    </figure>
-                </a>
-                <p class="subtitle is-6">{{this.feedbackDescription}}</p>
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title">
+                            {{this.title}}
+                        </p>
+                        <p>
+                            {{this.feedbackDescription}}
+                        </p>
+                    </div>
+                    <footer class="card-footer">
+                        <p class="card-footer-item">
+                            <a href="/community/resume/details/{{this.id}}">
+                                <button class="button is-light">
+                                    go to detail page!
+                                </button>
+                            </a>
+                        </p>
+                        <p class="card-footer-item">
+                            <span>
+                                help needed with: {{this.feedbackTypes}}
+                            </span>
+                        </p>
+                    </footer>
+                </div>
             </div>
+            <script>
+                pdfjsLib.getDocument('{{this.path}}')
+                    .then((doc) => {
+                        doc.getPage(1).then((page) => {
+                            var myCanvas = document.getElementById("{{this.originalName}}")
+                            var context = myCanvas.getContext("2d")
+
+                            var viewport = page.getViewport(0.8);
+                            myCanvas.width = viewport.width;
+                            myCanvas.height = viewport.height;
+
+                            page.render({
+                                canvasContext: context,
+                                viewport: viewport
+                            })
+                        })
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            </script>
             {{/each}}
         </div>
-
     </div>
 </section>

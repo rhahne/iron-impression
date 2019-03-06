@@ -7,12 +7,10 @@ const Comments = require('../models/comments')
 const User = require('../models/user')
 const fs = require('fs');
 
-
 // -------------------- COMMUNITY HOME -------------------- //
 router.get('/home', function(req, res, next) {
     res.render('community/index')
 });
-
 
 // -------------------- RESUME ROUTES -------------------- //
 router.get('/resume', function(req, res, next) {
@@ -43,7 +41,7 @@ var upload = multer({ dest: './public/uploads/' });
 router
 .post('/resume/upload', upload.single('cv'), (req, res, next) => {
     const cv = new Resume({
-        path: `/uploads/${req.file.filename}`,
+        path:`/uploads/${req.file.filename}`,
         title: req.body.title,
         originalName: req.file.originalname,
         user: mongoose.Types.ObjectId(req.session.currentuserid),
@@ -57,7 +55,6 @@ router
         res.redirect('/community/resume');
     });
 });
-
 
 router.get('/resume/details/:id', (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
@@ -75,7 +72,6 @@ router.get('/resume/details/:id', (req, res, next) => {
         })
     })
 })
-
 
 router.post('/resume/details/:id/comment', (req, res, next) => {
     debugger

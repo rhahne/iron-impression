@@ -3,3 +3,6 @@ body, html {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.canvas-pdf{
+  border: 1px solid lightgrey;
+}
