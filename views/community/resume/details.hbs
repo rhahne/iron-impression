@@ -80,11 +80,11 @@
                 <div class="content">
                     <p>
                         <strong>{{this.user.firstName}} {{this.user.lastName}}</strong>
-                        <div class="commentToggle">
+                        <div class="toggle{{this.id}}">
                             {{this.text}}
                             <br>
                         </div>
-                        <div class="commentToggle hidden">
+                        <div class="toggle{{this.id}} hidden">
                             <form action="/community/resume/editComment/{{this.id}}" method="POST">
                                 <textarea name="text" rows="2" class="textarea"
                                     placeholder="Add a comment...">{{this.text}}</textarea><br>
@@ -92,12 +92,13 @@
                             </form>
                             {{!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> --}}
                         </div>
+                        {{#if this.myComment}}
+                        <button id="edit{{this.id}}" class="button is-dark">edit</button>
+                        {{/if}}
                         <br>
-
-                        <button id="editCommentButton" class="button is-dark">edit</button>
                         <script>
-                            $("#editCommentButton").click(() => {
-                                $('.commentToggle').toggleClass('hidden');
+                            $("#edit{{this.id}}").click(() => {
+                                $('.toggle{{this.id}}').toggleClass('hidden');
                             });
                         </script>
                     </p>
