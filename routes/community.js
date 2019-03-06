@@ -47,7 +47,7 @@ router.post('/resume/upload', upload.single('cv'), (req, res, next) => {
         path: `/uploads/${req.file.filename}`,
         title: req.body.title,
         originalName: req.file.originalname,
-        user: mongoose.Types.ObjectId(req.session.currentuserid),
+        user: mongoose.Types.ObjectId(req.session.currentUserId),
         feedbackTypes: req.body.feedbacktype,
         feedbackDescription: req.body.feedbackdescription,
         points: 0
@@ -60,7 +60,7 @@ router.post('/resume/upload', upload.single('cv'), (req, res, next) => {
 
 router.get('/resume/details/:id', (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
-
+    debugger
     Comments
         .find({
             resume: id
@@ -71,6 +71,7 @@ router.get('/resume/details/:id', (req, res, next) => {
                 .find({
                     _id: id
                 })
+                .populate('user')
                 .exec((err, resume) => {
                     if (err) console.log(err)
                     comments.forEach((comment) => {
@@ -92,7 +93,6 @@ router.get('/resume/details/:id', (req, res, next) => {
 })
 
 router.post('/resume/details/:id/comment', (req, res, next) => {
-    debugger
     let user = mongoose.Types.ObjectId(req.session.currentUserId);
     let resume = mongoose.Types.ObjectId(req.params.id);
     let text = req.body.text;
