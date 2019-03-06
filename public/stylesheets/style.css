@@ -3,6 +3,21 @@ body, html {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.canvas-pdf{
+.canvas-pdf {
   border: 1px solid lightgrey;
+}
+
+.tiles-home-page .column {
+  margin: 20px 0px;
+}
+
+.tiles-home-page figure {
+  display: block;
+  margin: 0 auto;
+}
+
+.tiles-home-page .home-text {
+  max-width: 150px;
+  display: block;
+  margin: 25px auto;
 }
