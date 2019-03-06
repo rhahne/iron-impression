@@ -43,26 +43,23 @@ var upload = multer({
 });
 
 router.post('/resume/upload', upload.single('cv'), (req, res, next) => {
-        debugger
-        const cv = new Resume({
-            path: `/uploads/${req.file.filename}`,
-            title: req.body.title,
-            originalName: req.file.originalname,
-            user: mongoose.Types.ObjectId(req.session.currentUserId),
-            feedbackTypes: req.body.feedbacktype,
-            feedbackDescription: req.body.feedbackdescription,
-            points: 0
-        });
-        debugger
-        cv.save((err) => {
-            message = 'Your CV has been uploaded!'
-            res.redirect('/community/resume');
-        });
+    const cv = new Resume({
+        path: `/uploads/${req.file.filename}`,
+        title: req.body.title,
+        originalName: req.file.originalname,
+        user: mongoose.Types.ObjectId(req.session.currentUserId),
+        feedbackTypes: req.body.feedbacktype,
+        feedbackDescription: req.body.feedbackdescription,
+        points: 0
     });
+    cv.save((err) => {
+        message = 'Your CV has been uploaded!'
+        res.redirect('/community/resume');
+    });
+});
 
 router.get('/resume/details/:id', (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
-
     Comments
         .find({
             resume: id
@@ -75,27 +72,32 @@ router.get('/resume/details/:id', (req, res, next) => {
                 })
                 .exec((err, resume) => {
                     if (err) console.log(err)
-                    debugger
-                    comments.forEach((comment) =>{
-                        debugger
+                    comments.forEach((comment) => {
                         var myCom;
-                        if(comment.user.id === res.locals.currentUser){
+                        if (comment.user.id === res.locals.currentUser) {
                             myCom = true;
-                        }else{
+                        } else {
                             myCom = false;
                         }
                         comment.myComment = myCom;
                     })
-                    res.render('community/resume/details', {
-                        resume: resume[0],
-                        comments: comments
-                    })
+                    User.findOne({
+                            _id: res.locals.currentUser
+                        })
+                        .then((currentUser) => {
+                            res.render('community/resume/details', {
+                                resume: resume[0],
+                                comments: comments,
+                                loggedUser: res.locals.currentUser,
+                                avatarNumber: currentUser.avatarNumber
+                            })
+                        })
+
                 })
         })
 })
 
 router.post('/resume/details/:id/comment', (req, res, next) => {
-    debugger
     let user = mongoose.Types.ObjectId(req.session.currentUserId);
     let resume = mongoose.Types.ObjectId(req.params.id);
     let text = req.body.text;
@@ -136,7 +138,7 @@ router.post('/resume/edit/:id', upload.single('cv'), (req, res, next) => {
         feedbackTypes: req.body.feedbacktype,
         feedbackDescription: req.body.feedbackdescription,
     };
-    if(req.file){
+    if (req.file) {
         updateCV.path = `/uploads/${req.file.filename}`;
         updateCV.originalName = req.file.originalname;
     }
@@ -155,15 +157,37 @@ router.post('/resume/edit/:id', upload.single('cv'), (req, res, next) => {
 
 router.post('/resume/editComment/:commentId', (req, res) => {
     Comments.findOneAndUpdate({
+            _id: req.params.commentId
+        }, req.body, {
+            new: true
+        })
+        .then((comment) => {
+            res.redirect(`/community/resume/details/${comment.resume._id}`);
+        })
+        .catch((err) => {
+            res.send(err);
+        })
+})
+
+router.get('/resume/delete/:id', (req, res) => {
+    Resume.findOneAndDelete({
+        _id: req.params.id
+    }, (err) => {
+        if (err) console.log(err);
+        else {
+            res.redirect('/community/resume')
+        }
+    })
+})
+
+router.get('/resume/deleteComment/:commentId', (req, res) => {
+    Comments.findOneAndDelete({
         _id: req.params.commentId
-    }, req.body, {
-        new: true
-    })
-    .then((comment) => {
-        res.redirect(`/community/resume/details/${comment.resume._id}`);
-    })
-    .catch((err) => {
-        res.send(err);
+    }, (err) => {
+        if (err) console.log(err);
+        else {
+            res.redirect(`/community/resume`)
+        }
     })
 })
 

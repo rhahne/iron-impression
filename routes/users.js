@@ -138,7 +138,8 @@ router.post('/signup', (req, res) => {
       password: hash,
       bio: req.body.bio,
       linkedin: req.body.linkedin,
-      points: 0
+      points: 0,
+      avatarNumber: Math.floor(Math.random() * 50) + 1  
     }
     User.findOne({
         eMail: req.body.eMail
@@ -188,7 +189,6 @@ router.get('/profile', function (req, res, next) {
             Resume
             .find({user: profileid})
             .exec((err, resume) => {
-              debugger
               if (err) console.log(err)
               res.render('users/profile', {loggedUser, resume, comments})
             })

@@ -10,7 +10,8 @@ const User = mongoose.model('User', new Schema({
   bio: String,
   linkedin: String,
   password: String,
-  points: Number
+  points: Number,
+  avatarNumber: Number,
 }));
 
 module.exports = User
