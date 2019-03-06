@@ -1,7 +1,9 @@
+{{> nav}}
 <section class="hero is-medium is-bold">
   <div class="hero-body">
     <div class="container">
       <div class="columns is-vcentered">
+        <div class="column is-one-fifth"></div>
         <div class="column">
           <h1 class="title is-1 is-spaced">
             Iron Impression
@@ -10,32 +12,37 @@
             Iron Impression is an IronHack alumni community where we help eachother get ahead with CV’s and LinkedIn
           </h2>
           <div class="">
-            {{#unless currentUser}}
             <form id="regist" action="/users/register" method="post">
               <div class="field has-addons">
-                <div class="control has-icons-left is-expanded">
+                <div class="control has-icons-left">
+                  {{#unless currentUser}}
                   <input class="input is-hovered" type="email" name="email" placeholder="Your E-Mail">
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                   </span>
+                  {{/unless}}
                 </div>
                 <div class="control">
+                  {{#unless currentUser}}
                   <button type="submit" class="button is-primary">Register</button>
+                  {{/unless}}
                   <br>
                 </div>
               </div>
+              {{#unless currentUser}}
               <small>Already have an account? <a href="/users/login">Login</a></small>
+              {{/unless}}
             </form>
             {{#if errorMessage }}
             <p class="help is-danger">{{ errorMessage }}</p>
             {{/if}}
             <br>
           </div>
-          {{/unless}}
         </div>
         <div class="column">
           <img src="/img/welcome-preview-01-2.png" alt="">
         </div>
+        <div class="column is-one-fifth"></div>
       </div>
     </div>
   </div>
@@ -43,41 +50,44 @@
 </section>
 
 
-<section class="hero is-medium is-dark is-bold">
+<section class="hero  is-dark is-bold">
   <div class="hero-body">
     <div class="container">
-
+      <div class="tiles-home-page">
       <div class="columns is-centered">
+
         <div class="column has-text-centered is-one-third">
-          <figure class="image is-128x128">
+          <figure class="image is-96x96">
             <img src="/img/icons/feedback.png" alt="">
           </figure>
-          <h2 class="subtitle">
+          <h2 class="subtitle home-text">
             Receive honest feedback on your resume
           </h2>
         </div>
+        <hr class="hr">
 
         <div class="column has-text-centered is-one-third">
-          <figure class="image is-128x128">
+          <figure class="image is-96x96">
             <img src="/img/icons/usability.png" alt="">
           </figure>
 
-          <h2 class="subtitle">
-            Get endorsements for your skills on LinkedIn
+          <h2 class="subtitle home-text">
+            Get endorsements on your LinkedIn skills
           </h2>
         </div>
+        <hr class="hr">
 
         <div class="column has-text-centered is-one-third">
-          <figure class="image is-128x128">
+          <figure class="image is-96x96">
             <img src="/img/icons/maintenance.png" alt="">
           </figure>
-          <h2 class="subtitle">
+          <h2 class="subtitle home-text">
             Train your layout skills by improving eachother's CVs
           </h2>
         </div>
       </div>
-
     </div>
+  </div>
   </div>
 </section>
 

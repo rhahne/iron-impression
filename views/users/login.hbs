@@ -2,6 +2,7 @@
   <div class="hero-body">
     <div class="container">
       <div class="columns is-vcentered">
+        <div class="column"></div>
         <div class="column">
           <h1 class="title is-1 is-spaced">
             Login
@@ -10,37 +11,25 @@
             Welcome to the Login page
           </h2>
           <form action="/users/login" method="POST" id="login">
-            <div class="field">
-              <p class="control has-icons-left has-icons-right">
+            <div class="field has-addons">
+              <div class="control has-icons-left has-icons-right">
                 <input class="input" type="email" name="eMail" placeholder="Email" value="b.r.wakker@gmail.com">
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
-                {{#if errorMessage}}
-                <span class="icon is-small is-right">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </span>
-                {{else}}
-                <span class="icon is-small is-right">
-                  <i class="fas fa-check"></i>
-                </span>
-                {{/if}}
-              </p>
-              {{#if errorMessage }}
-              <p class="help is-danger">{{ errorMessage }}</p>
-              {{/if}}
+
+              </div>
             </div>
-            <div class="field">
-              <p class="control has-icons-left">
+            <div class="field has-addons">
+              <div class="control has-icons-left has-icons-right">
                 <input class="input" type="password" name="password" placeholder="Password">
                 <span class="icon is-small is-left">
                   <i class="fas fa-lock"></i>
                 </span>
-              </p>
-              {{#if passwordReset }}
-              <p class="help is-danger">Forgot your Password? <a href="/users/reset">Reset it here!</a></p>
-              {{/if}}
+              </div>
+
             </div>
+
             <div class="field">
               <p class="control">
                 <button class="button is-info">
@@ -48,6 +37,9 @@
                 </button>
               </p>
             </div>
+            {{#if passwordReset }}
+            <p class="content help is-danger">Forgot your Password? <a href="/users/reset">Reset it here!</a></p>
+            {{/if}}
             {{#if passwordUpdated}}
             <div class="notification is-info">
               <button class="delete"></button>
@@ -59,6 +51,7 @@
         <div class="column">
           <img src="/img/style-2019-character-01_2x2.png" alt="">
         </div>
+        <div class="column"></div>
       </div>
     </div>
   </div>
