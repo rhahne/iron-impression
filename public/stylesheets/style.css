@@ -5,4 +5,5 @@ body, html {
 
 .canvas-pdf{
   border: 1px solid lightgrey;
+  width: 100%;
 }

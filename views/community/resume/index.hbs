@@ -9,18 +9,25 @@
         <a href="/community/resume/upload">
             <button class="button is-primary">Upload your CV</button>
         </a>
-        <br><br>
+        <br><br><hr><br><br>
         <div class="columns is-multiline">
             {{#each resumes}}
             <div class="column is-half">
                 <div class="card">
                     <div class="card-content">
-                        <p class="title">
-                            {{this.title}}
-                        </p>
-                        <p>
-                            {{this.feedbackDescription}}
-                        </p>
+                        <div class="columns ">
+                            <div class="column">
+                                <p class="title">
+                                    {{this.title}}
+                                </p>
+                                <p>
+                                    {{this.feedbackDescription}}
+                                </p>
+                            </div>
+                            <div class="column">
+                                <canvas id="{{this.originalName}}" class="canvas-pdf"></canvas>
+                            </div>
+                        </div>
                     </div>
                     <footer class="card-footer">
                         <p class="card-footer-item">
@@ -45,10 +52,9 @@
                             var myCanvas = document.getElementById("{{this.originalName}}")
                             var context = myCanvas.getContext("2d")
 
-                            var viewport = page.getViewport(0.8);
+                            var viewport = page.getViewport(1);
                             myCanvas.width = viewport.width;
                             myCanvas.height = viewport.height;
-
                             page.render({
                                 canvasContext: context,
                                 viewport: viewport
@@ -58,6 +64,15 @@
                     .catch((err) => {
                         console.log(err)
                     })
+                function resize() {
+                    $(".pdf-canvas").outerHeight($(window).height() - $(".pdf-canvas").offset().top - Math.abs($(".pdf-canvas").outerHeight(true) - $(".pdf-canvas").outerHeight()));
+                }
+                $(document).ready(function () {
+                    resize();
+                    $(window).on("resize", function () {
+                        resize();
+                    });
+                });
             </script>
             {{/each}}
         </div>
