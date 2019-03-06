@@ -10,44 +10,72 @@
         <a href="/community/resume/upload">
             <button class="button is-primary">Upload your CV</button>
         </a>
+</section>
+<hr class="hr">
 
-        <br><br>
-        <hr><br><br>
-
-        {{!-- OLD SHAIT --}}
+<section class="section">
+    <div class="container">
         <div class="columns is-multiline">
-            {{#each resumes}}
-            <div class="column is-half">
+        {{#each resumes}}
+        <div class="column is-3">oi</div>
+            
+            <div class="column is-6">
                 <div class="card">
                     <div class="card-image">
-                        <div class="columns ">
-                            <div class="column is-radiusless">
-                                <canvas id="{{this.originalName}}" class="canvas-pdf"></canvas>
-                                <p class="title">
-                                    {{this.title}}
-                                </p>
-                                <p>
-                                    {{this.feedbackDescription}}
-                                </p>
+                        <a href="/community/resume/details/{{this.id}}">
+                            <canvas id="{{this.originalName}}" class="canvas-pdf is-shadowless">
+                            </canvas>
+                        </a>
+                    </div>
+                    <hr style="margin: 0px" class="hr">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="/img/avatars/avatar-{{this.user.avatarNumber}}.svg" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{this.user.firstName}} {{this.user.lastName}}</p>
+                                <p class="subtitle is-6">@{{this.user.bootcamp}}</p>
                             </div>
                         </div>
+                        <div class="content">
+                            {{this.feedbackDescription}}
+
+                            <nav style="margin-top: 10px" class="level is-mobile">
+                                <div class="level-left">
+
+
+                                    <a class="level-item" href="/community/resume/details/{{this.id}}">
+                                        <span class="icon is-small"><i class="fas fa-link"></i></span>
+                                    </a>
+
+                                    <a class="level-item" href="/community/resume/details/{{this.id}}">
+                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                    </a>
+
+                                    {{#each this.feedbackTypes}}
+                                    <a href="">#{{this}}</a>
+                                    {{/each}}
+                                    <br>
+                                    {{!-- <time date="2016-1-1">
+                                        {{this.created_at}}
+                                    </time> --}}
+                                </div>
+                                <div class="level-right">
+                                    <a class="button is-info level-item" href="/community/resume/details/{{this.id}}">
+                                        show
+                                    </a>
+                                </div>
+                            </nav>
+                        </div>
                     </div>
-                    <footer class="card-footer">
-                        <p class="card-footer-item">
-                            <a href="/community/resume/details/{{this.id}}">
-                                <button class="button is-light">
-                                    go to detail page!
-                                </button>
-                            </a>
-                        </p>
-                        <p class="card-footer-item">
-                            <span>
-                                help needed with: {{this.feedbackTypes}}
-                            </span>
-                        </p>
-                    </footer>
                 </div>
             </div>
+            <div class="column is-3"></div>
+
+            {{!-- PDF Display Script --}}
             <script>
                 pdfjsLib.getDocument('{{this.path}}')
                     .then((doc) => {
@@ -80,6 +108,7 @@
                 });
             </script>
             {{/each}}
+
         </div>
     </div>
 </section>

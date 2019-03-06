@@ -5,7 +5,7 @@ html {
 }
 
 .canvas-pdf {
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   width: 100%;
 }
 
@@ -35,4 +35,8 @@ a {
 
 nav a {
   margin-top: 0px;
+}
+
+a, button {
+  cursor: pointer;
 }

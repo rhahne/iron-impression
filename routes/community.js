@@ -14,15 +14,18 @@ router.get('/home', function (req, res, next) {
 
 // -------------------- RESUME ROUTES -------------------- //
 router.get('/resume', function (req, res, next) {
-    Resume.find({})
-        .then((resumes) => {
-            res.render('community/resume/index', {
-                resumes
-            })
+    Resume
+    .find({})
+    .populate('user')
+    .then((resumes) => {
+        debugger
+        res.render('community/resume/index', {
+            resumes
         })
-        .catch(error => {
-            console.log(error);
-        })
+    })
+    .catch(error => {
+        console.log(error);
+    })
 });
 
 // router.get('/resume/test', (req, res) => {

@@ -7,7 +7,7 @@ const Comments = require('../models/comments')
 const Resume = mongoose.model('Resume', new Schema({
   path: String,
   title: String,
-  originalName: String,
+  originalName: String, 
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   feedbackTypes: Array,
   feedbackDescription: String,
