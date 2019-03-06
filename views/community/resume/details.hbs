@@ -14,6 +14,12 @@
                             Edit
                         </button>
                     </a>
+                    <br><br>
+                    <a href="/community/resume/delete/{{resume.id}}">
+                        <button class="button is-dark">
+                            Delete
+                        </button>
+                    </a>
                 </p>
             </div>
             <div class="column">
@@ -93,6 +99,11 @@
                         </div>
                         {{#if this.myComment}}
                         <button id="edit{{this.id}}" class="button is-dark">edit</button>
+                        <a href="/community/resume/deleteComment/{{this.id}}">
+                            <button class="button is-dark">
+                                Delete
+                            </button>
+                        </a>
                         {{/if}}
                         <br>
                         <script>
