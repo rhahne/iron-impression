@@ -2,8 +2,10 @@ body, html {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 .canvas-pdf{
   border: 1px solid lightgrey;
   width: 100%;
+}
+.hidden{
+  display: none;
 }

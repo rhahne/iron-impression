@@ -1,15 +1,25 @@
 <section class="section">
     <div class="container">
-        <h1 class="title">{{resume.title}}</h1>
-
-        <p class="content">
-            <strong>Description:</strong> <br>
-            {{resume.feedbackDescription}} <br><br>
-            <strong>Type of help:</strong> <br>
-            {{resume.feedbackTypes}}
-        </p>
-
-        <canvas id="pdf-canvas" class="canvas-pdf"></canvas>
+        <div class="columns">
+            <div class="column">
+                <p class="content">
+                    <h1 class="title">{{resume.title}}</h1>
+                    <strong>Description:</strong> <br>
+                    {{resume.feedbackDescription}} <br><br>
+                    <strong>Type of help:</strong> <br>
+                    {{resume.feedbackTypes}}
+                    <br><br>
+                    <a href="/community/resume/edit/{{resume.id}}">
+                        <button class="button is-primary">
+                            Edit
+                        </button>
+                    </a>
+                </p>
+            </div>
+            <div class="column">
+                <canvas id="pdf-canvas" class="canvas-pdf"></canvas>
+            </div>
+        </div>
         <script>
             pdfjsLib.getDocument('{{resume.path}}')
                 .then((doc) => {
@@ -45,7 +55,7 @@
                 <div class="field">
                     <p class="control">
                         <form action="/community/resume/details/{{resume.id}}/comment" method="POST">
-                            <textarea name="text" class="textarea" placeholder="Add a comment..."></textarea>
+                            <textarea name="text" rows="2" class="textarea" placeholder="Add a comment..."></textarea>
                     </p>
                 </div>
                 <div class="field">
@@ -57,12 +67,10 @@
             </div>
             <br>
         </article>
-
         {{!-- Comments --}}
         {{#each comments}}
         <article class="media">
             <figure class="media-left">
-
                 <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
                 </p>
@@ -71,10 +79,26 @@
                 <div class="content">
                     <p>
                         <strong>{{this.user.firstName}} {{this.user.lastName}}</strong>
+                        <div class="commentToggle">
+                            {{this.text}}
+                            <br>
+                        </div>
+                        <div class="commentToggle hidden">
+                            <form action="/community/resume/editComment/{{this.id}}" method="POST">
+                                <textarea name="text" rows="2" class="textarea"
+                                    placeholder="Add a comment...">{{this.text}}</textarea><br>
+                                <button class="button">Update Comment!</button>
+                            </form>
+                            {{!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> --}}
+                        </div>
                         <br>
-                        {{this.text}}
-                        <br>
-                        {{!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> --}}
+
+                        <button id="editCommentButton" class="button is-dark">edit</button>
+                        <script>
+                            $("#editCommentButton").click(() => {
+                                $('.commentToggle').toggleClass('hidden');
+                            });
+                        </script>
                     </p>
                 </div>
             </div>
