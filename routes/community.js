@@ -74,8 +74,18 @@ router.get('/resume/details/:id', (req, res, next) => {
                     _id: id
                 })
                 .exec((err, resume) => {
-
                     if (err) console.log(err)
+                    debugger
+                    comments.forEach((comment) =>{
+                        debugger
+                        var myCom;
+                        if(comment.user.id === res.locals.currentUser){
+                            myCom = true;
+                        }else{
+                            myCom = false;
+                        }
+                        comment.myComment = myCom;
+                    })
                     res.render('community/resume/details', {
                         resume: resume[0],
                         comments: comments
