@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -7,7 +8,8 @@ body, html {
   border: 1px solid lightgrey;
   width: 100%;
 }
-.hidden{
+
+.hidden {
   display: none;
 }
 
@@ -26,6 +28,11 @@ body, html {
   margin: 25px auto;
 }
 
-.button-combo button, a{
+.button-combo button,
+a {
   margin: 10px 5px 0px 0px;
+}
+
+nav a {
+  margin-top: 0px;
 }

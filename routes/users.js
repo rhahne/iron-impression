@@ -189,7 +189,6 @@ router.get('/profile', function (req, res, next) {
             Resume
             .find({user: profileid})
             .exec((err, resume) => {
-              debugger
               if (err) console.log(err)
               res.render('users/profile', {loggedUser, resume, comments})
             })

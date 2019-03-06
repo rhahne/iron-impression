@@ -60,7 +60,6 @@ router.post('/resume/upload', upload.single('cv'), (req, res, next) => {
 
 router.get('/resume/details/:id', (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
-    debugger
     Comments
         .find({
             resume: id
@@ -71,7 +70,6 @@ router.get('/resume/details/:id', (req, res, next) => {
                 .find({
                     _id: id
                 })
-                .populate('user')
                 .exec((err, resume) => {
                     if (err) console.log(err)
                     comments.forEach((comment) => {
@@ -83,11 +81,18 @@ router.get('/resume/details/:id', (req, res, next) => {
                         }
                         comment.myComment = myCom;
                     })
-                    res.render('community/resume/details', {
-                        resume: resume[0],
-                        comments: comments,
-                        loggedUser: res.locals.currentUser
-                    })
+                    User.findOne({
+                            _id: res.locals.currentUser
+                        })
+                        .then((currentUser) => {
+                            res.render('community/resume/details', {
+                                resume: resume[0],
+                                comments: comments,
+                                loggedUser: res.locals.currentUser,
+                                avatarNumber: currentUser.avatarNumber
+                            })
+                        })
+
                 })
         })
 })
