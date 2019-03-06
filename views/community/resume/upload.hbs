@@ -1,73 +1,107 @@
 {{> nav}}
-<section class="section">
-    <div class="container">
-        <h1 class="title">
-            Feedback by Iron Friends
-        </h1>
-        <p class="content">
-            Receive feedback on your CV in 3 simple steps
-        </p>
-
-        <form action="/community/resume/upload" method="post" enctype="multipart/form-data">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-hovered" type="text" placeholder="title" name="title">
+<section class="hero is-medium is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column"></div>
+                <div class="column is-one-third">
+                    <img src="/img/peer-feedback.png" alt="">
                 </div>
-            </div>
+                <div class="column is-half">
+                    <h1 class="title is-1 is-spaced">
+                        Feedback by Iron Friends
+                    </h1>
+                    <h2 class="subtitle">
+                        Receive feedback on your CV in seconds
+                    </h2>
+                    <div class="">
+                        <form action="/community/resume/upload" method="post" enctype="multipart/form-data" id="cv-upload">
 
-            <div class="field">
-                <div class="file has-name is-fullwidth">
-                    <label for="file" class="file-label">
-                        <input class="file-input" type="file" name="cv" id="file">
-                        <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                Choose a file…
-                            </span>
-                        </span>
-                        <span class="file-name" id="filename">
-                        </span>
-                    </label>
-                </div>
-            </div>
+                            <div class="field">
+                                <div class="file has-name is-fullwidth">
+                                    <label for="file" class="file-label">
+                                        <input class="file-input" type="file" name="cv" id="file">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Choose a file…
+                                            </span>
+                                        </span>
+                                        <span class="file-name" id="filename">
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
 
-            <div class="field">
-                <div class="control">
-                    <div class="select">
-                        <select name="feedbacktype">
-                            <option value="design">Design</option>
-                            <option value="grammar">Grammar</option>
-                            <option value="prof">Professionalism</option>
-                            <option value="allround">Allround</option>
-                        </select>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-hovered" type="text" placeholder="Title" name="title">
+                                </div>
+                            </div>
+
+
+                            <br>
+
+                            <div class="field">
+                                <div class="control">
+                                    <p style="margin-bottom: 5px">
+                                        Select the feedback type you're looking for:
+                                    </p>
+                                    <div class="select">
+                                        <select name="feedbacktype">
+                                            <option value="design">Design</option>
+                                            <option value="grammar">Grammar</option>
+                                            <option value="prof">Professionalism</option>
+                                            <option value="allround">Allround</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <textarea style="max-width: 50px" class="textarea" placeholder="Describe the feedback you're looking for"
+                                    name="feedbackdescription"></textarea>
+                            </div>
+                            <button class="button is-info" type="submit">
+                                Submit
+                            </button>
+                            <p class="content">{{message}}</p>
+                        </form>
+                        <br>
+
+                        <small>Go to the <a href="/community/resume">community page</a></small>
+
+                        <br>
                     </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <textarea class="textarea" placeholder="Describe the feedback you're looking for"
-                    name="feedbackdescription">
-                </textarea>
+                <div class="column"></div>
             </div>
-
-            <button class="button is-primary" type="submit">
-                Submit
-            </button>
-        </form>
-        <p class="content">{{message}}</p>
-        <a href="/community/resume">
-            <button class="button is-primary">
-                Go to the community page
-            </button>
-        </a>
+        </div>
+    </div>
     </div>
 </section>
+{{> footer}}
 
 <script>
     // Get the filename on upload
     window.onload = function () {
+        $('#cv-upload').validate({ // initialize the plugin
+            rules: {
+                title: {
+                    required: true
+                },
+                cv: {
+                    required: true
+                },
+                feedbackdescription: {
+                    required: true
+                }
+            }
+        });
+
         var file = document.getElementById("file");
         file.onchange = function () {
             if (file.files.length > 0) {

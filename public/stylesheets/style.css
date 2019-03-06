@@ -26,6 +26,6 @@ body, html {
   margin: 25px auto;
 }
 
-.button-combo button{
+.button-combo button, a{
   margin: 10px 5px 0px 0px;
 }

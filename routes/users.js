@@ -182,6 +182,7 @@ router.get('/profile', function (req, res, next) {
 
         Comments
           .find({user: profileid})
+          .populate('resume')
           .then((comments) => {
 
             Resume
