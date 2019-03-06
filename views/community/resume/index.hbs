@@ -10,23 +10,25 @@
         <a href="/community/resume/upload">
             <button class="button is-primary">Upload your CV</button>
         </a>
-        <br><br><hr><br><br>
+
+        <br><br>
+        <hr><br><br>
+
+        {{!-- OLD SHAIT --}}
         <div class="columns is-multiline">
             {{#each resumes}}
             <div class="column is-half">
                 <div class="card">
-                    <div class="card-content">
+                    <div class="card-image">
                         <div class="columns ">
-                            <div class="column">
+                            <div class="column is-radiusless">
+                                <canvas id="{{this.originalName}}" class="canvas-pdf"></canvas>
                                 <p class="title">
                                     {{this.title}}
                                 </p>
                                 <p>
                                     {{this.feedbackDescription}}
                                 </p>
-                            </div>
-                            <div class="column">
-                                <canvas id="{{this.originalName}}" class="canvas-pdf"></canvas>
                             </div>
                         </div>
                     </div>
@@ -65,8 +67,10 @@
                     .catch((err) => {
                         console.log(err)
                     })
+
                 function resize() {
-                    $(".pdf-canvas").outerHeight($(window).height() - $(".pdf-canvas").offset().top - Math.abs($(".pdf-canvas").outerHeight(true) - $(".pdf-canvas").outerHeight()));
+                    $(".pdf-canvas").outerHeight($(window).height() - $(".pdf-canvas").offset().top - Math.abs($(
+                        ".pdf-canvas").outerHeight(true) - $(".pdf-canvas").outerHeight()));
                 }
                 $(document).ready(function () {
                     resize();
