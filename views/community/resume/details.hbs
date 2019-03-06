@@ -9,6 +9,7 @@
                     <strong>Type of help:</strong> <br>
                     {{resume.feedbackTypes}}
                     <br><br>
+                    {{#if loggedUser}}
                     <a href="/community/resume/edit/{{resume.id}}">
                         <button class="button is-primary">
                             Edit
@@ -18,6 +19,13 @@
                     <a href="/community/resume/delete/{{resume.id}}">
                         <button class="button is-dark">
                             Delete
+                        </button>
+                    </a>
+                    {{/if}}
+                    <br><br>
+                    <a href="{{resume.path}}">
+                        <button class="button is-light">
+                            Download the PDF
                         </button>
                     </a>
                 </p>

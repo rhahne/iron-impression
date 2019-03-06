@@ -84,7 +84,8 @@ router.get('/resume/details/:id', (req, res, next) => {
                     })
                     res.render('community/resume/details', {
                         resume: resume[0],
-                        comments: comments
+                        comments: comments,
+                        loggedUser: res.locals.currentUser
                     })
                 })
         })
