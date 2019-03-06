@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer')
 const templates = require('../templates/template')
 var jwt = require('jsonwebtoken');
 
+
 let transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {

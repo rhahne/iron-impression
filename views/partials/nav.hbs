@@ -1,4 +1,4 @@
-<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             <img src="https://image.flaticon.com/icons/svg/1144/1144441.svg" width="112" height="28">
@@ -32,19 +32,28 @@
                 </div>
             </div>
         </div>
-
         <div class="navbar-end">
+            {{#if currentUser}}
             <a class="navbar-item" href="/users/profile">
                 Account
             </a>
+            {{/if}}
             <div class="navbar-item">
                 <div class="buttons">
+                    {{#unless currentUser}}
                     <a class="button is-primary" href="/">
                         <strong>Sign up</strong>
                     </a>
                     <a class="button is-light" href="/users/login">
                         Log in
                     </a>
+                    {{/unless}}
+
+                    {{#if currentUser}}
+                    <a class="button is-light" href="/users/logout">
+                        Logout
+                    </a>
+                    {{/if}}
                 </div>
             </div>
         </div>

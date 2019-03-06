@@ -5,6 +5,7 @@ const Resume = require('../models/resume')
 const mongoose = require('mongoose')
 const Comments = require('../models/comments')
 const User = require('../models/user')
+const fs = require('fs');
 
 
 // -------------------- COMMUNITY HOME -------------------- //
@@ -24,11 +25,18 @@ router.get('/resume', function(req, res, next) {
     })
 });
 
+// router.get('/resume/test', (req, res) => {
+//     var tempFile="/uploads/CurriculumVitae(2019)-BasWakker-v4.pdf";
+//     fs.readFile(tempFile, (err, data) => {
+//        res.contentType("application/pdf");
+//        res.send(data);
+//     });
+// });
+
 // Resume Upload GET
 router.get('/resume/upload', (req, res, next) => {
     res.render('community/resume/upload');
 })
-
 // Resume Upload POST
 var upload = multer({ dest: './public/uploads/' });
 

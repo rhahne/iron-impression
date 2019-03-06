@@ -1,58 +1,95 @@
-<section class="section">
-  <div class="container">
-    <h1 class="title is-2">
-      Iron Impression
-    </h1>
-    <p class="content">
-      Iron Impression is an IronHack alumni community where we help eachother get ahead with CV’s and LinkedIn
-    </p>
-
-    {{#if user}}
-    <p>Hello {{user}}</p>
-    <h2>
-      <a href="/users/profile">My Profile</a>
-    </h2>
-    {{else}}
-
-    <form id="regist" action="/users/register" method="post">
-      <div class="field has-addons">
-        <div class="control has-icons-left is-expanded">
-          <input class="input is-hovered" type="email" name="email" placeholder="Your E-Mail">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
+<section class="hero is-medium is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column">
+          <h1 class="title is-1 is-spaced">
+            Iron Impression
+          </h1>
+          <h2 class="subtitle">
+            Iron Impression is an IronHack alumni community where we help eachother get ahead with CV’s and LinkedIn
+          </h2>
+          <div class="">
+            {{#unless currentUser}}
+            <form id="regist" action="/users/register" method="post">
+              <div class="field has-addons">
+                <div class="control has-icons-left is-expanded">
+                  <input class="input is-hovered" type="email" name="email" placeholder="Your E-Mail">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <div class="control">
+                  <button type="submit" class="button is-primary">Register</button>
+                  <br>
+                </div>
+              </div>
+              <small>Already have an account? <a href="/users/login">Login</a></small>
+            </form>
+            {{#if errorMessage }}
+            <p class="help is-danger">{{ errorMessage }}</p>
+            {{/if}}
+            <br>
+          </div>
+          {{/unless}}
         </div>
-        <div class="control">
-          <button type="submit" class="button is-primary">Register</button>
+        <div class="column">
+          <img src="/img/welcome-preview-01-2.png" alt="">
         </div>
       </div>
-    </form>
-    {{#if errorMessage }}
-    <p class="help is-danger">{{ errorMessage }}</p>
-    {{/if}}
-    <br>
-    or
-    <br>
-    <br>
-    <h2>
-      <a class="button is-light" href="/users/login">
-        Log in
-      </a>
-    </h2>
-    <br>
-    <br>
-    {{/if}}
+    </div>
+  </div>
   </div>
 </section>
+
+
+<section class="hero is-medium is-dark is-bold">
+  <div class="hero-body">
+    <div class="container">
+
+      <div class="columns is-centered">
+        <div class="column has-text-centered is-one-third">
+          <figure class="image is-128x128">
+            <img src="/img/icons/feedback.png" alt="">
+          </figure>
+          <h2 class="subtitle">
+            Receive honest feedback on your resume
+          </h2>
+        </div>
+
+        <div class="column has-text-centered is-one-third">
+          <figure class="image is-128x128">
+            <img src="/img/icons/usability.png" alt="">
+          </figure>
+
+          <h2 class="subtitle">
+            Get endorsements for your skills on LinkedIn
+          </h2>
+        </div>
+
+        <div class="column has-text-centered is-one-third">
+          <figure class="image is-128x128">
+            <img src="/img/icons/maintenance.png" alt="">
+          </figure>
+          <h2 class="subtitle">
+            Train your layout skills by improving eachother's CVs
+          </h2>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <script>
-$(document).ready(function () {
+  $(document).ready(function () {
     $('#regist').validate({ // initialize the plugin
-        rules: {
-            email: {
-                required: true,
-                email: true
-            }
+      rules: {
+        email: {
+          required: true,
+          email: true
         }
+      }
     });
-});
+  });
 </script>

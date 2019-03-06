@@ -24,12 +24,17 @@ mongoose
 // init sessions
 app.use(session({
   secret: "slothisticated",
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 999999999, expires: 999999999 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
   })
 }));
+
+app.use(function(req,res,next){
+  res.locals.currentUser = req.session.currentUserId
+  next()
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
