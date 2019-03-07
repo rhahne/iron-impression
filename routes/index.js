@@ -10,4 +10,8 @@ router.get('/about', function(req, res, next) {
   res.render('about');
 });
 
+router.get('/no-permission', function(req, res, next) {
+  res.render('no-permission');
+});
+
 module.exports = router;

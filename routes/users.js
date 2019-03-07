@@ -44,7 +44,8 @@ router.post('/login', (req, res) => {
           req.session.currentUser = foundUser.eMail;
           req.session.currentUserId = foundUser.id;
           req.session.save();
-          res.redirect('/community/home')
+          debugger
+          res.redirect('/about')
         } else {
           res.render('users/login', {
             passwordReset: true
@@ -139,7 +140,7 @@ router.post('/signup', (req, res) => {
       bio: req.body.bio,
       linkedin: req.body.linkedin,
       points: 0,
-      avatarNumber: Math.floor(Math.random() * 50) + 1  
+      avatarNumber: Math.floor(Math.random() * 50) + 1
     }
     User.findOne({
         eMail: req.body.eMail
@@ -150,9 +151,8 @@ router.post('/signup', (req, res) => {
             errorMessage: "email already exists"
           });
         } else {
-          User.create(newUser, (err) => {
-            if (err) console.log(err)
-            else {
+          User.create(newUser)
+            .then((createdUser) => {
               Register.remove({
                 eMail: req.body.eMail
               }, (err) => {
@@ -160,14 +160,17 @@ router.post('/signup', (req, res) => {
                   res.send('something went wrong!')
                 } else {
                   console.log('user registered')
-                  req.session.currentUser = newUser.eMail;
-                  req.session.currentUserId = newUser.id;
+                  req.session.currentUser = createdUser.eMail;
+                  req.session.currentUserId = createdUser.id;
                   req.session.save();
-                  res.redirect('/community/home')
+                  debugger
+                  res.redirect('/about')
                 }
               });
-            }
-          })
+            })
+            .catch((err) => {
+              console.log(err)
+            })
         }
       })
   });
@@ -177,22 +180,32 @@ router.post('/signup', (req, res) => {
 router.get('/profile', function (req, res, next) {
   if (req.session.currentUser) {
     User
-      .findOne({ eMail: req.session.currentUser})
+      .findOne({
+        eMail: req.session.currentUser
+      })
       .then((loggedUser) => {
         let profileid = mongoose.Types.ObjectId(loggedUser.id);
 
         Comments
-          .find({user: profileid})
+          .find({
+            user: profileid
+          })
           .populate('resume')
           .then((comments) => {
 
             Resume
-            .find({user: profileid})
-            .exec((err, resume) => {
-              if (err) console.log(err)
-              res.render('users/profile', {loggedUser, resume, comments})
-            })
-        })
+              .find({
+                user: profileid
+              })
+              .exec((err, resume) => {
+                if (err) console.log(err)
+                res.render('users/profile', {
+                  loggedUser,
+                  resume,
+                  comments
+                })
+              })
+          })
       })
   } else {
     res.send('no session')
@@ -261,7 +274,7 @@ router.post('/reset', (req, res, next) => {
   }
 })
 router.get('/resetPassword', (req, res) => {
-  if(!emailHash){
+  if (!emailHash) {
     var emailHash = req.query.emailHash;
   }
   var email = jwt.verify(emailHash, 'sloth');
@@ -278,15 +291,20 @@ router.post('/resetPassword', (req, res) => {
           eMail: email.eMail
         }, {
           password: hash
-        }, {new: true})
+        }, {
+          new: true
+        })
         .then((updatedUser) => {
-          res.render('users/login', {passwordUpdated: true});
+          res.render('users/login', {
+            passwordUpdated: true
+          });
           //res.send("password is now updated!")
         })
     })
   } else {
     res.render('users/resetPassword', {
-      errorMessage: "passwords are not equal!", emailHash: req.query.emailHash
+      errorMessage: "passwords are not equal!",
+      emailHash: req.query.emailHash
     });
   }
 

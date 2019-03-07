@@ -9,17 +9,11 @@ const fs = require('fs');
 
 // -- CHECK AUTHORIZATION -- //
 router.get('/*', (req, res, next) => {
-    debugger
     if(res.locals.currentUser){
         next();
     }else{
-        res.send('no-permission son!')
+        res.render('no-permission')
     }
-});
-
-// -------------------- COMMUNITY HOME -------------------- //
-router.get('/home', function (req, res, next) {
-    res.render('community/index')
 });
 
 // -------------------- RESUME ROUTES -------------------- //
