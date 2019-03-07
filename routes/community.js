@@ -114,6 +114,7 @@ router.get('/resume/details/:id', (req, res, next) => {
                 .find({
                     _id: id
                 })
+                .populate('user')
                 .exec((err, resume) => {
                     if (err) console.log(err)
                     comments.forEach((comment) => {
@@ -131,7 +132,7 @@ router.get('/resume/details/:id', (req, res, next) => {
                         .then((currentUser) => {
                             res.render('community/resume/details', {
                                 resume: resume[0],
-                                comments: comments,
+                                comments: comments.reverse(),
                                 loggedUser: res.locals.currentUser,
                                 avatarNumber: currentUser.avatarNumber
                             })
@@ -213,16 +214,28 @@ router.post('/resume/editComment/:commentId', (req, res) => {
         })
 })
 
+// I BROKE THE RESUME DELETION 
 router.get('/resume/delete/:id', (req, res) => {
+    debugger
     Resume.findOneAndDelete({
-        _id: req.params.id
-    }, (err) => {
-        if (err) console.log(err);
-        else {
-            res.redirect('/community/resume')
-        }
-    })
+            _id: req.params.id
+        })
+        .then(() => {
+            debugger
+            let resid = mongoose.Types.ObjectId(req.params.id)
+
+            Comments.deleteMany({
+                    resume: resid
+                })
+                .then(() => {
+                    res.redirect('/community/resume')
+                })
+        })
+        .catch((err) => {
+            res.send(err);
+        })
 })
+
 
 router.get('/resume/deleteComment/:commentId', (req, res) => {
     Comments.findOneAndDelete({

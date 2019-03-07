@@ -1,69 +1,87 @@
 {{> nav}}
-<section class="section">
-  <div class="container">
-    <h1 class="title is-2">
-      Edit CV
-    </h1>
-    <p class="content">
-      edit the desired fields:
-    </p>
-    <form action="/community/resume/edit/{{resumeToEdit._doc._id}}" method="POST" id="edit" enctype="multipart/form-data">
-      <div class="field">
-        <label class="label">Title</label>
-        <div class="control">
-          <input class="input" type="text" name="title" value="{{resumeToEdit._doc.title}}">
+
+<section class="hero is-medium is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-variable is-8 reversed-order">
+        <div class="column"></div>
+        <div class="column is-one-third">
+          <img src="/img/profile-hero.png" alt="">
         </div>
-      </div>
-      <div class="field">
-        <label class="label">File (PDF)</label>
-        <div class="file has-name is-fullwidth">
-          <label for="file" class="file-label">
-            <input class="file-input" type="file" name="cv" id="file">
-            <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-upload"></i>
-              </span>
-              <span class="file-label">
-                Choose a file…
-              </span>
-            </span>
-            <span class="file-name" id="filename">
-              {{resumeToEdit._doc.originalName}}
-            </span>
-          </label>
-        </div>
-      </div>
-      <label class="label">Description</label>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <textarea class="textarea" name="feedbackdescription"
-              placeholder="Tell us about yourself!">{{resumeToEdit._doc.feedbackDescription}}</textarea>
+        <div class="column is-half">
+          <h1 class="title is-1 is-spaced">
+            Edit CV
+          </h1>
+          <h2 class="subtitle">
+            Edit the desired fields below
+          </h2>
+          <div class="">
+            {{!-- Post --}}
+            <form action="/community/resume/edit/{{resumeToEdit._doc._id}}" method="POST" id="edit" enctype="multipart/form-data">
+              <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                  <input class="input" type="text" name="title" value="{{resumeToEdit._doc.title}}">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">File (PDF)</label>
+                <div class="file has-name is-fullwidth">
+                  <label for="file" class="file-label">
+                    <input class="file-input" type="file" name="cv" id="file">
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">
+                        Choose a file…
+                      </span>
+                    </span>
+                    <span class="file-name" id="filename">
+                      {{resumeToEdit._doc.originalName}}
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <label class="label">Description</label>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <textarea class="textarea" name="feedbackdescription" placeholder="Tell us about yourself!">{{resumeToEdit._doc.feedbackDescription}}</textarea>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <div class="select">
+                    <select name="feedbacktype">
+                      <option value="design">Design</option>
+                      <option value="grammar">Grammar</option>
+                      <option value="prof">Professionalism</option>
+                      <option value="allround">Allround</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <button class="button is-info">
+                    Change!
+                  </button>
+                </p>
+              </div>
+            </form>
+            <br>
+            <small>Go back to the <a href="/community/resume">community page</a></small>
             <br>
           </div>
         </div>
+
+        <div class="column"></div>
       </div>
-      <div class="field">
-        <div class="control">
-          <div class="select">
-            <select name="feedbacktype">
-              <option value="design">Design</option>
-              <option value="grammar">Grammar</option>
-              <option value="prof">Professionalism</option>
-              <option value="allround">Allround</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="field">
-        <p class="control">
-          <button class="button is-success">
-            Change!
-          </button>
-        </p>
-      </div>
-    </form>
+    </div>
+  </div>
   </div>
 </section>
 <script>
@@ -72,11 +90,11 @@
       if ($(this).val() == "{{resumeToEdit._doc.feedbackTypes}}")
         $(this).attr("selected", "selected");
     });
-        var file = document.getElementById("file");
-        file.onchange = function () {
-            if (file.files.length > 0) {
-                document.getElementById('filename').innerHTML = file.files[0].name;
-            }
-        };
+    var file = document.getElementById("file");
+    file.onchange = function () {
+      if (file.files.length > 0) {
+        document.getElementById('filename').innerHTML = file.files[0].name;
+      }
+    };
   })
 </script>

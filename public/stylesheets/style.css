@@ -46,6 +46,7 @@ a, button {
     flex-direction: column-reverse;
     display: flex;
   }
+
   #hero-img-overview {
     display: none;
   }

@@ -9,8 +9,7 @@ var jwt = require('jsonwebtoken');
 const Comments = require('../models/comments')
 const Resume = require('../models/resume')
 const mongoose = require('mongoose')
-const config = require('../config');
-
+const config = require('../bin/config');
 
 let transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -191,13 +190,14 @@ router.get('/profile/:userId', function (req, res, next) {
           .find({
             user: profileid
           })
-          .populate('resume')
+          .populate({path: 'resume', populate: {path: 'user'}})
           .then((comments) => {
 
             Resume
               .find({
                 user: profileid
               })
+
               .exec((err, resume) => {
                 if (err) console.log(err)
                 res.render('users/profile', {

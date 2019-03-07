@@ -1,42 +1,69 @@
-<section class="section">
-  <div class="container">
-    <h1 class="title is-2">
-      Edit Profile
-    </h1>
-    <p class="content">
-      edit the desired fields:
-    </p>
-    <form action="/users/{{loggedUser._doc._id}}/edit" method="POST" id="edit">
-      <div class="field">
-        <label class="label">LinkedIn</label>
-        <div class="control">
-          <input class="input" type="text" name="linkedin" value="{{loggedUser._doc.linkedin}}">
+{{> nav}}
+
+<section class="hero is-medium is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-variable is-8 is-vcentered reversed-order">
+        <div class="column"></div>
+        <div class="column is-one-third">
+          <img src="/img/edit-profile.png" alt="">
         </div>
-      </div>
-      <label class="label">Bio</label>
-      <div class="field-label is-normal">
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <textarea class="textarea" name="bio"
-              placeholder="Tell us about yourself!">{{loggedUser._doc.bio}}</textarea>
-            <br>
+        <div class="column is-half">
+          <h1 class="title is-1 is-spaced">
+            Edit Profile
+          </h1>
+          <h2 class="subtitle">
+            Edit the desired fields below
+          </h2>
+          <div class="">
+            {{!-- Post --}}
+            <form action="/users/{{loggedUser._doc._id}}/edit" method="POST" id="edit">
+              <div class="field">
+                <label class="label">LinkedIn</label>
+                <div class="control">
+                  <input class="input" type="text" name="linkedin" value="{{loggedUser._doc.linkedin}}">
+                </div>
+              </div>
+              <label class="label">Bio</label>
+              <div class="field-label is-normal">
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <textarea class="textarea" name="bio" placeholder="Tell us about yourself!">{{loggedUser._doc.bio}}</textarea>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="field">
+                <p class="control">
+                  <button class="button is-info">
+                    Update!
+                  </button>
+                </p>
+              </div>
+            </form>
           </div>
         </div>
+
+        <div class="column"></div>
       </div>
-      <br>
-      <div class="field">
-        <p class="control">
-          <button class="button is-success">
-            Change!
-          </button>
-        </p>
-      </div>
-    </form>
-    <br>
-    <form action="logout" method="get">
-      <button class="button is-primary">Log me out</button>
-    </form>
+    </div>
+  </div>
   </div>
 </section>
+<script>
+  $(document).ready(() => {
+    $("select option").each(function () {
+      if ($(this).val() == "{{resumeToEdit._doc.feedbackTypes}}")
+        $(this).attr("selected", "selected");
+    });
+    var file = document.getElementById("file");
+    file.onchange = function () {
+      if (file.files.length > 0) {
+        document.getElementById('filename').innerHTML = file.files[0].name;
+      }
+    };
+  })
+</script>
