@@ -1,167 +1,191 @@
-<section class="section">
-  <div class="container">
-    <h1 class="title is-2">
-      Register yourself slohn!
-    </h1>
-    <p class="content">
-      Fill in the fields:
-    </p>
+<section class="hero is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered reversed-order">
+        <div class="column"></div>
 
-    <form action="/users/signup" method="POST" id="register">
-      <div class="field is-horizontal">
-        <div class="field">
-          <label class="label">Firstname*</label>
-          <div class="control">
-            <input class="input" type="text" name="firstName" placeholder="Bob">
-          </div>
+        <div class="column is-one-third">
+          <img src="/img/best-cv.png" alt="">
         </div>
-        <div class="field">
-          <label class="label">Lastname*</label>
-          <div class="control">
-            <input class="input" type="text" name="lastName" placeholder="der Baumeister">
-          </div>
-        </div>
-      </div>
-      <div class="field is-horizontal">
-        <div class="field">
-          <label class="label">Bootcamp*</label>
-          <p class="control">
-            <span class="select">
-              <select name="bootcamp">
-                <option value="webdev">Web Development</option>
-                <option value="design">UX/UI Design</option>
-              </select>
-            </span>
-          </p>
-        </div>
-        <div class="field">
-          <label class="label">Location*</label>
-          <p class="control">
-            <span class="select">
-              <select name="location">
-                <option value="amsterdam">Amsterdam</option>
-                <option value="barcelona">Barcelona</option>
-                <option value="berlin">Berlin</option>
-                <option value="lisbon">Lisbon</option>
-                <option value="madrid">Madrid</option>
-                <option value="munich">Munich</option>
-                <option value="paris">Paris</option>
-                <option value="bogota">Bogota</option>
-                <option value="paris">Paris</option>
-                <option value="bogota">Bogota</option>
-                <option value="miami">Miami</option>
-                <option value="mexicocity">Mexico City</option>
-                <option value="SaoPaulo">Sao Paulo</option>
-              </select>
-            </span>
-          </p>
-        </div>
-        <div class="field">
-          <label class="label">Start Month*</label>
-          <p class="control">
-            <span class="select">
-              <select name="month">
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-                <option value="09">09</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
-            </span>
-          </p>
-        </div>
-        <div class="field">
-          <label class="label">Start Year*</label>
-          <p class="control">
-            <span class="select">
-              <select name="year">
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-              </select>
-            </span>
-          </p>
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Email*</label>
-        <div class="control has-icons-left">
-          <input class="input" type="email" name="eMail" value="{{email}}" readonly>
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">LinkedIn</label>
-        <div class="control">
-          <input class="input" type="text" name="linkedin">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Password*</label>
-        <div class="control has-icons-left">
-          <input class="input" type="password" id="password" name="password">
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Repeat Password *</label>
-        <div class="control has-icons-left">
-          <input class="input" type="password" name="password2">
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </div>
-      </div>
-      <label class="label">Bio</label>
-      <div class="field-label is-normal">
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <textarea class="textarea" name="bio" placeholder="Tell us about yourself!"></textarea>
+
+
+        <div class="column is-half">
+          <h1 class="title is-1 is-spaced">
+            Get the best CV
+          </h1>
+          <h2 class="subtitle">
+            Complete your account and get started!
+          </h2>
+          <br>
+          <div class="">
+            <form action="/users/signup" method="POST" id="register">
+              <div class="field is-horizontal">
+                <div class="field">
+                  <label class="label">Firstname*</label>
+                  <div class="control">
+                    <input class="input" type="text" name="firstName" placeholder="Bob">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Lastname*</label>
+                  <div class="control">
+                    <input class="input" type="text" name="lastName" placeholder="der Baumeister">
+                  </div>
+                </div>
+              </div>
+              <div class="field is-horizontal">
+                <div class="field">
+                  <label class="label">Bootcamp*</label>
+                  <p class="control">
+                    <span class="select">
+                      <select name="bootcamp">
+                        <option value="webdev">Web Development</option>
+                        <option value="design">UX/UI Design</option>
+                      </select>
+                    </span>
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="label">Location*</label>
+                  <p class="control">
+                    <span class="select">
+                      <select name="location">
+                        <option value="amsterdam">Amsterdam</option>
+                        <option value="barcelona">Barcelona</option>
+                        <option value="berlin">Berlin</option>
+                        <option value="lisbon">Lisbon</option>
+                        <option value="madrid">Madrid</option>
+                        <option value="munich">Munich</option>
+                        <option value="paris">Paris</option>
+                        <option value="bogota">Bogota</option>
+                        <option value="paris">Paris</option>
+                        <option value="bogota">Bogota</option>
+                        <option value="miami">Miami</option>
+                        <option value="mexicocity">Mexico City</option>
+                        <option value="SaoPaulo">Sao Paulo</option>
+                      </select>
+                    </span>
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="label">Month*</label>
+                  <p class="control">
+                    <span class="select">
+                      <select name="month">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>
+                    </span>
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="label">Year*</label>
+                  <p class="control">
+                    <span class="select">
+                      <select name="year">
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                      </select>
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Email*</label>
+                <div class="control has-icons-left">
+                  <input class="input" type="email" name="eMail" value="{{email}}" readonly>
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">LinkedIn</label>
+                <div class="control">
+                  <input class="input" type="text" name="linkedin">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Password*</label>
+                <div class="control has-icons-left">
+                  <input class="input" type="password" id="password" name="password">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Repeat Password*</label>
+                <div class="control has-icons-left">
+                  <input class="input" type="password" name="password2">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              <label class="label">Bio</label>
+              <div class="field-label is-normal">
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <textarea class="textarea" name="bio" placeholder="Tell us about yourself!"></textarea>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="field">
+                <p class="control">
+                  <button class="button is-info">
+                    Sign up!
+                  </button>
+                </p>
+              </div>
+            </form>
+            <br>
+            <small>Go to the <a href="/community/resume">community page</a></small>
             <br>
           </div>
         </div>
+
+
+
+        <div class="column"></div>
       </div>
-      <br>
-      <div class="field">
-        <p class="control">
-          <button class="button is-success">
-            Sign up!
-          </button>
-        </p>
-      </div>
-    </form>
+    </div>
+  </div>
   </div>
 </section>
+
 <script>
-$(document).ready(function () {
+  $(document).ready(function () {
     $('#register').validate({ // initialize the plugin
-        rules: {
-            firstName: {
-                required: true
-            },
-            lastName: {
-                required: true
-            },
-            password: {
-                minlength: 5
-            },
-            password2: {
-                minlength: 5,
-                equalTo : "#password"
-            }
+      rules: {
+        firstName: {
+          required: true
+        },
+        lastName: {
+          required: true
+        },
+        password: {
+          minlength: 5
+        },
+        password2: {
+          minlength: 5,
+          equalTo: "#password"
         }
+      }
     });
-});
+  });
 </script>

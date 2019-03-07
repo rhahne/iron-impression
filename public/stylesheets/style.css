@@ -40,3 +40,10 @@ nav a {
 a, button {
   cursor: pointer;
 }
+
+@media(max-width: 767px) {
+  .reversed-order  {
+    flex-direction: column-reverse;
+    display: flex;
+  }
+}
