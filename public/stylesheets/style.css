@@ -41,7 +41,7 @@ a, button {
   cursor: pointer;
 }
 
-@media(max-width: 767px) {
+@media(max-width: 768px) {
   .reversed-order  {
     flex-direction: column-reverse;
     display: flex;
