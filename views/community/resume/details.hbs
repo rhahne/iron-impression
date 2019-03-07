@@ -29,6 +29,11 @@
                             Download the PDF
                         </button>
                     </a>
+                    <a href="/community/resume/show?path={{resume.path}}">
+                        <button class="button is-light">
+                            Show me what you've got
+                        </button>
+                    </a>
                 </p>
             </div>
             <div class="column">
@@ -99,8 +104,7 @@
                         </div>
                         <div class="toggle{{this.id}} hidden">
                             <form action="/community/resume/editComment/{{this.id}}" method="POST">
-                                <textarea name="text" rows="2" class="textarea"
-                                    placeholder="Add a comment...">{{this.text}}</textarea><br>
+                                <textarea name="text" rows="2" class="textarea" placeholder="Add a comment...">{{this.text}}</textarea><br>
                                 <button class="button">Update Comment!</button>
                             </form>
                             {{!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> --}}
@@ -113,8 +117,8 @@
                             <a href="/community/resume/deleteComment/{{this.id}}">
                                 delete
                             </a>
-                        </small> 
-{{!-- 
+                        </small>
+                        {{!--
                         <button id="edit{{this.id}}" class="button is-dark">
                             edit
                         </button>
