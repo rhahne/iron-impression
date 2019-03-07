@@ -140,7 +140,8 @@ router.post('/signup', (req, res) => {
       bio: req.body.bio,
       linkedin: req.body.linkedin,
       points: 0,
-      avatarNumber: Math.floor(Math.random() * 50) + 1
+      avatarNumber: Math.floor(Math.random() * 50) + 1,
+      likedResumes: []
     }
     User.findOne({
         eMail: req.body.eMail

@@ -9,9 +9,9 @@ const fs = require('fs');
 
 // -- CHECK AUTHORIZATION -- //
 router.get('/*', (req, res, next) => {
-    if(res.locals.currentUser){
+    if (res.locals.currentUser) {
         next();
-    }else{
+    } else {
         res.render('no-permission')
     }
 });
@@ -19,16 +19,56 @@ router.get('/*', (req, res, next) => {
 // -------------------- RESUME ROUTES -------------------- //
 router.get('/resume', function (req, res, next) {
     Resume
-    .find({})
-    .populate('user')
-    .then((resumes) => {
-        res.render('community/resume/index', {
-            resumes
+        .find({})
+        .populate('user')
+        .then((resumes) => {
+            User.findOne({
+                    _id: res.locals.currentUser
+                })
+                .then((loggedUser) => {
+                    resumes.forEach((resume)=>{
+                        loggedUser.likedResumes.forEach((likedResumeId)=>{
+                            if(resume.id === likedResumeId){
+                                resume.liked = true;
+                            }
+                        })
+                    })
+                    res.render('community/resume/index', {
+                        resumes,
+                        loggedUser
+                    })
+                })
         })
-    })
-    .catch(error => {
-        console.log(error);
-    })
+        .catch(error => {
+            console.log(error);
+        })
+       /*
+    Resume
+        .aggregate(
+            [{$group: {
+                _id: '$feedbackTypes',
+                types: {
+                    $push: '$$ROOT'
+                }}}])
+        .then((result) => {
+            Resume.populate(result,{path: 'types/user'})
+            .then((resumes) => {
+                User.findOne({
+                        _id: res.locals.currentUser
+                    })
+                    .then((loggedUser) => {
+                        res.render('community/resume/index', {
+                            resumes,
+                            loggedUser
+                        })
+                    })
+    
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
+        */
 });
 
 router.get('/resume/show', (req, res) => {
@@ -194,6 +234,34 @@ router.get('/resume/deleteComment/:commentId', (req, res) => {
         }
     })
 })
+
+router.get('/resume/like/:resumeId', (req, res) => {
+
+
+    Resume.findOneAndUpdate({
+            _id: req.params.resumeId
+        }, {
+            $inc: {
+                points: 1
+            }
+        })
+        .then((resumeToLike) => {
+            debugger
+            User.findOneAndUpdate({
+                    _id: res.locals.currentUser
+                }, {
+                    "$push": {
+                        "likedResumes": resumeToLike.id
+                    }
+                })
+                .then((foundUser) => {
+                    res.redirect('/community/resume')
+                })
+        })
+});
+
+
+
 
 // ON HOLD ------- ON HOLD ------- ON HOLD ------- ON HOLD ------- //
 // -------------------- ENDORSMENT ROUTES -------------------- //
