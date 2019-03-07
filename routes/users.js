@@ -9,8 +9,7 @@ var jwt = require('jsonwebtoken');
 const Comments = require('../models/comments')
 const Resume = require('../models/resume')
 const mongoose = require('mongoose')
-const config = require('../config');
-
+const config = require('../bin/config');
 
 let transporter = nodemailer.createTransport({
   service: 'Gmail',
