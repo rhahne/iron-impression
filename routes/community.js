@@ -7,6 +7,16 @@ const Comments = require('../models/comments')
 const User = require('../models/user')
 const fs = require('fs');
 
+// -- CHECK AUTHORIZATION -- //
+router.get('/*', (req, res, next) => {
+    debugger
+    if(res.locals.currentUser){
+        next();
+    }else{
+        res.send('no-permission son!')
+    }
+});
+
 // -------------------- COMMUNITY HOME -------------------- //
 router.get('/home', function (req, res, next) {
     res.render('community/index')
