@@ -137,20 +137,8 @@
                     .catch((err) => {
                         console.log(err)
                     })
-
-                function resize() {
-                    $(".pdf-canvas").outerHeight($(window).height() - $(".pdf-canvas").offset().top - Math.abs($(
-                        ".pdf-canvas").outerHeight(true) - $(".pdf-canvas").outerHeight()));
-                }
-                $(document).ready(function () {
-                    resize();
-                    $(window).on("resize", function () {
-                        resize();
-                    });
-                });
             </script>
             {{/each}}
-
         </div>
     </div>
 </section>
