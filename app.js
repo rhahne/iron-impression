@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const config = require('./config');
 
 const app = express();
 
@@ -23,7 +24,7 @@ mongoose
 
 // init sessions
 app.use(session({
-  secret: "slothisticated",
+  secret: config.SESSION_SECRET,
   cookie: { maxAge: 999999999, expires: 999999999 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,

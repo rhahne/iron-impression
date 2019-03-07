@@ -9,13 +9,14 @@ var jwt = require('jsonwebtoken');
 const Comments = require('../models/comments')
 const Resume = require('../models/resume')
 const mongoose = require('mongoose')
+const config = require('../config');
 
 
 let transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'ironimpressioner@gmail.com',
-    pass: 'alwayshalffull'
+    user: config.SEND_MAIL_ACCOUNT,
+    pass: config.SEND_MAIL_PASSWORD
   }
 });
 
@@ -44,7 +45,6 @@ router.post('/login', (req, res) => {
           req.session.currentUser = foundUser.eMail;
           req.session.currentUserId = foundUser.id;
           req.session.save();
-          debugger
           res.redirect('/about')
         } else {
           res.render('users/login', {
@@ -62,7 +62,7 @@ router.post('/register', (req, res, next) => {
     eMail: req.body.email,
     eMailSigned: jwt.sign({
       eMail: req.body.email
-    }, 'sloth')
+    }, config.JWT_SECRET)
   }
   User.findOne({
       eMail: req.body.email
@@ -261,7 +261,7 @@ router.post('/reset', (req, res, next) => {
   if (email) {
     var emailHash = jwt.sign({
       eMail: 'hahne.robin@gmail.com'
-    }, 'sloth');
+    }, config.JWT_SECRET);
     transporter.sendMail({
       from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
       to: email,
@@ -277,14 +277,14 @@ router.get('/resetPassword', (req, res) => {
   if (!emailHash) {
     var emailHash = req.query.emailHash;
   }
-  var email = jwt.verify(emailHash, 'sloth');
+  var email = jwt.verify(emailHash, config.JWT_SECRET);
   res.render('users/resetPassword', {
     email,
     emailHash
   })
 })
 router.post('/resetPassword', (req, res) => {
-  var email = jwt.verify(req.query.emailHash, 'sloth');
+  var email = jwt.verify(req.query.emailHash, config.JWT_SECRET);
   if (req.body.password === req.body.password2) {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
       User.findOneAndUpdate({
