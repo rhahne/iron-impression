@@ -183,6 +183,7 @@ router.get('/profile/:userId', function (req, res, next) {
       .findOne({
         _id: req.params.userId
       })
+      .populate('likedResumes')
       .then((loggedUser) => {
         let profileid = mongoose.Types.ObjectId(loggedUser.id);
         Comments

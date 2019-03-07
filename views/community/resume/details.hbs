@@ -128,6 +128,23 @@
                             <span>Preview</span>
                         </a>
                     </div>
+                    {{#if resume.liked}}
+                            <div class="card-footer-item has-text-grey"
+                            style="border: none">
+                            <span class="icon " style="color:red;">
+                                <i class="far fa-heart"></i>
+                            </span>
+                            <span>Liked</span>
+                        </div>
+                        {{else}}
+                            <a href="/community/resume/like/{{resume.id}}" class="card-footer-item has-text-grey"
+                            style="border: none">
+                            <span class="icon ">
+                                <i class="far fa-heart"></i>
+                            </span>
+                            <span>Like</span>
+                        </a>
+                        {{/if}}
                 </p>
 
                 <hr class="hr" style="margin: 6% 0px">

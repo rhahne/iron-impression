@@ -112,7 +112,7 @@
               <h1 class="title is-3 is-spaced">
                 Likes
               </h1>
-              {{#each comments}}
+              {{#each loggedUser.likedResumes}}
               <article class="media">
                 <figure class="media-left">
                   <span class="icon is-left">
@@ -123,10 +123,9 @@
                   <div class="content">
                     <a href="/community/resume/details/{{this.resume.id}}" style="color: hsl(0, 0%, 21%); margin: 0px;">
                       <p>
-                        <small>You commented on:</small> <br> <strong>{{this.resume.user.firstName}}
-                          {{this.resume.user.lastName}}</strong>
-                        <br><br>
-                        {{this.text}}
+                        <small>You liked:</small> <br> <strong>{{this.title}}</strong>
+                        <br>
+                        #{{this.feedbackTypes}}
                       </p>
                     </a>
                   </div>
@@ -136,9 +135,6 @@
                   </nav>
                 </div>
                 <div class="media-right">
-                  <a href="/community/resume/deleteComment/{{this.id}}" class="level-item">
-                    <span class="icon is-small"><i class="far fa-trash-alt"></i></span>
-                  </a>
                   <a href="/community/resume/details/{{this.resume.id}}" class="level-item">
                     <span class="icon is-small"><i class="fas fa-link"></i></span>
                   </a>

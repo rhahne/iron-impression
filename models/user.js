@@ -12,7 +12,7 @@ const User = mongoose.model('User', new Schema({
   password: String,
   points: Number,
   avatarNumber: Number,
-  likedResumes: Array
+  likedResumes: [{ type: Schema.Types.ObjectId, ref: 'Resume' }]
 }));
 
 module.exports = User
