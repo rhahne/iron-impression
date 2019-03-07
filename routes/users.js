@@ -177,11 +177,11 @@ router.post('/signup', (req, res) => {
 })
 
 // Individual Profile Page
-router.get('/profile', function (req, res, next) {
+router.get('/profile/:userId', function (req, res, next) {
   if (req.session.currentUser) {
     User
       .findOne({
-        eMail: req.session.currentUser
+        _id: req.params.userId
       })
       .then((loggedUser) => {
         let profileid = mongoose.Types.ObjectId(loggedUser.id);
