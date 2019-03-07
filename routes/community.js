@@ -32,13 +32,12 @@ router.get('/resume', function (req, res, next) {
     })
 });
 
-// router.get('/resume/test', (req, res) => {
-//     var tempFile="/uploads/CurriculumVitae(2019)-BasWakker-v4.pdf";
-//     fs.readFile(tempFile, (err, data) => {
-//        res.contentType("application/pdf");
-//        res.send(data);
-//     });
-// });
+router.get('/resume/show', (req, res) => {
+    fs.readFileSync(req.query.path, (err, data) => {
+       res.contentType("application/pdf");
+       res.send(data);
+    });
+});
 
 // Resume Upload GET
 router.get('/resume/upload', (req, res, next) => {

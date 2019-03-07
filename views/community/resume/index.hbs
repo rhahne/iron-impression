@@ -1,24 +1,39 @@
 {{> nav}}
-<section class="section">
-    <div class="container">
-        <h1 class="title is-spaced">
+
+<div class="columns is-vcentered">
+    <div class="column is-1">
+
+    </div>
+    <div class="column is-5" id="hero-column-overview" style="text-align: left;">
+        <h1 id="hero-text-overview" class="title is-spaced"  >
             Create the best CVs together
         </h1>
-        <h2 class="subtitle">
-            Receive feedback on your resume and help others with your opinion
+        <h2 class="subtitle" style="font-size: 1.5em;">
+            Receive feedback on your resume and help others
         </h2>
         <a href="/community/resume/upload">
-            <button class="button is-primary">Upload your CV</button>
+            <button class="button is-info">Upload your CV</button>
         </a>
+    </div>
+
+    <div class="column is-6">
+        <figure>
+            <img id="hero-img-overview" src="/img/improve-together.png" alt="upgrade-your-cv-together" >
+        </figure>
+    </div>
+
+</div>
+
+
 </section>
 <hr class="hr">
 
 <section class="section">
     <div class="container">
         <div class="columns is-multiline">
-        {{#each resumes}}
-        <div class="column is-3">oi</div>
-            
+            {{#each resumes}}
+            <div class="column is-3">oi</div>
+
             <div class="column is-6">
                 <div class="card">
                     <div class="card-image">
