@@ -64,3 +64,10 @@ a, button {
     font-size: 2em;
   }
 }
+
+ul.no-list-style{
+  margin-left: 0px;
+}
+.no-list-style li{
+  list-style: none;
+}

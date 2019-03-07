@@ -3,142 +3,142 @@
 <section class="hero is-bold">
   <div class="hero-body">
     <div class="container">
-      <div class="columns">
-        <div class="column is-one-fifth"></div>
-        <div class="column">
-          <h1 class="title is-1 is-spaced">
-            Profile
-          </h1>
-          <h2 class="subtitle">
-            Hi <strong>{{loggedUser._doc.firstName}}</strong>, welcome to your profile page.
-          </h2>
-          <p class="content">
-            Here you can manage your uploads, comments, and your account details
-          </p>
-          <section class="section">
-            <ul>
-              <li>
-                <strong>Bootcamp Class</strong><br>
-                {{loggedUser._doc.bootcamp}}
-              </li><br>
-              <li>
-                <strong>Bio</strong> <br>
-                {{loggedUser._doc.bio}}
-              </li>
-              <li><br>
-                <strong>LinkedIn</strong><br>
-                {{loggedUser._doc.linkedin}}
-              </li>
-              <li><br>
-                <strong>E-Mail</strong><br>
-                {{loggedUser._doc.eMail}}
-              </li>
-            </ul>
-            <div class="button-combo" style="display: flex">
-              <form action="logout" method="get">
-                <button class="button is-primary">Log out</button>
-              </form>
-                <a href="/users/edit" class="button is-primary">Edit Shit</a>
-            </div>
-          </section>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-</section>
-
-<hr class="hr">
-{{!-- Comment Section --}}
-<section class="hero is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-one-fifth"></div>
-        <div class="column">
-          <h1 class="title is-1 is-spaced">
-            Comments
-          </h1>
-          <section class="section">
-            {{#each comments}}
-            <article class="media">
-              <figure class="media-left">
-                <p class="image is-64x64">
-                  <img src="https://bulma.io/images/placeholders/128x128.png">
-                </p>
-              </figure>
-              <div class="media-content">
-                <div class="content">
-                  
-                  <p class="content is-dark">
-                    <small>You commented on:</small> <strong><a style="color: hsl(0, 0%, 21%)" href="/community/resume/details/{{this.resume.id}}">{{this.resume.title}}</a></strong>
-                    <br>
-                    {{this.text}}
-                  </p>
-                  
+      <h1 class="title is-1 is-spaced">
+        Profile
+      </h1>
+      <h2 class="subtitle">
+        Hi <strong>{{loggedUser._doc.firstName}}</strong>, welcome to your profile page.
+      </h2>
+      <p class="content">
+        Here you can manage your uploads, comments, and your account details
+      </p>
+      <br><br>
+      <div class="columns is-variable is-6">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="/img/avatars/avatar-{{loggedUser._doc.avatarNumber}}.svg" alt="Placeholder image">
+                  </figure>
                 </div>
-                <nav class="level is-mobile">
-                  <div class="level-left">
-                    <a class="level-item" href="/community/resume/details/{{this.resume.id}}">
-                      <span class="icon is-small"><i class="fas fa-link"></i></span>
+                <div class="media-content">
+                  <p class="title is-4">{{loggedUser._doc.firstName}} {{loggedUser._doc.lastName}}</p>
+                  <p class="subtitle is-6">@{{loggedUser._doc.bootcamp}}</p>
+                </div>
+              </div>
+              <div class="content">
+                <ul class="no-list-style">
+                  <li>
+                    <strong>Bootcamp Class</strong><br>
+                    {{loggedUser._doc.bootcamp}}
+                  </li><br>
+                  <li>
+                    <strong>Bio</strong> <br>
+                    {{loggedUser._doc.bio}}
+                  </li>
+                  <li><br>
+                    <strong>LinkedIn</strong><br>
+                    {{loggedUser._doc.linkedin}}
+                  </li>
+                  <li><br>
+                    <strong>E-Mail</strong><br>
+                    {{loggedUser._doc.eMail}}
+                  </li>
+                </ul>
+                <div class="button-combo" style="display: flex">
+                  <form action="logout" method="get">
+                    <button class="button is-primary">Log out</button>
+                  </form>
+                  <a href="/users/edit" class="button is-primary">Edit Profile</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          {{!-- Comment Section --}}
+          <section class="hero is-bold">
+              <div class="container">
+                <div class="columns">
+                  <div class="column">
+                    <h1 class="title is-3 is-spaced">
+                      Comments
+                    </h1>
+                    {{#each comments}}
+                    <a href="/community/resume/details/{{this.resume.id}}" style="color: hsl(0, 0%, 21%)">
+                        <article class="media">
+                          <figure class="media-left">
+                            <p class="image">
+                              <span class="icon fa-3x"><i class="fas fa-comment"></i></span>
+                            </p>
+                          </figure>
+                          <div class="media-content">
+                            <div class="content">
+
+                              <p class="content is-dark">
+                                You commented on:<strong>{{this.resume.title}}</strong>
+                                <br>
+                                {{this.text}}
+                              </p>
+
+                            </div>
+                            <nav class="level is-mobile">
+                              <div class="level-left">
+                                <a class="level-item" href="/community/resume/details/{{this.resume.id}}">
+                                  <span class="icon is-small"><i class="fas fa-link"></i></span>
+                                </a>
+                              </div>
+                            </nav>
+                          </div>
+                          <div class="media-right">
+                            <a href="/community/resume/deleteComment/{{this.id}}">
+                              <button class="delete"></button>
+                            </a>
+                          </div>
+                        </article>
                     </a>
-                    <a class="level-item" href="/community/resume/edit/{{this.resume.id}}">
-                      <span class="icon is-small"><i class="fas fa-edit"></i></span>
-                    </a>
+                    {{/each}}
                   </div>
-                </nav>
+                </div>
               </div>
-              <div class="media-right">
-                <a href="/community/resume/deleteComment/{{this.id}}">
-                  <button class="delete"></button>
-                </a>
+          </section>
+        </div>
+        <div class="is-one-third column">
+          {{!-- Upload Section --}}
+          <section class="hero is-bold">
+              <div class="container">
+                <div class="columns">
+                  <div class="column">
+                    <h1 class="title is-3 is-spaced">
+                      Uploads
+                    </h1>
+                    <section class="section">
+                      {{#each resume}}
+                      <strong>You've uploaded: </strong> <small>{{this.title}}</small>
+                      <nav class="level is-mobile">
+                        <div class="level-left">
+                          <a class="level-item" href="/community/resume/details/{{this.id}}">
+                            <span class="icon is-small"><i class="fas fa-link"></i></span>
+                          </a>
+                          <a class="level-item" href="/community/resume/edit/{{this.id}}">
+                            <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                          </a>
+                        </div>
+                      </nav>
+                      {{/each}}
+                    </section>
+                  </div>
+                </div>
               </div>
-            </article>
-            {{/each}}
           </section>
         </div>
       </div>
-      <div class="column">
-      </div>
-      <div class="column is-one-fifth"></div>
+
     </div>
   </div>
   </div>
 </section>
 
 <hr class="hr">
-{{!-- Upload Section --}}
-<section class="hero is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-one-fifth"></div>
-        <div class="column">
-          <h1 class="title is-1 is-spaced">
-            Uploads
-          </h1>
-          <section class="section">
-            {{#each resume}}
-            <strong>You've uploaded: </strong> <small>{{this.title}}</small>
-            <nav class="level is-mobile">
-              <div class="level-left">
-                <a class="level-item" href="/community/resume/details/{{this.id}}">
-                  <span class="icon is-small"><i class="fas fa-link"></i></span>
-                </a>
-                <a class="level-item" href="/community/resume/edit/{{this.id}}">
-                  <span class="icon is-small"><i class="fas fa-edit"></i></span>
-                </a>
-              </div>
-            </nav>
-            {{/each}}
-          </section>
-        </div>
-      </div>
-      <div class="column">
-      </div>
-      <div class="column is-one-fifth"></div>
-    </div>
-  </div>
-  </div>
-</section>

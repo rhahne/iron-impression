@@ -33,10 +33,9 @@ router.get('/resume', function (req, res, next) {
 });
 
 router.get('/resume/show', (req, res) => {
-    fs.readFileSync(req.query.path, (err, data) => {
-       res.contentType("application/pdf");
-       res.send(data);
-    });
+    const data = fs.readFileSync(`./public/${req.query.path}`);
+    res.contentType("application/pdf");
+    res.send(data);
 });
 
 // Resume Upload GET
