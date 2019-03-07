@@ -41,6 +41,11 @@ a, button {
   cursor: pointer;
 }
 
+.card {
+  border-radius: 3px; 
+  border: solid 0.5px hsl(0, 0%, 92%);
+}
+
 @media(max-width: 768px) {
   .reversed-order  {
     flex-direction: column-reverse;

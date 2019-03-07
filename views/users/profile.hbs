@@ -14,11 +14,11 @@
       </p>
       <hr class="hr">
       <br><br>
-      <div class="columns is-variable is-6">
+      <div class="columns is-variable is-3">
 
         {{!-- Profile Card --}}
         <div class="column is-one-third">
-          <div class="card">
+          <div class="card is-shadowless">
             <div class="card-content">
               <h1 class="title is-3 is-spaced">
                 Details
@@ -55,9 +55,9 @@
                 </ul>
                 <div class="button-combo" style="display: flex">
                   <form action="logout" method="get">
-                    <button class="button is-primary">Log out</button>
+                    <a class="button is-primary">Logout</a>
                   </form>
-                  <a href="/users/edit" class="button is-primary">Edit Profile</a>
+                  <a href="/users/edit" class="button is-primary">Edit</a>
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
 
         {{!-- Comment CardNew --}}
         <div class="column is-one-third">
-          <div class="card">
+          <div class="card is-shadowless">
             <div class="card-content">
               <h1 class="title is-3 is-spaced">
                 Comments
@@ -75,7 +75,7 @@
               <article class="media">
                 <figure class="media-left">
                   <span class="icon is-left">
-                    <i class="far fa-comments"></i>
+                    <i class="fas fa-comment has-text-dark"></i>
                   </span>
                 </figure>
                 <div class="media-content">
@@ -151,9 +151,9 @@
         </div>
 
 
-        {{!-- Upload Overview  --}}
+        {{!-- Upload Overview --}}
         <div class="column is-one-third">
-          <div class="card">
+          <div class="card is-shadowless">
             <div class="card-content">
               <h1 class="title is-3 is-spaced">
                 Uploads
@@ -167,14 +167,14 @@
                 </figure>
                 <div class="media-content">
                   <div class="content">
-                      <p>
-                        <small>You uploaded: </small> <br> 
-                        <strong>
-                          {{this.title}}
-                        </strong>
-                        <br><br>
-                        {{this.feedbackDescription}}
-                      </p>
+                    <p>
+                      <small>You uploaded: </small> <br>
+                      <strong>
+                        {{this.title}}
+                      </strong>
+                      <br><br>
+                      {{this.feedbackDescription}}
+                    </p>
                   </div>
                   <nav class="level is-mobile">
                     <div class="level-left">
@@ -190,47 +190,12 @@
                   </a>
                 </div>
               </article>
-
               {{/each}}
             </div>
           </div>
         </div>
-
-
-        {{!-- Upload Section --}}
-        <div class="is-one-third column">
-          <section class="hero is-bold">
-            <div class="container">
-              <div class="columns">
-                <div class="column">
-                  <h1 class="title is-3 is-spaced">
-                    Uploads
-                  </h1>
-                  <section class="section">
-                    {{#each resume}}
-                    <strong>You've uploaded: </strong> <small>{{this.title}}</small>
-                    <nav class="level is-mobile">
-                      <div class="level-left">
-                        <a class="level-item" href="/community/resume/details/{{this.id}}">
-                          <span class="icon is-small"><i class="fas fa-link"></i></span>
-                        </a>
-                        <a class="level-item" href="/community/resume/edit/{{this.id}}">
-                          <span class="icon is-small"><i class="fas fa-edit"></i></span>
-                        </a>
-                      </div>
-                    </nav>
-                    {{/each}}
-                  </section>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
       </div>
-
     </div>
   </div>
   </div>
 </section>
-
-<hr class="hr">
