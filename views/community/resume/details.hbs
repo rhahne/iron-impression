@@ -39,28 +39,49 @@
             </div>
             <div class="column">
                 <canvas id="pdf-canvas" class="canvas-pdf"></canvas>
+
+                <div id="page-buttons">
+                </div>
             </div>
         </div>
         <script>
-            pdfjsLib.getDocument('{{resume.path}}')
-                .then((doc) => {
-                    doc.getPage(1).then((page) => {
-                        var myCanvas = document.getElementById("pdf-canvas")
-                        var context = myCanvas.getContext("2d")
+            $(document).ready(function () {
+                pdfjsLib.getDocument('{{resume.path}}')
+                    .then((doc) => {
+                        if (doc._pdfInfo.numPages > 1) {
+                            for (var i = 1; i < doc._pdfInfo.numPages + 1; i++)
+                                $('#page-buttons').append(`<button id="page-${i}" class="page-button button">${i}</button>`)
+                        }
+                        getPage(1)
+                    })
+            })
+            $(document).on('click', '.page-button', function (event) {
+                var pageNumber = parseInt(event.target.id.replace(/[^0-9.]/g, ''))
+                getPage(pageNumber)
+            })
+            function getPage(pageNumber) {
+                pdfjsLib.getDocument('{{resume.path}}')
+                    .then((doc) => {
+                        doc.getPage(pageNumber).then((page) => {
+                            var myCanvas = document.getElementById("pdf-canvas")
+                            var context = myCanvas.getContext("2d")
 
-                        var viewport = page.getViewport(1);
-                        myCanvas.width = viewport.width;
-                        myCanvas.height = viewport.height;
+                            var viewport = page.getViewport(1);
+                            myCanvas.width = viewport.width;
+                            myCanvas.height = viewport.height;
 
-                        page.render({
-                            canvasContext: context,
-                            viewport: viewport
+                            page.render({
+                                canvasContext: context,
+                                viewport: viewport
+                            })
                         })
                     })
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+
+
         </script>
         <br><br><br>
         <hr><br><br><br>
@@ -105,7 +126,8 @@
                         </div>
                         <div class="toggle{{this.id}} hidden">
                             <form action="/community/resume/editComment/{{this.id}}" method="POST">
-                                <textarea name="text" rows="2" class="textarea" placeholder="Add a comment...">{{this.text}}</textarea><br>
+                                <textarea name="text" rows="2" class="textarea"
+                                    placeholder="Add a comment...">{{this.text}}</textarea><br>
                                 <button class="button">Update Comment!</button>
                             </form>
                             {{!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> --}}

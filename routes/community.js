@@ -22,7 +22,6 @@ router.get('/resume', function (req, res, next) {
     .find({})
     .populate('user')
     .then((resumes) => {
-        debugger
         res.render('community/resume/index', {
             resumes
         })

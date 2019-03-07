@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-image">
                         <a href="/community/resume/details/{{this.id}}">
-                            <canvas id="{{this.originalName}}" class="canvas-pdf is-shadowless">
+                            <canvas id="{{this._id}}" class="canvas-pdf is-shadowless">
                             </canvas>
                         </a>
                     </div>
@@ -95,7 +95,7 @@
                 pdfjsLib.getDocument('{{this.path}}')
                     .then((doc) => {
                         doc.getPage(1).then((page) => {
-                            var myCanvas = document.getElementById("{{this.originalName}}")
+                            var myCanvas = document.getElementById("{{this._id}}")
                             var context = myCanvas.getContext("2d")
 
                             var viewport = page.getViewport(1);
