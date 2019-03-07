@@ -185,19 +185,16 @@ router.get('/profile/:userId', function (req, res, next) {
       })
       .then((loggedUser) => {
         let profileid = mongoose.Types.ObjectId(loggedUser.id);
-
         Comments
           .find({
             user: profileid
           })
           .populate({path: 'resume', populate: {path: 'user'}})
           .then((comments) => {
-
             Resume
               .find({
                 user: profileid
               })
-
               .exec((err, resume) => {
                 if (err) console.log(err)
                 res.render('users/profile', {

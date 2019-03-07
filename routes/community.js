@@ -129,6 +129,7 @@ router.get('/resume/details/:id', (req, res, next) => {
                     User.findOne({
                             _id: res.locals.currentUser
                         })
+                        .populate('likedResumes')
                         .then((currentUser) => {
                             res.render('community/resume/details', {
                                 resume: resume[0],
