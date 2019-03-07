@@ -9,9 +9,9 @@ const fs = require('fs');
 
 // -- CHECK AUTHORIZATION -- //
 router.get('/*', (req, res, next) => {
-    if(res.locals.currentUser){
+    if (res.locals.currentUser) {
         next();
-    }else{
+    } else {
         res.render('no-permission')
     }
 });
@@ -19,16 +19,16 @@ router.get('/*', (req, res, next) => {
 // -------------------- RESUME ROUTES -------------------- //
 router.get('/resume', function (req, res, next) {
     Resume
-    .find({})
-    .populate('user')
-    .then((resumes) => {
-        res.render('community/resume/index', {
-            resumes
+        .find({})
+        .populate('user')
+        .then((resumes) => {
+            res.render('community/resume/index', {
+                resumes
+            })
         })
-    })
-    .catch(error => {
-        console.log(error);
-    })
+        .catch(error => {
+            console.log(error);
+        })
 });
 
 router.get('/resume/show', (req, res) => {
@@ -74,6 +74,7 @@ router.get('/resume/details/:id', (req, res, next) => {
                 .find({
                     _id: id
                 })
+                .populate('user')
                 .exec((err, resume) => {
                     if (err) console.log(err)
                     comments.forEach((comment) => {
@@ -91,7 +92,7 @@ router.get('/resume/details/:id', (req, res, next) => {
                         .then((currentUser) => {
                             res.render('community/resume/details', {
                                 resume: resume[0],
-                                comments: comments,
+                                comments: comments.reverse(),
                                 loggedUser: res.locals.currentUser,
                                 avatarNumber: currentUser.avatarNumber
                             })
@@ -173,16 +174,28 @@ router.post('/resume/editComment/:commentId', (req, res) => {
         })
 })
 
+// I BROKE THE RESUME DELETION 
 router.get('/resume/delete/:id', (req, res) => {
+    debugger
     Resume.findOneAndDelete({
-        _id: req.params.id
-    }, (err) => {
-        if (err) console.log(err);
-        else {
-            res.redirect('/community/resume')
-        }
-    })
+            _id: req.params.id
+        })
+        .then(() => {
+            debugger
+            let resid = mongoose.Types.ObjectId(req.params.id)
+
+            Comments.deleteMany({
+                    resume: resid
+                })
+                .then(() => {
+                    res.redirect('/community/resume')
+                })
+        })
+        .catch((err) => {
+            res.send(err);
+        })
 })
+
 
 router.get('/resume/deleteComment/:commentId', (req, res) => {
     Comments.findOneAndDelete({

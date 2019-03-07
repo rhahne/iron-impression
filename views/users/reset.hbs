@@ -1,25 +1,37 @@
-<section class="section">
-  <div class="container">
-    <h1 class="title is-2">
-      Forgot your password slohn?
-    </h1>
-    <p class="content">
-      No worries slohn!, Reset it here:
-    </p>
-
-    <form action="/users/reset" method="post">
-      <div class="field has-addons">
-        <div class="control is-expanded has-icons-left">
-          <input class="input is-hovered" type="email" name="email" placeholder="bobderbaumeister@yowirschaffen.das">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
+<section class="hero is-medium is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column"></div>
+        <div class="column is-5">
+          <h1 class="title is-3 is-spaced">
+            Reset your password
+          </h1>
+          <h2 class="subtitle is-5">
+            Fillin your email:
+          </h2>
+          <form action="/users/reset" method="POST">
+            <div class="field has-addons">
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="email" name="eMail" placeholder="Email">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+              <p class="control">
+                <button type="submit" class="button is-info">
+                  Reset
+                </button>
+              </p>
+            </div>
+          </form>
         </div>
-        <div class="control">
-          <button type="submit" class="button is-primary">Reset my password, please!</button>
+        <div class="column">
+          <img src="/img/style-2019-character-01_2x2.png" alt="s">
         </div>
+        <div class="column"></div>
       </div>
-    </form>
-
+    </div>
+  </div>
   </div>
 </section>

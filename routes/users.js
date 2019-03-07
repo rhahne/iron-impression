@@ -189,13 +189,14 @@ router.get('/profile', function (req, res, next) {
           .find({
             user: profileid
           })
-          .populate('resume')
+          .populate({path: 'resume', populate: {path: 'user'}})
           .then((comments) => {
 
             Resume
               .find({
                 user: profileid
               })
+
               .exec((err, resume) => {
                 if (err) console.log(err)
                 res.render('users/profile', {

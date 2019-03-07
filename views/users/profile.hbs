@@ -12,11 +12,17 @@
       <p class="content">
         Here you can manage your uploads, comments, and your account details
       </p>
+      <hr class="hr">
       <br><br>
       <div class="columns is-variable is-6">
+
+        {{!-- Profile Card --}}
         <div class="column is-one-third">
           <div class="card">
             <div class="card-content">
+              <h1 class="title is-3 is-spaced">
+                Details
+              </h1>
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-48x48">
@@ -57,81 +63,126 @@
             </div>
           </div>
         </div>
+
+        {{!-- Comment CardNew --}}
         <div class="column is-one-third">
-          {{!-- Comment Section --}}
-          <section class="hero is-bold">
-              <div class="container">
-                <div class="columns">
-                  <div class="column">
-                    <h1 class="title is-3 is-spaced">
-                      Comments
-                    </h1>
-                    {{#each comments}}
-                    <a href="/community/resume/details/{{this.resume.id}}" style="color: hsl(0, 0%, 21%)">
-                        <article class="media">
-                          <figure class="media-left">
-                            <p class="image">
-                              <span class="icon fa-3x"><i class="fas fa-comment"></i></span>
-                            </p>
-                          </figure>
-                          <div class="media-content">
-                            <div class="content">
-
-                              <p class="content is-dark">
-                                You commented on:<strong>{{this.resume.title}}</strong>
-                                <br>
-                                {{this.text}}
-                              </p>
-
-                            </div>
-                            <nav class="level is-mobile">
-                              <div class="level-left">
-                                <a class="level-item" href="/community/resume/details/{{this.resume.id}}">
-                                  <span class="icon is-small"><i class="fas fa-link"></i></span>
-                                </a>
-                              </div>
-                            </nav>
-                          </div>
-                          <div class="media-right">
-                            <a href="/community/resume/deleteComment/{{this.id}}">
-                              <button class="delete"></button>
-                            </a>
-                          </div>
-                        </article>
+          <div class="card">
+            <div class="card-content">
+              <h1 class="title is-3 is-spaced">
+                Comments
+              </h1>
+              {{#each comments}}
+              <article class="media">
+                <figure class="media-left">
+                  <span class="icon is-left">
+                    <i class="far fa-comments"></i>
+                  </span>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <a href="/community/resume/details/{{this.resume.id}}" style="color: hsl(0, 0%, 21%); margin: 0px;">
+                      <p>
+                        <small>You commented on:</small> <br> <strong>{{this.resume.user.firstName}}
+                          {{this.resume.user.lastName}}</strong>
+                        <br><br>
+                        {{this.text}}
+                      </p>
                     </a>
-                    {{/each}}
                   </div>
+                  <nav class="level is-mobile">
+                    <div class="level-left">
+                    </div>
+                  </nav>
                 </div>
-              </div>
-          </section>
+                <div class="media-right">
+                  <a href="/community/resume/deleteComment/{{this.id}}" class="level-item">
+                    <span class="icon is-small"><i class="far fa-trash-alt"></i></span>
+                  </a>
+                  <a href="/community/resume/details/{{this.resume.id}}" class="level-item">
+                    <span class="icon is-small"><i class="fas fa-link"></i></span>
+                  </a>
+                </div>
+              </article>
+
+              {{/each}}
+            </div>
+          </div>
         </div>
-        <div class="is-one-third column">
-          {{!-- Upload Section --}}
-          <section class="hero is-bold">
-              <div class="container">
-                <div class="columns">
-                  <div class="column">
-                    <h1 class="title is-3 is-spaced">
-                      Uploads
-                    </h1>
-                    <section class="section">
-                      {{#each resume}}
-                      <strong>You've uploaded: </strong> <small>{{this.title}}</small>
-                      <nav class="level is-mobile">
-                        <div class="level-left">
-                          <a class="level-item" href="/community/resume/details/{{this.id}}">
-                            <span class="icon is-small"><i class="fas fa-link"></i></span>
-                          </a>
-                          <a class="level-item" href="/community/resume/edit/{{this.id}}">
-                            <span class="icon is-small"><i class="fas fa-edit"></i></span>
-                          </a>
-                        </div>
-                      </nav>
-                      {{/each}}
-                    </section>
+
+
+        {{!-- Upload Overview  --}}
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <h1 class="title is-3 is-spaced">
+                Uploads
+              </h1>
+              {{#each resume}}
+              <article class="media">
+                <figure class="media-left">
+                  <span class="icon is-left">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                      <p>
+                        <small>You uploaded: </small> <br> 
+                        <strong>
+                          {{this.title}}
+                        </strong>
+                        <br><br>
+                        {{this.feedbackDescription}}
+                      </p>
                   </div>
+                  <nav class="level is-mobile">
+                    <div class="level-left">
+                    </div>
+                  </nav>
+                </div>
+                <div class="media-right">
+                  <a href="/community/resume/edit/{{this.id}}" class="level-item">
+                    <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                  </a>
+                  <a href="/community/resume/details/{{this.id}}" class="level-item">
+                    <span class="icon is-small"><i class="fas fa-link"></i></span>
+                  </a>
+                </div>
+              </article>
+
+              {{/each}}
+            </div>
+          </div>
+        </div>
+
+
+        {{!-- Upload Section --}}
+        <div class="is-one-third column">
+          <section class="hero is-bold">
+            <div class="container">
+              <div class="columns">
+                <div class="column">
+                  <h1 class="title is-3 is-spaced">
+                    Uploads
+                  </h1>
+                  <section class="section">
+                    {{#each resume}}
+                    <strong>You've uploaded: </strong> <small>{{this.title}}</small>
+                    <nav class="level is-mobile">
+                      <div class="level-left">
+                        <a class="level-item" href="/community/resume/details/{{this.id}}">
+                          <span class="icon is-small"><i class="fas fa-link"></i></span>
+                        </a>
+                        <a class="level-item" href="/community/resume/edit/{{this.id}}">
+                          <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                        </a>
+                      </div>
+                    </nav>
+                    {{/each}}
+                  </section>
                 </div>
               </div>
+            </div>
           </section>
         </div>
       </div>
