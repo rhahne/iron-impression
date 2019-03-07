@@ -8,6 +8,7 @@
     <div class="column is-5" id="hero-column-overview" style="text-align: left;">
         <h1 id="hero-text-overview" class="title is-spaced">
             Create the best CVs together
+
         </h1>
         <h2 class="subtitle" style="font-size: 1.5em;">
             Receive feedback on your resume and help others
@@ -28,8 +29,10 @@
 <div class="tabs is-centered" style="margin-bottom: 0px">
     <ul>
         <li id="all-sort" class="is-active"><a>All</a></li>
-        <li id="web-sort" class=""><a>Webdev</a></li>
-        <li id="ui-sort" class=""><a>UI/UX</a></li>
+        <li id="design-sort" class=""><a>Design</a></li>
+        <li id="grammar-sort" class=""><a>Grammar</a></li>
+        <li id="prof-sort" class=""><a>Prof</a></li>
+        <li id="allround-sort" class=""><a>Allround</a></li>
     </ul>
 </div>
 
@@ -39,19 +42,20 @@
         <div class="columns is-multiline">
             {{#each resumes}}
             <div class="column is-3"></div>
-
             <div class="column is-6">
                 <div class="card is-shadowless">
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="/img/avatars/avatar-{{this.user.avatarNumber}}.svg" alt="Placeholder image">
+                                    <img src="/img/avatars/avatar-{{this.user.avatarNumber}}.svg"
+                                        alt="Placeholder image">
                                 </figure>
                             </div>
                             <div class="media-content">
-                                <p class="title is-4">{{this.user.firstName}} {{this.user.lastName}}</p>
-                                <p class="subtitle is-6">@{{this.user.bootcamp}}</p>
+                                <a href="/users/profile/{{this.user.id}}" <p class="title is-4">{{this.user.firstName}}
+                                    {{this.user.lastName}}</p>
+                                    <p class="subtitle is-6">@{{this.user.bootcamp}}</p>
                             </div>
                         </div>
                         <div class="content">
@@ -93,13 +97,56 @@
                         </a>
                     </div>
                     <footer class="card-footer" style="margin: 0 15px">
-                        <a href="#" class="card-footer-item has-text-grey" style="border: none">
+                        {{#if this.liked}}
+                            <div class="card-footer-item has-text-grey"
+                            style="border: none">
+                            <span class="icon " style="color:red;">
+                                <i class="far fa-heart"></i>
+                            </span>
+                            <span>Liked</span>
+                        </div>
+                        {{else}}
+                            <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey"
+                            style="border: none">
                             <span class="icon ">
                                 <i class="far fa-heart"></i>
                             </span>
                             <span>Like</span>
                         </a>
-                        <a href="#" class="card-footer-item has-text-grey" style="border: none">
+                        {{/if}}
+                        <div class="card-footer-item has-text-grey"
+                            style="border: none">
+                            {{this.points}} Likes
+                        </div>
+                        
+<!--
+                        {{#each ../loggedUser.likedResumes}}
+                        {{#ifCond this ../this.id}}
+                        <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey"
+                            style="border: none">
+                            <span class="icon " style="color:red;">
+                                <i class="far fa-heart"></i>
+                            </span>
+                            <span>Like</span>
+                        </a>
+                        LIKED
+                        {{else}}
+                         <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey"
+                            style="border: none">
+                            <span class="icon ">
+                                <i class="far fa-heart"></i>
+                            </span>
+                            <span>Like</span>
+                        </a>
+                        {{/ifCond}}
+                        {{/each}}
+
+                        
+
+-->
+
+                        <a href="/community/resume/details/{{this.id}}" class="card-footer-item has-text-grey"
+                            style="border: none">
                             <span class="icon ">
                                 <i class="far fa-comment-dots"></i>
                             </span>

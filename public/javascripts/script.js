@@ -28,19 +28,41 @@ document.addEventListener('DOMContentLoaded', () => {
 $(document).ready(() => {
     $('#all-sort').click(()=>{
         $('#all-sort').addClass('is-active')
-        $('#web-sort').removeClass('is-active')
-        $('#ui-sort').removeClass('is-active')
+        $('#design-sort').removeClass('is-active')
+        $('#grammar-sort').removeClass('is-active')
+        $('#prof-sort').removeClass('is-active')
+        $('#allround-sort').removeClass('is-active')
     })
     
-    $('#web-sort').click(()=>{
-        $('#web-sort').addClass('is-active')
+    $('#design-sort').click(()=>{
         $('#all-sort').removeClass('is-active')
-        $('#ui-sort').removeClass('is-active')
+        $('#design-sort').addClass('is-active')
+        $('#grammar-sort').removeClass('is-active')
+        $('#prof-sort').removeClass('is-active')
+        $('#allround-sort').removeClass('is-active')
     })
     
-    $('#ui-sort').click(()=>{
-        $('#ui-sort').addClass('is-active')
-        $('#web-sort').removeClass('is-active')
+    $('#grammar-sort').click(()=>{
         $('#all-sort').removeClass('is-active')
+        $('#design-sort').removeClass('is-active')
+        $('#grammar-sort').addClass('is-active')
+        $('#prof-sort').removeClass('is-active')
+        $('#allround-sort').removeClass('is-active')
+    })
+
+    $('#prof-sort').click(()=>{
+        $('#all-sort').removeClass('is-active')
+        $('#design-sort').removeClass('is-active')
+        $('#grammar-sort').removeClass('is-active')
+        $('#prof-sort').addClass('is-active')
+        $('#allround-sort').removeClass('is-active')
+    })
+
+    $('#allround-sort').click(()=>{
+        $('#all-sort').removeClass('is-active')
+        $('#design-sort').removeClass('is-active')
+        $('#grammar-sort').removeClass('is-active')
+        $('#prof-sort').removeClass('is-active')
+        $('#allround-sort').addClass('is-active')
     })
 })
