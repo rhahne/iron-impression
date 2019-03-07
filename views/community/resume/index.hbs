@@ -1,11 +1,12 @@
 {{> nav}}
 
-<div class="columns is-vcentered">
-    <div class="column is-1">
+<div class="columns is-vcentered" style="max-width: 100vw">
+    <div class="column">
 
     </div>
+
     <div class="column is-5" id="hero-column-overview" style="text-align: left;">
-        <h1 id="hero-text-overview" class="title is-spaced"  >
+        <h1 id="hero-text-overview" class="title is-spaced">
             Create the best CVs together
         </h1>
         <h2 class="subtitle" style="font-size: 1.5em;">
@@ -18,31 +19,29 @@
 
     <div class="column is-6">
         <figure>
-            <img id="hero-img-overview" src="/img/improve-together.png" alt="upgrade-your-cv-together" >
+            <img id="hero-img-overview" src="/img/improve-together.png" alt="upgrade-your-cv-together">
         </figure>
     </div>
 
 </div>
 
+<div class="tabs is-centered" style="margin-bottom: 0px">
+    <ul>
+        <li id="all-sort" class="is-active"><a>All</a></li>
+        <li id="web-sort" class=""><a>Webdev</a></li>
+        <li id="ui-sort" class=""><a>UI/UX</a></li>
+    </ul>
+</div>
 
-</section>
-<hr class="hr">
-
-<section class="section">
+<section class="section has-background-white-bis">
     <div class="container">
+
         <div class="columns is-multiline">
             {{#each resumes}}
-            <div class="column is-3">oi</div>
+            <div class="column is-3"></div>
 
             <div class="column is-6">
-                <div class="card">
-                    <div class="card-image">
-                        <a href="/community/resume/details/{{this.id}}">
-                            <canvas id="{{this.originalName}}" class="canvas-pdf is-shadowless">
-                            </canvas>
-                        </a>
-                    </div>
-                    <hr style="margin: 0px" class="hr">
+                <div class="card" style="border-radius: 5px;">
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
@@ -86,6 +85,36 @@
                             </nav>
                         </div>
                     </div>
+
+                    <hr class="hr" style="margin: 0px">
+
+                    <div class="card-image">
+                        <a href="/community/resume/details/{{this.id}}">
+                            <canvas id="{{this.originalName}}" class="canvas-pdf is-shadowless">
+                            </canvas>
+                        </a>
+                    </div>
+                    <footer class="card-footer" style="margin: 0 15px">
+                        <a href="#" class="card-footer-item has-text-grey" style="border: none">
+                            <span class="icon ">
+                                <i class="far fa-heart"></i>
+                            </span>
+                            <span>Like</span>
+                        </a>
+                        <a href="#" class="card-footer-item has-text-grey" style="border: none">
+                            <span class="icon ">
+                                <i class="far fa-comment-dots"></i>
+                            </span>
+                            <span>Comment</span>
+                        </a>
+                        <a href="#" class="card-footer-item has-text-grey" style="border: none">
+                            <span class="icon ">
+                                <i class="far fa-share-square is-dark"></i>
+                            </span>
+                            <span>share</span>
+                        </a>
+                    </footer>
+
                 </div>
             </div>
             <div class="column is-3"></div>

@@ -22,3 +22,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+// CV Overview Sorting
+$(document).ready(() => {
+    $('#all-sort').click(()=>{
+        $('#all-sort').addClass('is-active')
+        $('#web-sort').removeClass('is-active')
+        $('#ui-sort').removeClass('is-active')
+    })
+    
+    $('#web-sort').click(()=>{
+        $('#web-sort').addClass('is-active')
+        $('#all-sort').removeClass('is-active')
+        $('#ui-sort').removeClass('is-active')
+    })
+    
+    $('#ui-sort').click(()=>{
+        $('#ui-sort').addClass('is-active')
+        $('#web-sort').removeClass('is-active')
+        $('#all-sort').removeClass('is-active')
+    })
+})
