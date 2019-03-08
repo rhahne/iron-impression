@@ -13,7 +13,7 @@
           <form action="/users/login" method="POST" id="login">
             <div class="field has-addons">
               <div class="control has-icons-left has-icons-right">
-                <input class="input" type="email" name="eMail" placeholder="Email" value="b.r.wakker@gmail.com">
+                <input class="input" type="email" name="eMail" placeholder="Email">
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
@@ -39,6 +39,10 @@
             <small>Don't have an account yet? <a href="/">Signup</a></small>
             {{#if passwordReset }}
             <p class="help is-danger">Forgot your Password? <a href="/users/reset">Reset it here!</a></p>
+            {{/if}}
+            <br>
+            {{#if errorMessage}}
+             {{errorMessage}}
             {{/if}}
             {{#if passwordUpdated}}
             <div class="notification is-info">

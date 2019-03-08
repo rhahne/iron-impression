@@ -33,11 +33,22 @@ router.post('/login', (req, res) => {
   User.findOne({
     eMail: req.body.eMail
   }).then((foundUser) => {
-    debugger
     if (!foundUser) {
-      res.render('users/login', {
-        errorMessage: 'E-Mail is not registered!'
-      });
+      Register.findOne({
+        eMail: req.body.eMail
+      })
+      .then((foundRegister) => {
+        if (!foundRegister){
+          res.render('users/login', {
+            errorMessage: 'E-Mail is not registered!'
+          });
+        }else{
+          res.render('users/login', {
+            errorMessage: 'You need to activate your Account, Check your mail!'
+          });
+        }
+      })
+      
     } else {
       bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
         if (result == true) {
