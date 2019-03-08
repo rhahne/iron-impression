@@ -221,15 +221,11 @@ module.exports = {
             <td
                align="center" class="" style=""
             >
-          <![endif]-->
-                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
-                                  <tbody>
-                                    <tr>
-                                      <td style="width:550px;"> <img height="auto" src="https://cdn.dribbble.com/users/103909/screenshots/5311226/flavio-07.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="550" /> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                                <!--[if mso | IE]>
+              <a
+                 href="${process.env.BASE_URL}/users/createAccount?emailHash=${emailHash}" style="background:#F45E43;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
+              >
+                Get Access!
+              </a>
             </td>
           
         </tr>
