@@ -37,17 +37,18 @@ nav a {
   margin-top: 0px;
 }
 
-a, button {
+a,
+button {
   cursor: pointer;
 }
 
 .card {
-  border-radius: 3px; 
+  border-radius: 3px;
   border: solid 0.5px hsl(0, 0%, 92%);
 }
 
 @media(max-width: 768px) {
-  .reversed-order  {
+  .reversed-order {
     flex-direction: column-reverse;
     display: flex;
   }
@@ -55,6 +56,7 @@ a, button {
   #hero-img-overview {
     display: none;
   }
+
   #hero-column-overview {
     display: block;
     margin-left: 5%;
@@ -71,9 +73,27 @@ a, button {
   }
 }
 
-ul.no-list-style{
+ul.no-list-style {
   margin-left: 0px;
 }
-.no-list-style li{
+
+.no-list-style li {
   list-style: none;
+}
+
+.special-item{
+  padding: 0px 10px;
+  padding-right: 38px;
+}
+#avatar-nav{
+  padding-right: 5px;
+}
+
+@media(max-width: 1088px) {
+  .special-item {
+    padding: .5rem .75rem
+  }
+  #avatar-nav{
+    display:none;
+  }
 }

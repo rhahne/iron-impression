@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const cookieParser = require('cookie-parser');
@@ -7,8 +8,7 @@ const logger = require('morgan');
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 require("dotenv").config();
-  
-const app = express();
+const User = require('./models/user.js')
 
 // connect to mongoDB
 const mongoose = require('mongoose');
@@ -33,7 +33,16 @@ app.use(session({
 
 app.use(function(req,res,next){
   res.locals.currentUser = req.session.currentUserId
-  next()
+  User.findOne({
+    _id: req.session.currentUserId
+  },(err, currentUser) => {
+    if (currentUser){
+      res.locals.avatarNumber = currentUser.avatarNumber
+      next()
+    }else{
+      next()
+    }
+  })
 })
 
 // view engine setup
