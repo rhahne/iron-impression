@@ -47,8 +47,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="/img/avatars/avatar-{{this.user.avatarNumber}}.svg"
-                                        alt="Placeholder image">
+                                    <img src="/img/avatars/avatar-{{this.user.avatarNumber}}.svg" alt="Placeholder image">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -57,36 +56,35 @@
                                     <p class="subtitle is-6">@{{this.user.bootcamp}}</p>
                             </div>
                         </div>
-                        <div class="content">
+                        <div class="subtitle is-5">
                             {{this.feedbackDescription}}
-
-                            <nav style="margin-top: 10px" class="level is-mobile">
-                                <div class="level-left">
-
-
-                                    <a class="level-item" href="/community/resume/details/{{this.id}}">
-                                        <span class="icon is-small"><i class="fas fa-link"></i></span>
-                                    </a>
-
-                                    <a class="level-item" href="/community/resume/details/{{this.id}}">
-                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                    </a>
-
-                                    {{#each this.feedbackTypes}}
-                                    <a href="">#{{this}}</a>
-                                    {{/each}}
-                                    <br>
-                                    {{!-- <time date="2016-1-1">
-                                        {{this.created_at}}
-                                    </time> --}}
-                                </div>
-                                <div class="level-right">
-                                    <a class="button is-info level-item" href="/community/resume/details/{{this.id}}">
-                                        show
-                                    </a>
-                                </div>
-                            </nav>
                         </div>
+                        <nav style="margin-top: 10px" class="level is-mobile">
+                            <div class="level-left">
+
+
+                                <a class="level-item" href="/community/resume/details/{{this.id}}">
+                                    <span class="icon is-small"><i class="fas fa-link"></i></span>
+                                </a>
+
+                                <a class="level-item" href="/community/resume/details/{{this.id}}">
+                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                </a>
+
+                                {{#each this.feedbackTypes}}
+                                <a href="">#{{this}}</a>
+                                {{/each}}
+                                <br>
+                                {{!-- <time date="2016-1-1">
+                                    {{this.created_at}}
+                                </time> --}}
+                            </div>
+                            <div class="level-right">
+                                <a class="button is-info level-item" href="/community/resume/details/{{this.id}}">
+                                    show
+                                </a>
+                            </div>
+                        </nav>
                     </div>
                     <hr class="hr" style="margin: 0px">
                     <div class="card-image">
@@ -97,28 +95,25 @@
                     </div>
                     <footer class="card-footer" style="margin: 0 15px">
                         {{#if this.liked}}
-                            <div class="card-footer-item has-text-grey"
-                            style="border: none">
+                        <div class="card-footer-item has-text-grey" style="border: none">
                             <span class="icon " style="color:red;">
                                 <i class="far fa-heart"></i>
                             </span>
                             <span>Liked</span>
                         </div>
                         {{else}}
-                            <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey"
-                            style="border: none">
+                        <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey" style="border: none">
                             <span class="icon ">
                                 <i class="far fa-heart"></i>
                             </span>
                             <span>Like</span>
                         </a>
                         {{/if}}
-                        <div class="card-footer-item has-text-grey"
-                            style="border: none">
+                        <div class="card-footer-item has-text-grey" style="border: none">
                             {{this.points}} Likes
                         </div>
-                        
-<!--
+
+                        <!--
                         {{#each ../loggedUser.likedResumes}}
                         {{#ifCond this ../this.id}}
                         <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey"
@@ -141,8 +136,7 @@
                         {{/each}}
 -->
 
-                        <a href="/community/resume/details/{{this.id}}" class="card-footer-item has-text-grey"
-                            style="border: none">
+                        <a href="/community/resume/details/{{this.id}}" class="card-footer-item has-text-grey" style="border: none">
                             <span class="icon ">
                                 <i class="far fa-comment-dots"></i>
                             </span>

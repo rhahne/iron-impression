@@ -276,7 +276,7 @@ router.post('/reset', (req, res, next) => {
       subject: 'Reset password',
       html: templates.resetPassword(emailHash)
     })
-    res.render('users/message', {resetPasswordMessage: true});
+    res.render('users/message', {resetPasswordMessage: true, email});
   } else {
     res.send('something went wrong!')
   }
