@@ -107,9 +107,7 @@ router.post('/register', (req, res, next) => {
                     })
                     .then(info => {
                       console.log('email registered')
-                      res.render('users/message', {signupMessage: true}, {
-                        email
-                      })
+                      res.render('users/message', {signupMessage: true, email})
                       console.log(info)
                     })
                     .catch(error => console.log(error))
