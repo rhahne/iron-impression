@@ -33,6 +33,7 @@ router.post('/login', (req, res) => {
   User.findOne({
     eMail: req.body.eMail
   }).then((foundUser) => {
+    debugger
     if (!foundUser) {
       res.render('users/login', {
         errorMessage: 'E-Mail is not registered!'
@@ -95,7 +96,7 @@ router.post('/register', (req, res, next) => {
                     })
                     .then(info => {
                       console.log('email registered')
-                      res.render('users/message', {
+                      res.render('users/message', {signupMessage: true}, {
                         email
                       })
                       console.log(info)
@@ -255,10 +256,10 @@ router.post('/reset', (req, res, next) => {
   if (req.query.emailHash) {
     next();
   }
-  var email = req.body.email;
+  var email = req.body.eMail;
   if (email) {
     var emailHash = jwt.sign({
-      eMail: 'hahne.robin@gmail.com'
+      eMail: email
     }, process.env.JWT_SECRET);
     transporter.sendMail({
       from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
@@ -266,9 +267,9 @@ router.post('/reset', (req, res, next) => {
       subject: 'Reset password',
       html: templates.resetPassword(emailHash)
     })
-    res.send('email sent');
+    res.render('users/message', {resetPasswordMessage: true});
   } else {
-    res.send('no email set')
+    res.send('something went wrong!')
   }
 })
 router.get('/resetPassword', (req, res) => {
