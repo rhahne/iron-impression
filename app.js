@@ -6,15 +6,17 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-const config = require('./bin/config');
+require("dotenv").config();
 
 const app = express();
 
 // connect to mongoDB
 const mongoose = require('mongoose');
-
+// process.env.DB_HOST
+// in .env:
+// DB_HOST=lalalalala
 mongoose
-  .connect(config.DB_HOST, {useNewUrlParser: true})
+  .connect(process.env.DB_HOST, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -24,7 +26,7 @@ mongoose
 
 // init sessions
 app.use(session({
-  secret: config.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   cookie: { maxAge: 999999999, expires: 999999999 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
