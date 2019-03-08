@@ -1,17 +1,18 @@
 {{> nav}}
-<section class="hero is-medium is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-vcentered">
-        <div class="column is-one-fifth"></div>
-        <div class="column">
-          <h1 class="title is-1 is-spaced">
+<div class="columns is-vcentered" style="max-width: 100vw; margin: 0px;" >
+    <div class="column">
+
+    </div>
+
+    <div class="column is-5" id="hero-column-overview" style="text-align: left;">
+        <h1 id="hero-text-overview" class="title is-spaced">
             Iron Impression
-          </h1>
-          <h2 class="subtitle">
+
+        </h1>
+        <h2 class="subtitle" style="font-size: 1.5em;">
             Iron Impression is an IronHack alumni community where we help eachother get ahead with CV’s and LinkedIn
-          </h2>
-          <div class="">
+        </h2>
+                      <div class="">
             <form id="regist" action="/users/register" method="post">
               <div class="field has-addons">
                 <div class="control has-icons-left">
@@ -24,7 +25,7 @@
                 </div>
                 <div class="control">
                   {{#unless currentUser}}
-                  <button type="submit" class="button is-primary">Register</button>
+                  <button type="submit" class="button is-info">Register</button>
                   {{/unless}}
                   <br>
                 </div>
@@ -38,19 +39,17 @@
             {{/if}}
             <br>
           </div>
-        </div>
-        <div class="column">
-          <img src="/img/welcome-preview-01-2.png" alt="">
-        </div>
-        <div class="column is-one-fifth"></div>
-      </div>
     </div>
-  </div>
-  </div>
-</section>
 
 
-<section class="hero  is-dark is-bold">
+    <div class="column is-6" style="padding:0px; margin: 0px;">
+        <figure style="padding:0px; margin-bottom: -4px; height: auto">
+            <img id="hero-img-overview" src="/img/home-iron.png" alt="improve-your-cv-son" style="height: vh100">
+        </figure>
+    </div>
+</div>
+
+<section class="hero is-dark is-bold" >
   <div class="hero-body">
     <div class="container">
       <div class="tiles-home-page">
@@ -58,7 +57,7 @@
 
         <div class="column has-text-centered is-one-third">
           <figure class="image is-96x96">
-            <img src="/img/icons/feedback.png" alt="">
+            <img src="/img/icons/feedback.svg" alt="">
           </figure>
           <h2 class="subtitle home-text">
             Receive honest feedback on your resume
@@ -68,7 +67,7 @@
 
         <div class="column has-text-centered is-one-third">
           <figure class="image is-96x96">
-            <img src="/img/icons/usability.png" alt="">
+            <img src="/img/icons/usability.svg" alt="">
           </figure>
 
           <h2 class="subtitle home-text">
@@ -79,7 +78,7 @@
 
         <div class="column has-text-centered is-one-third">
           <figure class="image is-96x96">
-            <img src="/img/icons/maintenance.png" alt="">
+            <img src="/img/icons/maintenance.svg" alt="">
           </figure>
           <h2 class="subtitle home-text">
             Train your layout skills by improving eachother's CVs
