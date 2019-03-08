@@ -8,7 +8,13 @@
             You've got mail!
           </h1>
           <h2 class="subtitle">
-            An email has been sent to {{email}}. Click the link in the email to complete the signup.
+            An email has been sent to {{email}}. 
+            {{#if resetPasswordMessage}}
+            Click the link in the email to reset your password.
+            {{/if}}
+            {{#if signupMessage}}
+            Click the link in the email to complete the signup.
+            {{/if}}
           </h2>
           <div class="field">
             <div class="control">

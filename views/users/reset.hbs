@@ -8,9 +8,9 @@
             Reset your password
           </h1>
           <h2 class="subtitle is-5">
-            Fillin your email:
+            Fill in your email:
           </h2>
-          <form action="/users/reset" method="POST">
+          <form action="/users/reset" method="POST" id="reset">
             <div class="field has-addons">
               <div class="control has-icons-left has-icons-right">
                 <input class="input" type="email" name="eMail" placeholder="Email">
@@ -35,3 +35,15 @@
   </div>
   </div>
 </section>
+<script>
+  $(document).ready(function () {
+    $('#reset').validate({ // initialize the plugin
+      rules: {
+        eMail: {
+          required: true,
+          email: true
+        }
+      }
+    });
+  });
+</script>

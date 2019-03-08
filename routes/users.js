@@ -34,9 +34,21 @@ router.post('/login', (req, res) => {
     eMail: req.body.eMail
   }).then((foundUser) => {
     if (!foundUser) {
-      res.render('users/login', {
-        errorMessage: 'E-Mail is not registered!'
-      });
+      Register.findOne({
+        eMail: req.body.eMail
+      })
+      .then((foundRegister) => {
+        if (!foundRegister){
+          res.render('users/login', {
+            errorMessage: 'E-Mail is not registered!'
+          });
+        }else{
+          res.render('users/login', {
+            errorMessage: 'You need to activate your Account, Check your mail!'
+          });
+        }
+      })
+      
     } else {
       bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
         if (result == true) {
@@ -95,9 +107,7 @@ router.post('/register', (req, res, next) => {
                     })
                     .then(info => {
                       console.log('email registered')
-                      res.render('users/message', {
-                        email
-                      })
+                      res.render('users/message', {signupMessage: true, email})
                       console.log(info)
                     })
                     .catch(error => console.log(error))
@@ -255,10 +265,10 @@ router.post('/reset', (req, res, next) => {
   if (req.query.emailHash) {
     next();
   }
-  var email = req.body.email;
+  var email = req.body.eMail;
   if (email) {
     var emailHash = jwt.sign({
-      eMail: 'hahne.robin@gmail.com'
+      eMail: email
     }, process.env.JWT_SECRET);
     transporter.sendMail({
       from: '"Iron Impression 👻" <ironimpressioner@gmail.com>',
@@ -266,9 +276,9 @@ router.post('/reset', (req, res, next) => {
       subject: 'Reset password',
       html: templates.resetPassword(emailHash)
     })
-    res.send('email sent');
+    res.render('users/message', {resetPasswordMessage: true});
   } else {
-    res.send('no email set')
+    res.send('something went wrong!')
   }
 })
 router.get('/resetPassword', (req, res) => {
