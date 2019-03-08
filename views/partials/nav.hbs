@@ -29,8 +29,9 @@
             </div>
             <div class="navbar-end">
                 {{#if currentUser}}
-                <a class="navbar-item" href="/users/profile/{{currentUser}}">
-                    Account
+                <a class="navbar-item special-item" href="/users/profile/{{currentUser}}">
+                <img src="/img/avatars/avatar-{{avatarNumber}}.svg" id="avatar-nav">
+                     Account
                 </a>
                 <!--
                 <a class="navbar-item" href="/users/profile/{{currentUser}}">
