@@ -21,6 +21,7 @@ router.get('/resume', function (req, res, next) {
     Resume
         .find({})
         .populate('user')
+        .populate('likes')
         .then((resumes) => {
             User.findOne({
                     _id: res.locals.currentUser
@@ -29,6 +30,7 @@ router.get('/resume', function (req, res, next) {
                 .then((loggedUser) => {
                     resumes.forEach((resume)=>{
                         loggedUser.likedResumes.forEach((likedResume)=>{
+                            debugger
                             if(resume.id === likedResume.id){
                                 resume.liked = true;
                             }
@@ -258,14 +260,15 @@ router.get('/resume/deleteComment/:commentId', (req, res) => {
 })
 
 router.get('/resume/like/:resumeId', (req, res) => {
-
-
     Resume.findOneAndUpdate({
             _id: req.params.resumeId
         }, {
             $inc: {
                 points: 1
-            }
+            },
+            "$push": {
+                "likes": res.locals.currentUser
+        }
         })
         .then((resumeToLike) => {
             User.findOneAndUpdate({
@@ -275,7 +278,7 @@ router.get('/resume/like/:resumeId', (req, res) => {
                         "likedResumes": resumeToLike.id
                     }
                 })
-                .then((foundUser) => {
+                .then(() => {
                     res.redirect('/community/resume')
                 })
         })

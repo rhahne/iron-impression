@@ -55,18 +55,18 @@
 
                     {{!-- Profile Card --}}
                     <div class="field" style="margin-bottom: 25px;">
-                    <div class="media">
-                        <div class="media-left">
-                            <figure class="image is-48x48">
-                                <img src="/img/avatars/avatar-{{resume.user.avatarNumber}}.svg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-3">{{resume.user.firstName}} {{resume.user.lastName}}</p>
-                            <p class="subtitle is-5">@{{resume.user.bootcamp}}</p>
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="/img/avatars/avatar-{{resume.user.avatarNumber}}.svg" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-3">{{resume.user.firstName}} {{resume.user.lastName}}</p>
+                                <p class="subtitle is-5">@{{resume.user.bootcamp}}</p>
+                            </div>
                         </div>
                     </div>
-</div>
 
                     <h4 class="title is-4">
                         Description:
@@ -117,22 +117,21 @@
                         </a>
                     </div>
                     {{#if resume.liked}}
-                            <div class="card-footer-item has-text-grey"
-                            style="border: none">
-                            <span class="icon " style="color:red;">
-                                <i class="far fa-heart"></i>
-                            </span>
-                            <span>Liked</span>
-                        </div>
-                        {{else}}
-                            <a href="/community/resume/like/{{resume.id}}" class="card-footer-item has-text-grey"
-                            style="border: none">
-                            <span class="icon ">
-                                <i class="far fa-heart"></i>
-                            </span>
-                            <span>Like</span>
-                        </a>
-                        {{/if}}
+                    <div class="card-footer-item has-text-grey level-left" style="border: none">
+                        <span class="icon " style="color:red;">
+                            <i class="far fa-heart"></i>
+                        </span> 
+                        <span>{{resume.points}} </span><span> Likes</span>
+                    </div>
+                    {{else}}
+                    <a href="/community/resume/like/{{resume.id}}" class="card-footer-item has-text-grey level-left"
+                        style="border: none">
+                        <span class="icon ">
+                            <i class="far fa-heart"></i>
+                        </span>
+                        <span>Like</span>
+                    </a>
+                    {{/if}}
                 </p>
 
                 <hr class="hr" style="margin: 6% 0px">
@@ -171,7 +170,7 @@
                         <div class="content">
                             <p>
                                 <a href="/users/profile/{{this.user.id}}" style="color: black;">
-                                <strong>{{this.user.firstName}} {{this.user.lastName}}</strong>
+                                    <strong>{{this.user.firstName}} {{this.user.lastName}}</strong>
                                 </a>
                                 <div class="toggle{{this.id}}">
                                     {{this.text}}

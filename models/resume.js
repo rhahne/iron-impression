@@ -11,7 +11,8 @@ const Resume = mongoose.model('Resume', new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   feedbackTypes: Array,
   feedbackDescription: String,
-  points: Number
+  points: Number,
+  likes: [{type: Schema.Types.ObjectId, ref: 'User'}]
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 }));

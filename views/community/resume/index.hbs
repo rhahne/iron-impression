@@ -51,131 +51,132 @@
                                 </figure>
                             </div>
                             <div class="media-content">
-                                <a href="/users/profile/{{this.user.id}}" <p class="title is-4">{{this.user.firstName}}
-                                    {{this.user.lastName}}</p>
+                                <a href="/users/profile/{{this.user.id}}" style="margin: 0px">
+                                    <p class="title is-4">
+                                        {{this.user.firstName}}
+                                        {{this.user.lastName}}
+                                    </p>
                                     <p class="subtitle is-6">@{{this.user.bootcamp}}</p>
+                                </a>
                             </div>
                         </div>
-                        <div class="subtitle is-5">
-                            {{this.feedbackDescription}}
+                        <div class="content">
+                            <p class="subtitle is-6">
+                                {{this.feedbackDescription}}
+                            </p>
+
+
+                            <nav style="margin-top: 10px" class="level is-mobile">
+                                <div class="level-left">
+
+
+                                    <a class="level-item" href="/community/resume/details/{{this.id}}">
+                                        <span class="icon is-small"><i class="fas fa-link"></i></span>
+                                    </a>
+
+                                    <a class="level-item" href="/community/resume/details/{{this.id}}">
+                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                    </a>
+
+                                    {{#each this.feedbackTypes}}
+                                    <a href="">#{{this}}</a>
+                                    {{/each}}
+                                    <br>
+                                    {{!-- <time date="2016-1-1">
+                                        {{this.created_at}}
+                                    </time> --}}
+                                </div>
+                                <div class="level-right">
+                                    <a class="button is-info level-item" href="/community/resume/details/{{this.id}}">
+                                        show
+                                    </a>
+                                </div>
+                            </nav>
                         </div>
-                        <nav style="margin-top: 10px" class="level is-mobile">
-                            <div class="level-left">
-
-
-                                <a class="level-item" href="/community/resume/details/{{this.id}}">
-                                    <span class="icon is-small"><i class="fas fa-link"></i></span>
-                                </a>
-
-                                <a class="level-item" href="/community/resume/details/{{this.id}}">
-                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                </a>
-
-                                {{#each this.feedbackTypes}}
-                                <a href="">#{{this}}</a>
+                        <hr class="hr" style="margin: 0px">
+                        <div class="card-image">
+                            <a href="/community/resume/details/{{this.id}}">
+                                <canvas id="{{this._id}}" class="canvas-pdf is-shadowless">
+                                </canvas>
+                            </a>
+                        </div>
+                        <footer class="card-footer">
+                            <div class="card-footer-item has-text-grey level-left" style="border: none">
+                                {{#each this.likes}}
+                                <img style="width: 25px" src="/img/avatars/avatar-{{avatarNumber}}.svg" alt="">
                                 {{/each}}
-                                <br>
-                                {{!-- <time date="2016-1-1">
-                                    {{this.created_at}}
-                                </time> --}}
+                                <span>
+                                    {{this.points}} Likes
+                                </span>
                             </div>
-                            <div class="level-right">
-                                <a class="button is-info level-item" href="/community/resume/details/{{this.id}}">
-                                    show
-                                </a>
-                            </div>
-                        </nav>
+                        </footer>
+
+                        <footer class="card-footer" style="margin: 0 15px">
+                            {{#if this.liked}}
+
+                            <a class="card-footer-item has-text-grey" style="border: none">
+                                <span class="icon" style="color:red;">
+                                    <i class="far fa-heart"></i>
+                                </span>
+                                <span>
+                                    Liked
+                                </span>
+                            </a>
+                            {{else}}
+
+                            <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey" style="border: none">
+                                <span class="icon ">
+                                    <i class="far fa-heart"></i>
+                                </span>
+                                <span>
+                                    Like
+                                </span>
+                            </a>
+                            {{/if}}
+
+
+
+                            <a href="/community/resume/details/{{this.id}}" class="card-footer-item has-text-grey"
+                                style="border: none">
+                                <span class="icon ">
+                                    <i class="far fa-comment-dots"></i>
+                                </span>
+                                <span>Comment</span>
+                            </a>
+                            <a href="#" class="card-footer-item has-text-grey" style="border: none">
+                                <span class="icon ">
+                                    <i class="far fa-share-square is-dark"></i>
+                                </span>
+                                <span>share</span>
+                            </a>
+                        </footer>
+
                     </div>
-                    <hr class="hr" style="margin: 0px">
-                    <div class="card-image">
-                        <a href="/community/resume/details/{{this.id}}">
-                            <canvas id="{{this._id}}" class="canvas-pdf is-shadowless">
-                            </canvas>
-                        </a>
-                    </div>
-                    <footer class="card-footer" style="margin: 0 15px">
-                        {{#if this.liked}}
-                        <div class="card-footer-item has-text-grey" style="border: none">
-                            <span class="icon " style="color:red;">
-                                <i class="far fa-heart"></i>
-                            </span>
-                            <span>Liked</span>
-                        </div>
-                        {{else}}
-                        <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey" style="border: none">
-                            <span class="icon ">
-                                <i class="far fa-heart"></i>
-                            </span>
-                            <span>Like</span>
-                        </a>
-                        {{/if}}
-                        <div class="card-footer-item has-text-grey" style="border: none">
-                            {{this.points}} Likes
-                        </div>
-
-                        <!--
-                        {{#each ../loggedUser.likedResumes}}
-                        {{#ifCond this ../this.id}}
-                        <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey"
-                            style="border: none">
-                            <span class="icon " style="color:red;">
-                                <i class="far fa-heart"></i>
-                            </span>
-                            <span>Like</span>
-                        </a>
-                        LIKED
-                        {{else}}
-                         <a href="/community/resume/like/{{this.id}}" class="card-footer-item has-text-grey"
-                            style="border: none">
-                            <span class="icon ">
-                                <i class="far fa-heart"></i>
-                            </span>
-                            <span>Like</span>
-                        </a>
-                        {{/ifCond}}
-                        {{/each}}
--->
-
-                        <a href="/community/resume/details/{{this.id}}" class="card-footer-item has-text-grey" style="border: none">
-                            <span class="icon ">
-                                <i class="far fa-comment-dots"></i>
-                            </span>
-                            <span>Comment</span>
-                        </a>
-                        <a href="#" class="card-footer-item has-text-grey" style="border: none">
-                            <span class="icon ">
-                                <i class="far fa-share-square is-dark"></i>
-                            </span>
-                            <span>share</span>
-                        </a>
-                    </footer>
-
                 </div>
-            </div>
-            <div class="column is-3"></div>
+                <div class="column is-3"></div>
 
-            {{!-- PDF Display Script --}}
-            <script>
-                pdfjsLib.getDocument('{{this.path}}')
-                    .then((doc) => {
-                        doc.getPage(1).then((page) => {
-                            var myCanvas = document.getElementById("{{this._id}}")
-                            var context = myCanvas.getContext("2d")
+                {{!-- PDF Display Script --}}
+                <script>
+                    pdfjsLib.getDocument('{{this.path}}')
+                        .then((doc) => {
+                            doc.getPage(1).then((page) => {
+                                var myCanvas = document.getElementById("{{this._id}}")
+                                var context = myCanvas.getContext("2d")
 
-                            var viewport = page.getViewport(1);
-                            myCanvas.width = viewport.width;
-                            myCanvas.height = viewport.height;
-                            page.render({
-                                canvasContext: context,
-                                viewport: viewport
+                                var viewport = page.getViewport(1);
+                                myCanvas.width = viewport.width;
+                                myCanvas.height = viewport.height;
+                                page.render({
+                                    canvasContext: context,
+                                    viewport: viewport
+                                })
                             })
                         })
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
-            </script>
-            {{/each}}
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                </script>
+                {{/each}}
+            </div>
         </div>
-    </div>
 </section>
