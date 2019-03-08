@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-const config = require('./bin/config');
 
 const app = express();
 

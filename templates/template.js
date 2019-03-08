@@ -185,7 +185,7 @@ module.exports = {
                               <tr>
                                 <td align="center" bgcolor="hsl(0, 0%, 21%)" role="presentation" style="border:none;border-radius:5px;cursor:auto;padding:10px 25px;background:hsl(0, 0%, 21%);" valign="middle"> 
                                   
-                                  <a href="http://localhost:3000/users/createAccount?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+                                  <a href="${process.env.BASE_URL}/users/createAccount?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
                                   Complete Signup
                                   </a> 
                                 </td>
@@ -617,7 +617,7 @@ module.exports = {
           <tr>
             <td align="center" bgcolor="hsl(0, 0%, 21%)" role="presentation" style="border:none;border-radius:5px;cursor:auto;padding:10px 25px;background:hsl(0, 0%, 21%);" valign="middle"> 
               
-              <a href="http://localhost:3000/users/resetPassword?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+              <a href="${process.env.BASE_URL}/users/resetPassword?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
               Reset Password
               </a> 
             </td>
