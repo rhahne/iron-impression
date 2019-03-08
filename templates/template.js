@@ -1,6 +1,6 @@
 module.exports = {
-    register: (emailHash) => {
-      return `
+  register: (emailHash) => {
+    return `
       <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
@@ -174,22 +174,24 @@ module.exports = {
                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                           <tr>
                             <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                              <div style="font-family:helvetica;font-size:20px;line-height:1;text-align:left;color:hhsl(0, 0%, 21%);"> Complete your signup to get access instantly: </div>
+                              <div style="font-family:helvetica;font-size:20px;line-height:1;text-align:left;color:hsl(0, 0%, 21%);"> Complete your signup to get access instantly: </div>
                             </td>
                           </tr>
+
                           <tr>
                             <td align="left" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                               <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
-                                <tr>
-                                  <td align="center" bgcolor="hsl(0, 0%, 21%)" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 25px;background:hsl(0, 0%, 21%);" valign="middle">
-                                    <a
-                                    href="http://localhost:3000/users/createAccount?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none; target="_blank"
-                                 >
-                                 Complete Signup
-                                 </a>
+                              
+                              <tr>
+                                <td align="center" bgcolor="hsl(0, 0%, 21%)" role="presentation" style="border:none;border-radius:5px;cursor:auto;padding:10px 25px;background:hsl(0, 0%, 21%);" valign="middle"> 
+                                  
+                                  <a href="http://localhost:3000/users/createAccount?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+                                  Complete Signup
+                                  </a> 
+                                </td>
 
-                                  </td>
-                                </tr>
+                                  
+                              </tr>
                               </table>
                             </td>
                           </tr>
@@ -270,9 +272,9 @@ module.exports = {
 
 </html>
     `
-    },
-    resetPassword: (emailHash) => {
-      return `
+  },
+  resetPassword: (emailHash) => {
+    return `
       <!doctype html>
       <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
         <head>
@@ -607,15 +609,17 @@ module.exports = {
         <table
            align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
         >
+
+        <tr>
+        <td align="left" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+          <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+          
           <tr>
-            <td
-               align="center" bgcolor="#F45E43" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 25px;" valign="middle"
-            >
-              <a
-              href="http://localhost:3000/users/resetPassword?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none; target="_blank"
-           >
-           Change Password
-           </a>
+            <td align="center" bgcolor="hsl(0, 0%, 21%)" role="presentation" style="border:none;border-radius:5px;cursor:auto;padding:10px 25px;background:hsl(0, 0%, 21%);" valign="middle"> 
+              
+              <a href="http://localhost:3000/users/resetPassword?emailHash=${emailHash}" style="background:hsl(0, 0%, 21%);color:#FFFFFF;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+              Reset Password
+              </a> 
             </td>
           </tr>
         </table>
@@ -657,5 +661,5 @@ module.exports = {
         </body>
       </html>
     `
-    }
   }
+}
