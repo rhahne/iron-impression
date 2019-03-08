@@ -193,8 +193,11 @@ router.get('/profile/:userId', function (req, res, next) {
         _id: req.params.userId
       })
       .populate('likedResumes')
-      .then((loggedUser) => {
-        let profileid = mongoose.Types.ObjectId(loggedUser.id);
+      .then((profileUser) => {
+        if(profileUser.id === res.locals.currentUser){
+          profileUser.isMyProfile = true;
+        }
+        let profileid = mongoose.Types.ObjectId(profileUser.id);
         Comments
           .find({
             user: profileid
@@ -208,7 +211,7 @@ router.get('/profile/:userId', function (req, res, next) {
               .exec((err, resume) => {
                 if (err) console.log(err)
                 res.render('users/profile', {
-                  loggedUser,
+                  profileUser,
                   resume,
                   comments
                 })

@@ -7,18 +7,6 @@
             <div class="column">
                 <canvas id="pdf-canvas" class="canvas-pdf" style="border-radius: 5px; border: solid 0.5px hsl(0, 0%, 92%)"></canvas>
                 <div id="page-buttons"></div>
-                <div class="button-combo" style="display: flex;">
-                    <a href="/community/resume/edit/{{resume.id}}">
-                        <small>
-                            Edit
-                        </small>
-                    </a>
-                    <a href="/community/resume/delete/{{resume.id}}">
-                        <small>
-                            Delete
-                        </small>
-                    </a>
-                </div>
                 <script>
                     $(document).ready(function () {
                         pdfjsLib.getDocument('{{resume.path}}')
@@ -99,7 +87,7 @@
 
 
 
-                    {{#if loggedUser}}
+                    {{#if resume.isMyResume}}
                     <div class="button-combo" style="display: flex;">
                         <a href="/community/resume/edit/{{resume.id}}">
                             <small>

@@ -7,7 +7,7 @@
         Profile
       </h1>
       <h2 class="subtitle">
-        Hi <strong>{{loggedUser._doc.firstName}}</strong>, welcome to your profile page.
+        Hi <strong>{{profileUser._doc.firstName}}</strong>, welcome to your profile page.
       </h2>
       <p class="content">
         Here you can manage your uploads, comments, and your account details
@@ -26,39 +26,41 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-48x48">
-                    <img src="/img/avatars/avatar-{{loggedUser._doc.avatarNumber}}.svg" alt="Placeholder image">
+                    <img src="/img/avatars/avatar-{{profileUser._doc.avatarNumber}}.svg" alt="Placeholder image">
                   </figure>
                 </div>
                 <div class="media-content">
-                  <p class="title is-4">{{loggedUser._doc.firstName}} {{loggedUser._doc.lastName}}</p>
-                  <p class="subtitle is-6">@{{loggedUser._doc.bootcamp}}</p>
+                  <p class="title is-4">{{profileUser._doc.firstName}} {{profileUser._doc.lastName}}</p>
+                  <p class="subtitle is-6">@{{profileUser._doc.bootcamp}}</p>
                 </div>
               </div>
               <div class="content">
                 <ul class="no-list-style">
                   <li>
                     <strong>Bootcamp Class</strong><br>
-                    {{loggedUser._doc.bootcamp}}
+                    {{profileUser._doc.bootcamp}}
                   </li><br>
                   <li>
                     <strong>Bio</strong> <br>
-                    {{loggedUser._doc.bio}}
+                    {{profileUser._doc.bio}}
                   </li>
                   <li><br>
                     <strong>LinkedIn</strong><br>
-                    {{loggedUser._doc.linkedin}}
+                    {{profileUser._doc.linkedin}}
                   </li>
                   <li><br>
                     <strong>E-Mail</strong><br>
-                    {{loggedUser._doc.eMail}}
+                    {{profileUser._doc.eMail}}
                   </li>
                 </ul>
+                {{#if profileUser.isMyProfile}}
                 <div class="button-combo" style="display: flex">
                   <form action="logout" method="get">
                     <a class="button is-primary">Logout</a>
                   </form>
                   <a href="/users/edit" class="button is-primary">Edit</a>
                 </div>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -95,9 +97,11 @@
                   </nav>
                 </div>
                 <div class="media-right">
+                  {{#if ../profileUser.isMyProfile}}
                   <a href="/community/resume/deleteComment/{{this.id}}" class="level-item">
                     <span class="icon is-small"><i class="far fa-trash-alt"></i></span>
                   </a>
+                  {{/if}}
                   <a href="/community/resume/details/{{this.resume.id}}" class="level-item">
                     <span class="icon is-small"><i class="fas fa-link"></i></span>
                   </a>
@@ -112,7 +116,7 @@
               <h1 class="title is-3 is-spaced">
                 Likes
               </h1>
-              {{#each loggedUser.likedResumes}}
+              {{#each profileUser.likedResumes}}
               <article class="media">
                 <figure class="media-left">
                   <span class="icon is-left">
@@ -178,9 +182,11 @@
                   </nav>
                 </div>
                 <div class="media-right">
+                  {{#if ../profileUser.isMyProfile}}
                   <a href="/community/resume/edit/{{this.id}}" class="level-item">
                     <span class="icon is-small"><i class="fas fa-edit"></i></span>
                   </a>
+                  {{/if}}
                   <a href="/community/resume/details/{{this.id}}" class="level-item">
                     <span class="icon is-small"><i class="fas fa-link"></i></span>
                   </a>

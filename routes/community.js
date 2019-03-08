@@ -137,6 +137,9 @@ router.get('/resume/details/:id', (req, res, next) => {
                                         resume[0].liked = true;
                                     }
                                 })
+                                if (resume[0].user.id === res.locals.currentUser) {
+                                    resume[0].isMyResume = true;
+                                }
                             res.render('community/resume/details', {
                                 resume: resume[0],
                                 comments: comments.reverse(),
@@ -223,7 +226,6 @@ router.post('/resume/editComment/:commentId', (req, res) => {
 
 // I BROKE THE RESUME DELETION 
 router.get('/resume/delete/:id', (req, res) => {
-    debugger
     Resume.findOneAndDelete({
             _id: req.params.id
         })
