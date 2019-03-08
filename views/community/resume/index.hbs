@@ -38,11 +38,12 @@
 <section class="section has-background-white-bis">
     <div class="container">
 
+        {{#each resumes}}
         <div class="columns is-multiline">
-            {{#each resumes}}
+
             <div class="column is-3"></div>
             <div class="column is-6">
-                <div class="card is-shadowless">
+                <div class="card is-shadowless" style="width: 100%">
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
@@ -176,7 +177,8 @@
                             console.log(err)
                         })
                 </script>
-                {{/each}}
+
             </div>
         </div>
+        {{/each}}
 </section>
