@@ -7,8 +7,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const User = require('./models/user.js');
 require("dotenv").config();
-const User = require('./models/user.js')
 
 // connect to mongoDB
 const mongoose = require('mongoose');
